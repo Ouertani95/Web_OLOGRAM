@@ -1,0 +1,6 @@
+# Connect to mysql running in docker container :
+#Because you are running MySQL inside Docker container, socket is not available and you need to connect through TCP. Setting "--protocol" in the mysql command will change that.
+#https://stackoverflow.com/questions/33001750/connect-to-mysql-in-a-docker-container-from-the-host
+
+
+mysql -h localhost -P 3306 --protocol=tcp -u sail -p

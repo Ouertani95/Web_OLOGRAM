@@ -1,0 +1,5 @@
+# add laravel command to path :
+
+echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc
+source ~/.bashrc
+
