@@ -1,0 +1,8 @@
+to get access and modify files without sudo in app folder : 
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker  (or logout and login)
+docker run hello-world (for testing)
+=> If error :
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R

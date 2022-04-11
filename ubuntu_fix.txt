@@ -1,0 +1,58 @@
+# Solution 0 :
+## launch terminal 
+ctrl + alt + F2	
+## enter superuser mode
+sudo su
+## configure all the Ubuntu packages that have been unpacked but not configured
+dpkg --configure -a
+## reinstall packages previously configured
+apt-get -f install
+## update
+apt-get update
+apt-get dist-upgrade
+## reinstall the graphical environment
+apt-get install --reinstall ubuntu-desktop
+## delete unused packages and downloaded files
+apt-get autoremove
+apt-get clean
+##  reboot the system
+reboot
+
+
+# Solution 1 :
+sudo apt-get update
+sudo apt install ubuntu-desktop
+
+
+# Solution 2 :
+sudo systemctl status lightdm
+sudo systemctl restart lightdm
+
+# Solution 3 :
+sudo dpkg --configure -a
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo reboot
+
+# Solution 4 :
+sudo apt-get update
+sudo apt-get install --reinstall ubuntu-desktop
+sudo apt-get install unity
+sudo shutdown -r now
+
+# Solution 5 :
+sudo do-release-upgrade
+
+# Solution 6 : (this will work)
+sudo apt-get update
+sudo apt-get install --reinstall ubuntu-desktop
+sudo apt-get install unity
+sudo shutdown -r now
+
+# Solution 7 :
+sudo apt-get autoremove
+sudo apt-get autoclean
+=> Install graphics 
+
+
+
