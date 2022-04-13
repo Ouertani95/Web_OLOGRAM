@@ -94,6 +94,16 @@ services:
           - mysql
         networks:
           - sail
+    gtftk:
+        image: 'gtftk:staging'
+        container_name: gtftk
+        ports:
+            - 6869:6869
+        volumes:
+            - './pygtftk_results:/pygtftk'
+        networks:
+            - sail
+
 networks:
     sail:
         driver: bridge
