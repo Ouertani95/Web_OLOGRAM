@@ -1,0 +1,3 @@
+#Working command for ologram :
+
+sail exec gtftk conda run -n pygtftk gtftk ologram -i mini_real.gtf.gz -c hg38.genome -p ENCFF112BHN_H3K4me3_K562_sub.bed
