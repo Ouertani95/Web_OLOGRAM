@@ -1,0 +1,37 @@
+FROM python:3.9
+
+WORKDIR /pygtftk
+
+# Install base utilities
+RUN apt-get update && \
+    # apt-get upgrade -y && \
+    apt-get install -y build-essential  && \
+    apt-get install -y wget && \
+    apt-get install -y locales && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+
+ENV LC_ALL en_US.UTF-8 
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en 
+
+# Install miniconda
+ENV CONDA_DIR /opt/conda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+     /bin/bash ~/miniconda.sh -b -p /opt/conda
+
+# Put conda in path so we can use conda activate
+ENV PATH=$CONDA_DIR/bin:$PATH
+
+# Configure conda environment
+RUN conda config --add channels defaults && \
+    conda config --add channels bioconda && \
+    conda config --add channels conda-forge && \
+    conda init --all && \
+    conda create -n pygtftk pygtftk
+    
+RUN echo "alias cndr ='conda run -n pygtftk'" >> ~/.bash_aliases
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
