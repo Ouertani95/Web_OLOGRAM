@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('gtf');
             $table->string('bed');
+            $table->string('chr');
             $table->timestamps();
         });
     }
