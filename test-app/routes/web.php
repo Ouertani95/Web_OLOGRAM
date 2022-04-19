@@ -14,14 +14,14 @@ use App\Http\Controllers\JobsController;
 |
 */
 
+// Route for get request of home page
 Route::get('/', function () {
     // Mail::to('ouertani2006@gmail.com')->send(new \App\Mail\HelloMail());
     return view('welcome');
     });
 
+// Route for get request of /main URI
+Route::get('/main', [JobsController::class,'index']);
 
-Route::get('/main',function(){
-    return view('main');
-    });
-
-Route::post('/main', [JobsController::class,'run']);
+// Route for form submission goes to JobsController class
+Route::post('/main', [JobsController::class,'run_job']);
