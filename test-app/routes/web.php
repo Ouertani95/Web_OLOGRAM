@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
+use App\Http\Controllers\JobsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +19,9 @@ Route::get('/', function () {
     return view('welcome');
     });
 
+
 Route::get('/main',function(){
     return view('main');
     });
 
-ROUTE::post('/main',function(){
-    Job::create([
-        'email' => request('email'),
-        'gtf' => request('gtf'),
-        'bed' => request('bed')
-    ]);
-    // redirect to main page and show success message (linked to @if @endif in view)
-    return redirect('/main')->with('success', 'Job is running !');
-    // return var_dump(request('gtf'));
-});
+Route::post('/main', [JobsController::class,'run']);
