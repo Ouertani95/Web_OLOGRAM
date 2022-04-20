@@ -25,7 +25,7 @@ class JobsController extends Controller
         ]);
 
         // Initialise variables
-        $command = "who 2>&1";
+        $command = "../vendor/bin/sail exec gtftk conda run -n pygtftk gtftk ologram -i mini_real.gtf.gz -c hg38.genome -p ENCFF112BHN_H3K4me3_K562_sub.bed -o test2.pdf 2>&1";
         $output=null;
         $return_var=null;
         // Execute shell command in php
