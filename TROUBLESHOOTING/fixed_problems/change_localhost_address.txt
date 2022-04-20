@@ -1,0 +1,4 @@
+# change localhost address :
+sudo nano /etc/hosts
+# change 127.0.0.1 localhost :
+127.0.0.1 laravel-app.test

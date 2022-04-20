@@ -1,0 +1,5 @@
+# Fix for log problem in /var/www/html inside the container
+# Add lines to .env file then restart the containers
+
+WWWGROUP=1000
+WWWUSER=1000
