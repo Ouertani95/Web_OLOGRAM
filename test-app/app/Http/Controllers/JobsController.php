@@ -23,17 +23,16 @@ class JobsController extends Controller
             'bed' => request('bed'),
             'chr' => request('chr')
         ]);
-
-        // Initialise variables
-        $command = "../vendor/bin/sail exec gtftk conda run -n pygtftk gtftk ologram -i mini_real.gtf.gz -c hg38.genome -p ENCFF112BHN_H3K4me3_K562_sub.bed -o test2.pdf 2>&1";
+        
+        $command = "docker exec gtftk conda run -n pygtftk gtftk ologram -i mini_real.gtf.gz -c hg38.genome -p ENCFF112BHN_H3K4me3_K562_sub.bed -o test3.pdf 2>&1";
         $output=null;
         $return_var=null;
         // Execute shell command in php
         exec($command, $output, $return_var);
-        // Echo the output and the error code 
+        // Echo the output and the error code
         echo "Returned with status $return_var and output:\n";
         print_r($output);
-    
+
     }
 
     public function show_message()
