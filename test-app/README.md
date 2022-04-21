@@ -24,6 +24,10 @@ Once you have Docker Compose set up you can run the following commands :
 git clone https://github.com/Ouertani95/laravel_test_app
 cd laravel_test_app/test_app
 docker build -f Dockerfile-pygtftk-conda -t gtftk:staging .
+sudo groupadd docker
+sudo adduser sail
+usermod -aG docker sail
+newgrp docker
 
 ```
 
