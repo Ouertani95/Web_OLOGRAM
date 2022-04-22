@@ -1,0 +1,7 @@
+# Display all available groups :
+cat /etc/group
+
+# view uid, gid and groups of current user :
+id 
+
+

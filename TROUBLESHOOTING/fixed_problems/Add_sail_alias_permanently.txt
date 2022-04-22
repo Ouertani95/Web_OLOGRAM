@@ -1,0 +1,9 @@
+# Add sail alias permanently :
+sudo nano ~/.bashrc
+# Add the following alias to the end of the file :
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+# Save and exit
+# Source the file :
+source ~/.bashrc
+# Check if the new alias is added :
+alias
