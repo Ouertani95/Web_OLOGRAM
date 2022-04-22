@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
     {{-- This is the navigation bar on the top --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -62,19 +63,39 @@
                     </ul>
                 </div>
                 @endif
+                
+                <!-- show error message from redirection -->
+                @if (\Session::has('error'))
+                <div class="alert alert-danger alert-block">
+                    <ul>
+                        <li>{!! \Session::get('error') !!}</li>
+                    </ul>
+                </div>
+                @endif
 
-                {{-- This is the actual form --}}
-                <form action='/main' method='POST' >
+                <!-- show error messages if there are any from validation -->
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <!-- This is the actual form -->
+                <form action='/main' method='POST' enctype="multipart/form-data" >
                     @csrf 
                     <!-- @csrf is mandatory for forms with post method -->
                     <label for='email'>Email : </label>
-                    <input type='email' name='email'></br><br>
-                    <label for="gtf">GTF file : </label>
-                    <input type="file" name="gtf"></br><br>
+                    <input type='email' name='email' value="{{ old('email') }}"></br><br>
+                    <label for="gtf" >GTF file : </label>
+                    <input type="file" name="gtf" ></br><br>
                     <label for="bed">BED file : </label>
-                    <input type="file" name="bed"></br><br>
+                    <input type="file" name="bed" ></br><br>
                     <label for="chr">Chr file :  </label>
-                    <input type="file" name="chr"></br><br>
+                    <input type="file" name="chr" ></br><br>
                     <button type="submit" class="btn btn-primary">Start job</button></br><br>
                 </form>
 
