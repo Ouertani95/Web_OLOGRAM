@@ -1,0 +1,6 @@
+#After git pull : 
+sail build --no-cache
+sail up -d
+sail artisan migrate
+sail restart
+
