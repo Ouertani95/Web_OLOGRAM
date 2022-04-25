@@ -1,0 +1,3 @@
+#Remove all jobs from queue :
+sail artisan tinker
+DB::table('queued_jobs')->delete();
