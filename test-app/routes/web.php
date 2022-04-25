@@ -24,4 +24,4 @@ Route::get('/', function () {
 Route::get('/main', [JobsController::class,'index']);
 
 // Route for form submission goes to JobsController class
-Route::post('/main', [JobsController::class,'run_job']);
+Route::post('/main', [JobsController::class,'run_queued_job']);

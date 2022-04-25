@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Jobs\ExecuteCommand;
 use Session;
 // use Illuminate\Support\Facades\Redirect;
 
@@ -14,8 +15,8 @@ class JobsController extends Controller
         return view('main');
     }
 
-    public function run_job (Request $request)
-    {   
+    public function run_queued_job(Request $request)
+    {
         // Validate form fields
         $validated = $request->validate([
             'email' => 'bail|required|email|max:100',
@@ -42,26 +43,9 @@ class JobsController extends Controller
         $directory_name = $date.'-'.$gtf.'-'.$bed;
         
         // Initialise command variables
-        $command = "docker exec gtftk conda run -n pygtftk gtftk ologram -i $gtf -c $chr -p $bed -o $directory_name 2>&1" ;
-        $output=null;
-        $return_var=null;
-
-        // Execute shell command in php
-        exec($command, $output, $return_var);
-
-        // Verify if errors occured during execution of command
-        if ($return_var!== 0) {
-
-            // If there are errors display the output of the error
-            return back()->with('error','<pre>' . print_r($output,$return=true) . '</pre>');
-        }
-        
-        // If no errors display result
-        else{
-            $result = $this->display_result($directory_name);
-            return response()->file($result);
-        }
-    
+        $command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram -i $gtf -c $chr -p $bed -o $directory_name -k 8 2>&1"."'" ;
+        ExecuteCommand::dispatch($command,$directory_name);
+        return $this->show_message();
     }
 
     public function show_message()
