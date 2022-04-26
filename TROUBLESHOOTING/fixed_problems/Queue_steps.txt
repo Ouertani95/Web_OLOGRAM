@@ -1,0 +1,50 @@
+#Steps for creating queue :
+
+1) Modify .env file variable
+QUEUE_CONNECTION=database
+
+2) Modify config file queue.php
+'database' => [
+            'driver' => 'database',
+            'table' => 'queued_jobs',
+            'queue' => 'default',
+            'retry_after' => 9000,
+            'after_commit' => false,
+        ],
+
+3) Create new migration for queued_jobs table
+sail artisan queue:table
+
+4) Migrate the queued_jobs table to database
+sail artisan migrate
+
+5) Create the new job to be queued :
+sail artisan make:job ExecuteCommand
+
+6) Add the commands to handle method
+
+7) Call the Job inside the Controller
+ExecuteCommand::dispatch($command,$directory_name);
+
+#Steps for launching queue workers automatically : 
+
+1) Add the following process to the supervisord.conf in vendor/laravel/sail/runtimes/8.1 :
+[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600 --timeout=3600
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=sail
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/var/www/html/worker.log
+stderr_logfile=/var/www/html/worker_err.log
+stopwaitsecs=3600
+
+2) Rebuild the sail image using the modified supervisord.conf :
+sail build --no-cache
+
+3) Relaunch the application
+sail up -d
