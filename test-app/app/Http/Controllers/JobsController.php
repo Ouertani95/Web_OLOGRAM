@@ -32,8 +32,6 @@ class JobsController extends Controller
             'bed' => request('bed'),
             'chr' => request('chr')
         ]);
-        
-        // dd(request('gtf'));
 
         // Get all inputs as strings
         $inputs = [
@@ -42,8 +40,6 @@ class JobsController extends Controller
             "chr" => $request->file('chr')->getClientOriginalName(),
             "email" => $request->email
         ];
-
-        // ddd($inputs);
        
         // Prepare date and directory variables
         $date = date("Ymd_His",time());
@@ -61,16 +57,4 @@ class JobsController extends Controller
         return redirect()->to('/main')->with('success', 'Job is running !');
     }
 
-    public function display_result($directory)
-    {
-        $files = scandir("../pygtftk_results/".$directory);
-        foreach ($files as $file){
-            if (str_contains($file,"pdf")){
-                $file_path = "../pygtftk_results/".$directory.'/'.$file;
-                    return $file_path;
-            }
-        }
-        
-        
-    }
 }
