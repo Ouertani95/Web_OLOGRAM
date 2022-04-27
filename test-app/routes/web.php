@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobsController;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,11 @@ Route::get('/main', [JobsController::class,'index']);
 
 // Route for form submission goes to JobsController class
 Route::post('/main', [JobsController::class,'run_queued_job']);
+
+Route::get('/test-mail', function() {
+    Mail::raw('bonjour',function($message){
+        $message->subject('Email de test 2')
+                ->to('ouertani2006@gmail.com');
+    });
+    return 'OK! Le mail a été envoyé !';
+});
