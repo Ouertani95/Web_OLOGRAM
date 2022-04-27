@@ -47,3 +47,28 @@ ERROR conda.cli.main_run:execute(33): Subprocess for 'conda run ['gtftk', 'ologr
 "
 [2022-04-25 14:51:58][61] Processed:  App\Jobs\ExecuteCommand
 success madafaka !!! [2022-04-25 14:52:58][60] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 08:56:21][105] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 08:57:59][105] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 09:35:55][106] Processing: App\Jobs\ExecuteCommand
+string(621) "WARNING: Error loading config file: /root/.docker/config.json: open /root/.docker/config.json: permission denied
+ERROR conda.cli.main_run:execute(33): Subprocess for 'conda run ['gtftk', 'ologram', '-i', 'ENCFF119BYM_H3K36me3_K562_sub.bed', '-c', 'ENCFF119BYM_H3K36me3_K562_sub.bed', '-p', 'ENCFF354QXX_H3K79me2_K562_sub.bed', '-o', '20220427_093554-ENCFF119BYM_H3K36me3_K562_sub.bed-ENCFF354QXX_H3K79me2_K562_sub.bed', '-k', '8']' command failed.  (See above for error)
+ |-- 9:35-WARNING : Not a valid filename extension :ENCFF119BYM_H3K36me3_K562_sub.bed
+ |-- 9:35-ERROR : Extension expected: \.[Gg][Tt][Ff]\.[Gg][Zz]$
+"
+[2022-04-27 09:35:56][106] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 09:36:26][107] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 09:37:59][107] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 09:42:20][108] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 09:43:52][108] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 09:48:57][109] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 09:51:31][110] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 09:54:05][111] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 09:56:40][111] Failed:     App\Jobs\ExecuteCommand
+[2022-04-27 09:59:52][112] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 10:02:27][113] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 10:05:00][114] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 10:07:31][114] Failed:     App\Jobs\ExecuteCommand
+[2022-04-27 10:10:57][115] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 10:11:28][115] Processed:  App\Jobs\ExecuteCommand
+[2022-04-27 10:13:22][116] Processing: App\Jobs\ExecuteCommand
+success madafaka !!! [2022-04-27 10:13:45][116] Processed:  App\Jobs\ExecuteCommand
