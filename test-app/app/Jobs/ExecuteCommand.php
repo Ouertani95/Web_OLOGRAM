@@ -8,6 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendResults;
+
 
 class ExecuteCommand implements ShouldQueue
 {
@@ -20,11 +23,12 @@ class ExecuteCommand implements ShouldQueue
      */
     protected $command;
     protected $directory;
-    public function __construct($command,$directory)
+    protected $inputs;
+    public function __construct($inputs,$command,$directory)
     {
+        $this->inputs = $inputs;
         $this->command = $command;
         $this->directory = $directory;
-        var_dump($this->directory);
     }
 
     /**
@@ -50,15 +54,18 @@ class ExecuteCommand implements ShouldQueue
         // If no errors display result
         else{
             echo ("success madafaka !!! ");
+            $pdf_path = $this->get_pdf_path(base_path("pygtftk_results/".$this->directory));
+            Mail::to($this->inputs["email"])
+                ->send(new SendResults($this->inputs,$pdf_path));
         }
     }
 
-    public function display_result()
+    public function get_pdf_path($results_directory)
     {
-        $files = scandir("../pygtftk_results/".$this->directory);
+        $files = scandir($results_directory);
         foreach ($files as $file){
             if (str_contains($file,"pdf")){
-                $file_path = "../pygtftk_results/".$this->directory.'/'.$file;
+                $file_path = base_path("pygtftk_results/".$this->directory.'/'.$file);
                     return $file_path;
             }
         }

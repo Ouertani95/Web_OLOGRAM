@@ -33,18 +33,26 @@ class JobsController extends Controller
             'chr' => request('chr')
         ]);
         
-        // Get uploaded files
-        $gtf = $request->file('gtf')->getClientOriginalName();
-        $bed = $request->file('bed')->getClientOriginalName();
-        $chr = $request->file('chr')->getClientOriginalName();
+        // dd(request('gtf'));
 
+        // Get all inputs as strings
+        $inputs = [
+            "gtf" => $request->file('gtf')->getClientOriginalName(),
+            "bed" => $request->file('bed')->getClientOriginalName(),
+            "chr" => $request->file('chr')->getClientOriginalName(),
+            "email" => $request->email
+        ];
+
+        // ddd($inputs);
+       
         // Prepare date and directory variables
         $date = date("Ymd_His",time());
-        $directory_name = $date.'-'.$gtf.'-'.$bed;
+        $directory_name = $date.'-'.$inputs["gtf"].'-'.$inputs["bed"];
+
         
         // Initialise command variables
-        $command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram -i $gtf -c $chr -p $bed -o $directory_name -k 8 2>&1"."'" ;
-        ExecuteCommand::dispatch($command,$directory_name);
+        $command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram -i ".$inputs["gtf"]." -c ".$inputs["chr"]." -p ".$inputs["bed"]." -o ".$directory_name." -k 8 2>&1"."'" ;
+        ExecuteCommand::dispatch($inputs,$command,$directory_name);
         return $this->show_message();
     }
 
