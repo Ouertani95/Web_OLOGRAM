@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Jobs\\ExecuteCommand' => $baseDir . '/app/Jobs/ExecuteCommand.php',
     'App\\Mail\\HelloMail' => $baseDir . '/app/Mail/HelloMail.php',
     'App\\Models\\Job' => $baseDir . '/app/Models/Job.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
