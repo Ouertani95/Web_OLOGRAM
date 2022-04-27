@@ -1,0 +1,7 @@
+- Utiliser le modèle git flow avec les branches develop et master.
+
+- Changer la méthode de queue avec SLURM ou équivalent
+
+- Intégrer le plugin d'affichage HTML dans le dockerfile de gtftk (temporairement)
+
+
