@@ -54,22 +54,23 @@ class ExecuteCommand implements ShouldQueue
         // If no errors display result
         else{
             echo ("success madafaka !!! ");
-            $pdf_path = $this->get_pdf_path(base_path("pygtftk_results/".$this->directory));
+            $results_paths = $this->get_results_paths(base_path("pygtftk_results/".$this->directory));
             Mail::to($this->inputs["email"])
-                ->send(new SendResults($this->inputs,$pdf_path));
+                ->send(new SendResults($this->inputs,$results_paths));
         }
     }
 
-    public function get_pdf_path($results_directory)
-    {
-        $files = scandir($results_directory);
-        foreach ($files as $file){
-            if (str_contains($file,"pdf")){
-                $file_path = base_path("pygtftk_results/".$this->directory.'/'.$file);
-                    return $file_path;
+    public function get_results_paths($results_directory)
+    {   
+        $results_paths = [];
+        $available_files = scandir($results_directory);
+        foreach ($available_files as $file){
+            if (! in_array($file,array(".",".."))){
+                $file_path = $results_directory.'/'.$file;
+                array_push($results_paths,$file_path);
             }
         }
-        
+        return $results_paths;
         
     }
 }

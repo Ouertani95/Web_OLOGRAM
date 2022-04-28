@@ -17,12 +17,11 @@ class SendResults extends Mailable
      * @return void
      */
     protected $inputs;
-    // protected $files_directory;
-    protected $pdf_path;
-    public function __construct($inputs,$pdf_path)
+    protected $results_paths;
+    public function __construct($inputs,$results_paths)
     {
         $this->inputs = $inputs;
-        $this->pdf_path = $pdf_path; 
+        $this->results_paths = $results_paths; 
     }
 
     /**
@@ -32,13 +31,17 @@ class SendResults extends Mailable
      */
     public function build()
     {
-        return $this->subject('OLOGRAM Results')
-                    ->view('emails.ologram-results')
-                    ->with([
-                        'gtf' => $this->inputs['gtf'],
-                        'bed' => $this->inputs['bed'],
-                        'chr' => $this->inputs['chr']
-                    ])
-                    ->attach($this->pdf_path);
+        $email_message = $this->subject('OLOGRAM Results')
+                            ->view('emails.ologram-results')
+                            ->with([
+                                'gtf' => $this->inputs['gtf'],
+                                'bed' => $this->inputs['bed'],
+                                'chr' => $this->inputs['chr']
+                            ]);
+        foreach ($this->results_paths as $path){
+            $email_message->attach($path);
+        }
+        return $email_message;
+
     }
 }
