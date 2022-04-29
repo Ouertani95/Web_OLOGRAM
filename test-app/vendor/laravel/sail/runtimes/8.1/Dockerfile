@@ -46,6 +46,23 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+    # Installing R and all the dependencies :
+RUN apt-get update \
+    && apt-get install -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common \
+    && add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' \ 
+    && wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
+    && apt-get update \
+    && apt-get install -y r-base \
+    && apt-get install -y r-base-dev \
+    && R -e 'install.packages("shiny",dependencies=TRUE)' \
+    && R -e 'install.packages("reshape2",dependencies=TRUE)' \
+    && R -e 'install.packages("ggplot2",dependencies=TRUE)' \
+    && R -e 'install.packages("dplyr",dependencies=TRUE)' \
+    && R -e 'install.packages("ggrepel",dependencies=TRUE)' \
+    && R -e 'install.packages("ggthemes",dependencies=TRUE)' \
+    && R -e 'install.packages("shinythemes",dependencies=TRUE)' \
+    && R -e 'install.packages("optparse",dependencies=TRUE)'
+
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 RUN groupadd --force -g $WWWGROUP sail
