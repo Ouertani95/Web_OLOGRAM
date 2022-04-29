@@ -90,7 +90,7 @@ services:
     myadmin:
         image: 'phpmyadmin:latest'
         ports:
-          - 8080:80
+          - '8080:80'
         environment:
           MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
         links:
@@ -103,7 +103,8 @@ services:
         image: 'gtftk:staging'
         container_name: gtftk   
         ports:
-            - 6869:6869
+            - '6869:6869'
+            - '8071:8071'
         volumes:
             - './pygtftk_results:/pygtftk'
         networks:

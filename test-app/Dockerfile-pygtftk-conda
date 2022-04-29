@@ -31,7 +31,12 @@ RUN conda config --add channels defaults && \
     conda config --add channels conda-forge && \
     conda init --all && \
     conda create -n pygtftk pygtftk
-    
-RUN echo "alias cndr ='conda run -n pygtftk'" >> ~/.bash_aliases
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+COPY /storage/html_diagram.py /opt/conda/envs/pygtftk/lib/python3.9/site-packages/pygtftk/plugins/html_diagram.py 
+RUN conda run -n pygtftk pip install plotly && \ 
+    conda run -n pygtftk pip install dash-bootstrap-components && \ 
+    conda run -n pygtftk pip install dash && \ 
+    conda run -n pygtftk pip install  dash_defer_js_import && \ 
+    conda run -n pygtftk gtftk -i 
+
+ENTRYPOINT ["tail", "-f", "/dev/null"] 
