@@ -53,10 +53,19 @@ class ExecuteCommand implements ShouldQueue
         
         // If no errors display result
         else{
-            echo ("success madafaka !!! ");
-            $results_paths = $this->get_results_paths(base_path("pygtftk_results/".$this->directory));
+            
+            $results_directory = base_path("pygtftk_results/".$this->directory);
+            $results_paths = $this->get_results_paths($results_directory);
             Mail::to($this->inputs["email"])
                 ->send(new SendResults($this->inputs,$results_paths));
+                
+            // Run the Shiny app with the results 
+
+            // $tsv_path = $this->get_tsv_path($results_paths);
+            // $shiny_command = "Rscript app/Shiny/app.R -i $tsv_path &";
+            // exec($shiny_command);
+
+            echo ("success !!! ");
         }
     }
 
@@ -72,5 +81,14 @@ class ExecuteCommand implements ShouldQueue
         }
         return $results_paths;
         
+    }
+
+    public function get_tsv_path($results_paths)
+    {
+        foreach ($results_paths as $path){
+            if (str_ends_with($path,".tsv")) {
+                return $path;
+            }
+        }
     }
 }
