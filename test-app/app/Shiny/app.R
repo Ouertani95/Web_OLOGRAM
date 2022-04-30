@@ -395,6 +395,6 @@ server <- function(input, output) {
   
 }
 
-app <- shinyApp(ui, server,options = list("port"=7775,"host"='0.0.0.0',"quiet"=TRUE))
+app <- shinyApp(ui, server,options = list("port"=7775,"host"='0.0.0.0'))
 
 runApp(app)
