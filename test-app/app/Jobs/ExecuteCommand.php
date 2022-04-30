@@ -21,9 +21,11 @@ class ExecuteCommand implements ShouldQueue
      *
      * @return void
      */
+
     protected $command;
     protected $directory;
     protected $inputs;
+
     public function __construct($inputs,$command,$directory)
     {
         $this->inputs = $inputs;
@@ -36,13 +38,20 @@ class ExecuteCommand implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
-    {
-        $output=null;
-        $return_var=null;
 
-        // Execute shell command in php
-        exec($this->command, $output, $return_var);
+    public function handle()
+    {   
+        $results_directory = base_path("pygtftk_results/".$this->directory);
+        
+        // Initialise output variables
+        $output=null;
+        $return_var=0;
+
+        // Check if directory already exists (meaning command has already been launched before)
+        if (!file_exists($results_directory)){
+            // Execute shell command in php
+            exec($this->command, $output, $return_var);
+        }
 
         // Verify if errors occured during execution of command
         if ($return_var!== 0) {
@@ -51,20 +60,20 @@ class ExecuteCommand implements ShouldQueue
             var_dump($output_string);
         }
         
-        // If no errors display result
+        // If no errors send the results
         else{
             
-            $results_directory = base_path("pygtftk_results/".$this->directory);
+            // Get the result files and send email with attachements
             $results_paths = $this->get_results_paths($results_directory);
             Mail::to($this->inputs["email"])
                 ->send(new SendResults($this->inputs,$results_paths));
                 
             // Run the Shiny app with the results 
+            $tsv_path = $this->get_tsv_path($results_paths);
+            $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R -i $tsv_path >> app/Shiny/shiny.log 2>&1 &'";
+            exec($shiny_command);
 
-            // $tsv_path = $this->get_tsv_path($results_paths);
-            // $shiny_command = "Rscript app/Shiny/app.R -i $tsv_path &";
-            // exec($shiny_command);
-
+            // Print success message
             echo ("success !!! ");
         }
     }
