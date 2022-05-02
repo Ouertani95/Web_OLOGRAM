@@ -25,7 +25,9 @@ class JobsController extends Controller
             'bed' => ['required',new ValidateBED],
             'chr' => 'required'
         ]);
-
+        
+        // dd ($request->file("gtf")->getContent());
+        
         // Add form information  to Jobs database using Job model
         Job::create([
             'email' => request('email'),
