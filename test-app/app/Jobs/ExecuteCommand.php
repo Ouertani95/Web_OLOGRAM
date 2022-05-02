@@ -51,7 +51,7 @@ class ExecuteCommand implements ShouldQueue
         // Check if directory already exists (meaning command has already been launched before)
         if (!file_exists($results_directory)){
             // Execute shell command in php
-            // Storage::makeDirectory("/".$this->directory);
+            Storage::makeDirectory("/".$this->directory);
             exec($this->command, $output, $return_var);
         }
 
@@ -65,7 +65,7 @@ class ExecuteCommand implements ShouldQueue
 
             // Delete uploaded files and results directory
             Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
-            // Storage::deleteDirectory($this->directory);
+            Storage::deleteDirectory($this->directory);
         }
         
         // If no errors send the results
