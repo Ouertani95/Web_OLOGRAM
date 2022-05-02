@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Jobs\ExecuteCommand;
-use Session;
-// use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class JobsController extends Controller
 {
@@ -40,6 +39,11 @@ class JobsController extends Controller
             "chr" => $request->file('chr')->getClientOriginalName(),
             "email" => $request->email
         ];
+
+        // Upload files to server
+        Storage::putFileAs("",$request->file('gtf'),$inputs['gtf']);
+        Storage::putFileAs("",$request->file('bed'),$inputs['bed']);
+        Storage::putFileAs("",$request->file('chr'),$inputs['chr']);
        
         // Prepare date and directory variables
         $date = date("Ymd_His",time());
