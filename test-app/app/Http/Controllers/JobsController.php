@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Jobs\ExecuteCommand;
 use Illuminate\Support\Facades\Storage;
+use App\Rules\ValidateGTF;
+use App\Rules\ValidateBED;
 
 class JobsController extends Controller
 {
@@ -15,12 +17,12 @@ class JobsController extends Controller
     }
 
     public function run_queued_job(Request $request)
-    {
+    {   
         // Validate form fields
         $validated = $request->validate([
             'email' => 'bail|required|email|max:100',
-            'gtf' => 'required',
-            'bed' => 'required',
+            'gtf' => ['required',new ValidateGTF],
+            'bed' => ['required',new ValidateBED],
             'chr' => 'required'
         ]);
 
