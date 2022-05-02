@@ -51,15 +51,21 @@ class ExecuteCommand implements ShouldQueue
         // Check if directory already exists (meaning command has already been launched before)
         if (!file_exists($results_directory)){
             // Execute shell command in php
+            // Storage::makeDirectory("/".$this->directory);
             exec($this->command, $output, $return_var);
         }
 
         // Verify if errors occured during execution of command
         if ($return_var!== 0) {
+
             $output_string = implode("\n",$output);
+
             // If there are errors display the output of the error
             var_dump($output_string);
-            Storage::disk('local')->delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
+
+            // Delete uploaded files and results directory
+            Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
+            // Storage::deleteDirectory($this->directory);
         }
         
         // If no errors send the results
@@ -75,11 +81,12 @@ class ExecuteCommand implements ShouldQueue
             $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R -i $tsv_path >> app/Shiny/shiny.log 2>&1 &'";
             exec($shiny_command);
 
-            // Print success message
-            echo ("success !!! ");
-
             // Delete uploaded files and results directory
             Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
+            // Storage::deleteDirectory($this->directory);
+
+            // Print success message
+            echo ("success !!! ");
         }   
     }
 
