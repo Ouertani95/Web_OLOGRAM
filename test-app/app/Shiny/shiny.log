@@ -92,3 +92,113 @@ Using Feature as id variables
 Using Feature as id variables
 
 Listening on http://0.0.0.0:7775
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+createTcpServer: address already in use
+Error in initialize(...) : Failed to create server
+Calls: runApp ... startApp -> startServer -> <Anonymous> -> initialize
+Execution halted
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+createTcpServer: address already in use
+Error in initialize(...) : Failed to create server
+Calls: runApp ... startApp -> startServer -> <Anonymous> -> initialize
+Execution halted
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+createTcpServer: address already in use
+Error in initialize(...) : Failed to create server
+Calls: runApp ... startApp -> startServer -> <Anonymous> -> initialize
+Execution halted
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+createTcpServer: address already in use
+Error in initialize(...) : Failed to create server
+Calls: runApp ... startApp -> startServer -> <Anonymous> -> initialize
+Execution halted
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Using Feature as id variables
+Using Feature as id variables
+
+Listening on http://0.0.0.0:7775
+createTcpServer: address already in use
+Error in initialize(...) : Failed to create server
+Calls: runApp ... startApp -> startServer -> <Anonymous> -> initialize
+Execution halted

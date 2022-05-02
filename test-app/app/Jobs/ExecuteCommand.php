@@ -10,7 +10,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendResults;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ExecuteCommand implements ShouldQueue
 {
@@ -22,9 +23,9 @@ class ExecuteCommand implements ShouldQueue
      * @return void
      */
 
-    protected $command;
-    protected $directory;
-    protected $inputs;
+    public $command;
+    public $directory;
+    public $inputs;
 
     public function __construct($inputs,$command,$directory)
     {
@@ -58,6 +59,7 @@ class ExecuteCommand implements ShouldQueue
             $output_string = implode("\n",$output);
             // If there are errors display the output of the error
             var_dump($output_string);
+            Storage::disk('local')->delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
         }
         
         // If no errors send the results
@@ -75,7 +77,10 @@ class ExecuteCommand implements ShouldQueue
 
             // Print success message
             echo ("success !!! ");
-        }
+
+            // Delete uploaded files and results directory
+            Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
+        }   
     }
 
     public function get_results_paths($results_directory)
