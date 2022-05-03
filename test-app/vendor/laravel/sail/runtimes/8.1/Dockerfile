@@ -63,6 +63,23 @@ RUN apt-get update \
     && R -e 'install.packages("shinythemes",dependencies=TRUE)' \
     && R -e 'install.packages("optparse",dependencies=TRUE)'
 
+RUN apt install -y libcurl4-openssl-dev \
+    && apt install -y  libssl-dev \
+    && R -e 'install.packages("plotly",dependencies=TRUE)' \
+    && R -e 'install.packages("flexdashboard",dependencies=TRUE)' \
+    && R -e 'install.packages("htmltools",dependencies=TRUE)' \
+    && R -e 'install.packages("DT",dependencies=TRUE)' 
+
+RUN apt install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev \
+    && R -e 'install.packages("xml2",dependencies=TRUE)' \
+    && R -e 'install.packages("devtools",dependencies=TRUE)' \
+    && R -e 'devtools::install_github("rstudio/crosstalk")' 
+    
+RUN apt install -y pandoc \
+    && R -e 'install.packages("rmarkdown",dependencies=TRUE)' 
+
+
+
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 RUN groupadd --force -g $WWWGROUP sail
