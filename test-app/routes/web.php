@@ -38,3 +38,8 @@ Route::get('/test-mail', function() {
 Route::get('/results',function (){
     return view('results.web_ologram');
 });
+
+Route::get('/results/{id?}',function($id){
+    $results="results.".$id;
+    return view("$results");
+});
