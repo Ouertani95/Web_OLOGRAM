@@ -79,7 +79,7 @@ class ExecuteCommand implements ShouldQueue
             exec($shiny_command,$shiny_output);
             $file_name = end($shiny_output);
 
-            $results_link = "localhost/results/".$file_name;
+            $results_link = "http://localhost/results/".$file_name;
         
             // Send email with link and attachements
             
