@@ -1,16 +1,15 @@
-<div>
-    <p>
-        Bonjour, <br>
-        <br>
-        Voici ci-joint les résultats de votre analyse avec OLOGRAM en utilisant les fichiers suivants : <br>
-        - {{$gtf}}<br>
-        - {{$bed}}<br>
-        - {{$chr}}<br>
-        <br>
-        Vous pouvez aussi les retrouver à travers ce lien : <br>
-        <a href='{{$link}}'>Résultas OLOGRAM</a><br>
+@component('mail::message')
+Bonjour, 
 
-        <br>
-        Merci d'avoir choisi OLOGRAM et à bientôt !
-    </p>
-</div>
+Voici ci-joint les résultats de votre analyse avec OLOGRAM en utilisant les fichiers suivants :
+- {{$gtf}}
+- {{$bed}}
+- {{$chr}}
+
+Vous pouvez aussi les retrouver à travers ce lien :
+@component('mail::button',['url'=> "$link"])
+Résultats OLOGRAM
+@endcomponent
+
+Merci d'avoir choisi OLOGRAM et à bientôt !
+@endcomponent

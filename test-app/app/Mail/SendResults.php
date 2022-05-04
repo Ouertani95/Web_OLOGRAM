@@ -34,7 +34,7 @@ class SendResults extends Mailable
     public function build()
     {
         $email_message = $this->subject('OLOGRAM Results')
-                            ->view('emails.ologram-results')
+                            ->markdown('emails.ologram-results')
                             ->with([
                                 'gtf' => $this->inputs['gtf'],
                                 'bed' => $this->inputs['bed'],
