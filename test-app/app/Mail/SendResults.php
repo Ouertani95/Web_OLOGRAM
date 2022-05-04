@@ -18,10 +18,12 @@ class SendResults extends Mailable
      */
     protected $inputs;
     protected $results_paths;
-    public function __construct($inputs,$results_paths)
+    protected $results_link;
+    public function __construct($inputs,$results_paths,$results_link)
     {
         $this->inputs = $inputs;
-        $this->results_paths = $results_paths; 
+        $this->results_paths = $results_paths;
+        $this->results_link = $results_link;
     }
 
     /**
@@ -36,7 +38,8 @@ class SendResults extends Mailable
                             ->with([
                                 'gtf' => $this->inputs['gtf'],
                                 'bed' => $this->inputs['bed'],
-                                'chr' => $this->inputs['chr']
+                                'chr' => $this->inputs['chr'],
+                                'link' => $this->results_link
                             ]);
         foreach ($this->results_paths as $path){
             $email_message->attach($path);

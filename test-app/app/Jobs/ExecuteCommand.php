@@ -70,16 +70,23 @@ class ExecuteCommand implements ShouldQueue
         
         // If no errors send the results
         else{
-            
-            // Get the result files and send email with attachements
+             // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
-            Mail::to($this->inputs["email"])
-                ->send(new SendResults($this->inputs,$results_paths));
-                
+
             // Run the Shiny app with the results 
             $tsv_path = $this->get_tsv_path($results_paths);
-            $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R -i $tsv_path >> app/Shiny/shiny.log 2>&1 &'";
-            exec($shiny_command);
+            $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R -i $tsv_path '";
+            exec($shiny_command,$shiny_output);
+            $file_name = end($shiny_output);
+
+            $results_link = "localhost/results/".$file_name;
+        
+            // Send email with link and attachements
+            
+            Mail::to($this->inputs["email"])
+                ->send(new SendResults($this->inputs,$results_paths,$results_link));
+                
+            
 
             // Delete uploaded files and results directory
             Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
