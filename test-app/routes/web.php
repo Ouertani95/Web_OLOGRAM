@@ -34,3 +34,7 @@ Route::get('/test-mail', function() {
     });
     return 'OK! Le mail a été envoyé !';
 });
+
+Route::get('/results',function (){
+    return view('results.web_ologram');
+});
