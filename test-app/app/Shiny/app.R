@@ -236,20 +236,34 @@ themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
 # Generate output name and render final page
 #--------------------------------------------------------------
 
-myData = read.delim("random_names.txt", header = FALSE)
-print(myData)
 
-rand_int = sample(1:1000000000,1)
-while(rand_int %in% myData)
-  rand_int = sample(1:1000000000,1)
-rand_int
-sprintf("%010d",rand_int)
+time_stamp <- format(Sys.time(), "%m%d%Y-%H%M%S")
+
+myData <- data.frame()
+try(myData<-read.delim("random_names.txt", header = FALSE))
+
+generate_stamped_rand <- function(){
+  rand_int <- sample(1:1000000000,1)
+  rand_int <- sprintf("%010d",rand_int) 
+  stamped_rand_int <- paste(time_stamp,rand_int,sep = "-")
+  return(stamped_rand_int)
+}
+
+stamped_rand_int <- generate_stamped_rand()
+while(stamped_rand_int %in% myData)
+  stamped_rand_int <- generate_stamped_rand()
+
+
+file_name <- paste(stamped_rand_int,".html",sep = "")
+file_path <- "../../resources/views/results/"
+random_output <- paste(file_path,file_name,sep = "")
 
 rmarkdown::render("app/Shiny/web_ologram.rmd",
-                  params = list(barplot_table=user_barplot_table,
-                              volcano_table=user_volcano_table), 
-                  output_file = "../../resources/views/results/web_ologram.html")
+                  params =list(barplot_table=user_barplot_table,volcano_table=user_volcano_table),
+                  output_file = random_output)
 
+write(stamped_rand_int , file = "app/Shiny/random_names.txt", append = TRUE,sep = "\n")
+write(stamped_rand_int,stdout())
 
 # #--------------------------------------------------------------
 # # Define UI 
