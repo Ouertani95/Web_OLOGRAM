@@ -240,7 +240,7 @@ themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
 time_stamp <- format(Sys.time(), "%m%d%Y-%H%M%S")
 
 myData <- data.frame()
-try(myData<-read.delim("random_names.txt", header = FALSE))
+try(myData<-read.delim("app/Shiny/random_names.txt", header = FALSE))
 
 generate_stamped_rand <- function(){
   rand_int <- sample(1:1000000000,1)
