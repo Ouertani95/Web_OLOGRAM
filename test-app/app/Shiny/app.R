@@ -215,8 +215,7 @@ loading_and_preparing_ologram_table_volcano <- function(table_path){
 #--------------------------------------------------------------
 
 
-#user_barplot_table <- loading_and_preparing_ologram_table_barplot("/Users/puthier/Documents/git/project_dev/pygtftk/pygtftk/data/hg38_chr1/H3K36me3_ologram_stats.tsv")
-#user_volcano_table <- loading_and_preparing_ologram_table_volcano("/Users/puthier/Documents/git/project_dev/pygtftk/pygtftk/data/hg38_chr1/H3K36me3_ologram_stats.tsv")
+
 user_barplot_table <- loading_and_preparing_ologram_table_barplot(opt$inputfile)
 user_volcano_table <- loading_and_preparing_ologram_table_volcano(opt$inputfile)
 
@@ -233,12 +232,23 @@ themes_avail <- c(grep("^theme_",
 
 themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
 
-# library(random)
-# rand_number <- random::randomNumbers(n=1,min=1,max=1000000000,col=1)
-# rand_number <- rand_number[0]
-# sprintf("%010s",rand_number)
-# rand_number
-rmarkdown::render("app/Shiny/web_ologram.rmd",params =list(barplot_table=user_barplot_table,volcano_table=user_volcano_table))
+#--------------------------------------------------------------
+# Generate output name and render final page
+#--------------------------------------------------------------
+
+myData = read.delim("random_names.txt", header = FALSE)
+print(myData)
+
+rand_int = sample(1:1000000000,1)
+while(rand_int %in% myData)
+  rand_int = sample(1:1000000000,1)
+rand_int
+sprintf("%010d",rand_int)
+
+rmarkdown::render("app/Shiny/web_ologram.rmd",
+                  params = list(barplot_table=user_barplot_table,
+                              volcano_table=user_volcano_table), 
+                  output_file = "../../resources/views/results/web_ologram.html")
 
 
 # #--------------------------------------------------------------
