@@ -78,7 +78,7 @@ RUN apt install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev \
 RUN apt install -y pandoc \
     && R -e 'install.packages("rmarkdown",dependencies=TRUE)' 
 
-
+RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
