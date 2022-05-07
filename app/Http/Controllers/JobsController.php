@@ -54,7 +54,7 @@ class JobsController extends Controller
         $directory_name = $date.'-'.$inputs["gtf"].'-'.$inputs["bed"];
 
         // Prepare command to be executed
-        $command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram -i ".$inputs["gtf"]." -c ".$inputs["chr"]." -p ".$inputs["bed"]." -o ".$directory_name." -k 8 2>&1"."'" ;
+        $command = "sg docker -c '"."docker exec web_ologram_gtftk_1 conda run -n pygtftk gtftk ologram -i ".$inputs["gtf"]." -c ".$inputs["chr"]." -p ".$inputs["bed"]." -o ".$directory_name." -k 8 2>&1"."'" ;
         
         // Send job to queue
         ExecuteCommand::dispatch($inputs,$command,$directory_name);

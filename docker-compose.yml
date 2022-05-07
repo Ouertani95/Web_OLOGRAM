@@ -102,7 +102,6 @@ services:
           - sail
     gtftk:
         image: 'gtftk:staging'
-        container_name: gtftk   
         ports:
             - 6869:6869
         volumes:
