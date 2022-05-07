@@ -1,2 +1,0 @@
-/opt/conda/envs/pygtftk/lib/python3.9/site-packages/pygtftk/plugins
-
