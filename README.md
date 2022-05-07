@@ -21,8 +21,8 @@ You also need Git in order to clone the repository locally :
 Once you have Docker Compose set up you can run the following commands :
 
 ```bash
-git clone https://github.com/Ouertani95/laravel_test_app
-cd laravel_test_app/test_app
+git clone https://github.com/Ouertani95/Web_OLOGRAM
+cd Web_OLOGRAM/
 docker build -f Dockerfile-pygtftk-conda -t gtftk:staging .
 sudo groupadd docker
 sudo adduser sail
