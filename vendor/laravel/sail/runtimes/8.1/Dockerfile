@@ -49,9 +49,9 @@ RUN apt-get update \
     # Installing R and all the dependencies :
 RUN apt-get update \
     && apt-get install -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common \
-    && add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' \ 
+    && add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' \ 
     && wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
-    && apt-get update \
+    # && apt-get update \
     && apt-get install -y r-base \
     && apt-get install -y r-base-dev \
     && R -e 'install.packages("shiny",dependencies=TRUE)' \
