@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
     
     <title>OLOGRAM test</title>
 
@@ -14,7 +13,7 @@
 <body>
 
   {{-- This is the navigation bar on the top --}}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-light navbar-expand-lg ">
     <div class="container-fluid">
       <a class="navbar-brand" href="/main">OLOGRAM</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,78 +88,61 @@
     </div>
     <div class="row">
       <div class="col text-center">
-        <div id="accordion">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  <h4>BED vs GTF</h4>
-                </button>
-              </h5>
-            </div>
+        <div class="accordion" id="accordionExample">
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                BED vs GTF
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/main' method='POST' enctype="multipart/form-data" >
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
-                    <div class="col-sm-4">
-                    
-                      <label for='email'>Email : </label>
-                      <input type='email' name='email' value="{{ old('email') }}"></br><br>
+                    <div class="col-sm-4 ">
 
                       <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroupFileAddon01">GTF</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
+                        <span class="input-group-text " id="basic-addon0">EMAIL</span>
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com">
                       </div>
 
                       <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">BED</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile02">
-                          <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                        </div>
+                        <input class="form-control " id="formFileSm1" name="gtf" type="file">
+                        <span class="input-group-text" id="basic-addon1">GTF</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">CHR</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile03">
-                          <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
-                        </div>
+                        <input class="form-control " id="formFileSm2" name="bed" type="file">
+                        <span class="input-group-text " id="basic-addon2">BED</span>
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input class="form-control " id="formFileSm3" name="chr" type="file">
+                        <span class="input-group-text " id="basic-addon3">CHR</span>
                       </div>
 
                       <button type="submit" class="btn btn-primary">Start job</button></br><br>
 
                     </div>
-
+                    
+                    
                     <div class="col-sm">
                       <div class="col text-center">
-                        <div id="accordion-advanced">
-                          <div class="card" >
-                            <div class="card-header" id="headingOne-advanced" style="height: 4rem;">
-                              <h5 class="s">
-                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne-advanced" aria-expanded="false" aria-controls="collapseOne-advanced">
-                                  <h6>Advanced options</h6>
-                                </button>
-                              </h5>
-                            </div>
-
-                            <div id="collapseOne-advanced" class="collapse" aria-labelledby="headingOne-advanced" data-parent="#accordion-advanced">
-                              <div class="card-body">
+                        <div class="accordion" id="accordionExample2">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingone-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-advanced" aria-expanded="true" aria-controls="collapseOne-advanced">
+                                Advanced options
+                              </button>
+                            </h2>
+                            <div id="collapseOne-advanced" class="accordion-collapse collapse" aria-labelledby="headingone-advanced" data-bs-parent="#accordionExample2">
+                              <div class="accordion-body">
                                 <div class="row">
-                                  <div class="col-sm-6 text-left">
+                                  <div class="col-sm-4 text-start">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                       <label class="form-check-label" for="defaultCheck1">
@@ -206,34 +188,33 @@
                                     
                                   </div>
 
-
-                                  <div class="col-sm-6 text-left">
+                                  <div class="col-sm-6 text-start">
                                     <div class="dropdown">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Sort features
                                       </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <button class="dropdown-item" type="button">None</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_expectation_shuffled</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_variance_shuffled</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_negbinom_fit_quality</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_log2_fold_change</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_true</button>
-                                        <button class="dropdown-item" type="button">nb_intersections_pvalue</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_expectation_shuffled</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_variance_shuffled</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_negbinom_fit_quality</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_log2_fold_change</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_true</button>
-                                        <button class="dropdown-item" type="button">summed_bp_overlaps_pvalue</button>
-                                      </div>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">None</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_expectation_shuffled</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_variance_shuffled</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_negbinom_fit_quality</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_log2_fold_change</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_true</a></li>
+                                        <li><a class="dropdown-item" href="#">nb_intersections_pvalue</a></li>
+                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_expectation_shuffled</a></li>
+                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_variance_shuffled</a></li>
+                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_negbinom_fit_quality</a></li>
+                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_true</a></li>
+                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_pvalue</a></li>
+                                      </ul>
                                     </div>
+
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -243,53 +224,50 @@
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header" id="headingTwo">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <h4>BED vs GTF (keys/values)</h4>
-                </button>
-              </h5>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" >
-              <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                BED vs GTF (keys/values)
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header" id="headingThree">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  <h4>BED vs BED</h4>                
-                </button>
-              </h5>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                BED vs BED
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header" id="headingFour">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  <h4>BED vs BED (Combinations)</h4>
-                </button>
-              </h5>
-            </div>
-            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-              <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading4">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                BED vs BED (Combinations)
+              </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>This is the Fourth item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
