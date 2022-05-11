@@ -15,17 +15,12 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-// Route for get request of home page
-Route::get('/', function () {
-    // Mail::to('ouertani2006@gmail.com')->send(new \App\Mail\HelloMail());
-    return view('welcome');
-    });
 
 // Route for get request of /main URI
-Route::get('/main', [JobsController::class,'index']);
+Route::get('/', [JobsController::class,'index']);
 
 // Route for form submission goes to JobsController class
-Route::post('/main', [JobsController::class,'run_queued_job']);
+Route::post('/', [JobsController::class,'run_queued_job']);
 
 Route::get('/test-mail', function() {
     Mail::raw('bonjour',function($message){
@@ -33,10 +28,6 @@ Route::get('/test-mail', function() {
                 ->to('ouertani2006@gmail.com');
     });
     return 'OK! Le mail a été envoyé !';
-});
-
-Route::get('/results',function (){
-    return view('results.web_ologram');
 });
 
 Route::get('/results/{id?}',function($id){

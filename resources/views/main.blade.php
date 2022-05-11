@@ -15,7 +15,7 @@
   {{-- This is the navigation bar on the top --}}
   <nav class="navbar navbar-light navbar-expand-lg ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/main">OLOGRAM</a>
+      <a class="navbar-brand" href="/">OLOGRAM</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -99,11 +99,13 @@
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
               <div class="accordion-body">
                 <!-- This is the actual form -->
-                <form action='/main' method='POST' enctype="multipart/form-data" >
+                <form action='/' method='POST' enctype="multipart/form-data" >
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
                     <div class="col-sm-4 ">
+                      
+                      <input type="hidden" name="caseId" value="case1">
 
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -113,21 +115,21 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control "  name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">GTF</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control "  name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control "  name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
@@ -153,7 +155,7 @@
                                   <div class="col-sm-3 text-start">
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="fcg">
                                       <label class="form-check-label" for="defaultCheck1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title=" Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file.">
                                         Force-chrom-gtf
@@ -161,7 +163,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" name="fcp">
                                       <label class="form-check-label" for="defaultCheck2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”.">
                                         Force-chrom-peak
@@ -169,7 +171,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" name="fcmb">
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
@@ -177,7 +179,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="fcg">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
                                         Display-fit-quality
@@ -185,7 +187,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="cf">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
                                         Coord-flip
@@ -193,7 +195,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
                                         Hide-undef
@@ -201,7 +203,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="pvt">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">
                                         Pval-threshold
@@ -214,7 +216,7 @@
 
                                     <div class="input-group mb-3">
                                       <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">More BED</span>
                                     </div>
@@ -223,19 +225,19 @@
                                       <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting.">More BED labels</span>
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"></textarea>
                                     </div>
 
                                      <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
+                                      <input class="form-control " id="formFileSm1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
+                                      <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
                                     </div>
@@ -248,18 +250,18 @@
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">Upstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups">
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">Downstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns">
                                     </div>
 
                                     <div class="dropdown">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" name="srtf">
                                         Sort features
                                       </button>
                                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -305,21 +307,23 @@
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
               <div class="accordion-body">
                 <!-- This is the actual form -->
-                <form action='/main' method='POST' enctype="multipart/form-data" >
+                <form action='/' method='POST' enctype="multipart/form-data" >
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
                     <div class="col-sm-4 ">
 
+                      <input type="hidden" name="caseId" value="case2">
+
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">GTF</span>
@@ -333,14 +337,14 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
@@ -440,14 +444,14 @@
                                     </div>
 
                                      <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
@@ -518,16 +522,18 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample1">
               <div class="accordion-body">
                 <!-- This is the actual form -->
-                <form action='/main' method='POST' enctype="multipart/form-data" >
+                <form action='/' method='POST' enctype="multipart/form-data" >
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
                     <div class="col-sm-4 ">
+                      
+                      <input type="hidden" name="caseId" value="case3">
 
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
@@ -539,14 +545,14 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
@@ -639,14 +645,14 @@
                                     </div>
 
                                      <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
@@ -717,16 +723,18 @@
             <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample1">
               <div class="accordion-body">
                 <!-- This is the actual form -->
-                <form action='/main' method='POST' enctype="multipart/form-data" >
+                <form action='/' method='POST' enctype="multipart/form-data" >
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
                     <div class="col-sm-4 ">
 
+                      <input type="hidden" name="caseId" value="case4">
+        
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
@@ -738,7 +746,7 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which combinations are searched.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which combinations are searched.">BED</span>
@@ -765,14 +773,14 @@
                                   <div class="col-sm text-start">
 
                                     <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>

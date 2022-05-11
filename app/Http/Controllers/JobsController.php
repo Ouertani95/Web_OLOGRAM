@@ -18,6 +18,7 @@ class JobsController extends Controller
 
     public function run_queued_job(Request $request)
     {   
+        dd($request);
         // Validate form fields
         $validated = $request->validate([
             'email' => 'bail|required|email|max:100',
@@ -65,7 +66,19 @@ class JobsController extends Controller
 
     public function show_message()
     {
-        return redirect()->to('/main')->with('success', 'Job is running !');
+        return redirect()->to('/')->with('success', 'Job is running !');
     }
-
+    
+    public function build_command()
+    {
+        $options = [
+            "fcg" => " -f ",
+            "fcp" => " -w ",
+            "fcmb" => " -q ",
+            "dfq" => " -y ",
+            "cf" => " -r ",
+            "hu" => " -a ",
+            "pvt" => " -g ",
+        ];
+    }
 }
