@@ -106,23 +106,31 @@
                     <div class="col-sm-4 ">
 
                       <div class="input-group mb-3">
-                        <span class="input-group-text " id="basic-addon0">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com">
+                        <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Required email address to send the final results to.">EMAIL</span>
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm1" name="gtf" type="file">
-                        <span class="input-group-text" id="basic-addon1">GTF</span>
+                        <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                        <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">GTF</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" name="bed" type="file">
-                        <span class="input-group-text " id="basic-addon2">BED</span>
+                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which the enrichment will be calculated.">
+                        <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" name="chr" type="file">
-                        <span class="input-group-text " id="basic-addon3">CHR</span>
+                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                        <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
                       </div>
 
                       <button type="submit" class="btn btn-primary">Start job</button></br><br>
@@ -142,53 +150,114 @@
                             <div id="collapseOne-advanced" class="accordion-collapse collapse" aria-labelledby="headingone-advanced" data-bs-parent="#accordionExample2">
                               <div class="accordion-body">
                                 <div class="row">
-                                  <div class="col-sm-4 text-start">
+                                  <div class="col-sm-3 text-start">
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                      <label class="form-check-label" for="defaultCheck1">
+                                      <label class="form-check-label" for="defaultCheck1" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title=" Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file.">
                                         Force-chrom-gtf
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                      <label class="form-check-label" for="defaultCheck2">
+                                      <label class="form-check-label" for="defaultCheck2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”.">
                                         Force-chrom-peak
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                                      <label class="form-check-label" for="defaultCheck3">
+                                      <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                                      <label class="form-check-label" for="defaultCheck4">
+                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
                                         Display-fit-quality
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                                      <label class="form-check-label" for="defaultCheck4">
+                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
                                         Coord-flip
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                                      <label class="form-check-label" for="defaultCheck4">
+                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
                                         Hide-undef
                                       </label>
                                     </div>
+
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                                      <label class="form-check-label" for="defaultCheck4">
+                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">
                                         Pval-threshold
                                       </label>
                                     </div>
                                     
                                   </div>
 
-                                  <div class="col-sm-6 text-start">
+                                  <div class="col-sm-5 text-start">
+
+                                    <div class="input-group mb-3">
+                                      <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">
+                                      <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">More BED</span>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                      <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting.">More BED labels</span>
+                                      <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></textarea>
+                                    </div>
+
+                                     <div class="input-group mb-3">
+                                      <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
+                                      <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                      <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
+                                      <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
+                                    </div>
+
+                                  </div>
+
+                                  <div class="col-sm text-start">
+
+                                    <div class="input-group mb-3">
+                                      <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">Upstream</span>
+                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                      <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">Downstream</span>
+                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">
+                                    </div>
+
                                     <div class="dropdown">
                                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Sort features
@@ -208,8 +277,10 @@
                                         <li><a class="dropdown-item" href="#">summed_bp_overlaps_pvalue</a></li>
                                       </ul>
                                     </div>
-
+                                  
                                   </div>
+
+
                                 </div>
                               </div>
                             </div>
@@ -268,6 +339,12 @@
       </div>
     </div>
   </div>
+  {{-- <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script> --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
