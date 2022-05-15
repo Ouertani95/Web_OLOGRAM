@@ -27,6 +27,7 @@ class ValidateBED implements Rule
      */
     public function passes($attribute, $value)
     {
+        $this->attribute = $attribute;
         return Str::endsWith(strtoupper($value->getClientOriginalName()),["BED"]);
     }
 
@@ -37,6 +38,6 @@ class ValidateBED implements Rule
      */
     public function message()
     {
-        return 'Please submit a valid BED file.';
+        return "Please submit a valid BED file in $this->attribute.";
     }
 }
