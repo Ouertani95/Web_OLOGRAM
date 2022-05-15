@@ -88,15 +88,15 @@
     </div>
     <div class="row">
       <div class="col text-center">
-        <div class="accordion" id="accordionExample1">
+        <div class="accordion" id="cases-accordion">
 
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h2 class="accordion-header" id="heading1">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
                 BED vs GTF
               </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -142,20 +142,20 @@
                     
                     <div class="col-sm">
                       <div class="col text-center">
-                        <div class="accordion" id="accordionExample2">
+                        <div class="accordion" id="case1-accordion-advanced">
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingone-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-advanced" aria-expanded="true" aria-controls="collapseOne-advanced">
+                            <h2 class="accordion-header" id="heading1-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1-advanced" aria-expanded="true" aria-controls="collapse1-advanced">
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapseOne-advanced" class="accordion-collapse collapse" aria-labelledby="headingone-advanced" data-bs-parent="#accordionExample2">
+                            <div id="collapse1-advanced" class="accordion-collapse collapse show" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="fcg">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="defaultCheck1" name="fcg">
                                       <label class="form-check-label" for="defaultCheck1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title=" Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file.">
                                         Force-chrom-gtf
@@ -163,7 +163,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" name="fcp">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="defaultCheck2" name="fcp">
                                       <label class="form-check-label" for="defaultCheck2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”.">
                                         Force-chrom-peak
@@ -171,7 +171,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" name="fcmb">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="defaultCheck3" name="fcmb">
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
@@ -179,7 +179,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="fcg">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
                                         Display-fit-quality
@@ -187,7 +187,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="cf">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
                                         Coord-flip
@@ -195,7 +195,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="hu">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('hu') ? 'checked' : null }} id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
                                         Hide-undef
@@ -203,7 +203,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="pvt">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('pvt') ? 'checked' : null }} id="defaultCheck4" name="pvt">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">
                                         Pval-threshold
@@ -225,7 +225,7 @@
                                       <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting.">More BED labels</span>
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"></textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"> {{ old('mbedl') }} </textarea>
                                     </div>
 
                                      <div class="input-group mb-3">
@@ -250,35 +250,38 @@
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">Upstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups">
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" value="{{ old('ups') }}">
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">Downstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns">
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
 
-                                    <div class="dropdown">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" name="srtf">
-                                        Sort features
-                                      </button>
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">None</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_log2_fold_change</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_true</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_pvalue</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_true</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_pvalue</a></li>
-                                      </ul>
-                                    </div>
+                                    <label for="srtf" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
+                                    Sort features
+                                    </label>
+
+                                    <select class="form-select" aria-label="Default select example" name="srtf" value="{{ old('srtf') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
+                                      <option selected>None</option>
+                                      <option value="nb_intersections_expectation_shuffled" {{ old('srtf')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
+                                      <option value="nb_intersections_variance_shuffled" {{ old('srtf')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
+                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('srtf')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
+                                      <option value="nb_intersections_log2_fold_change" {{ old('srtf')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
+                                      <option value="nb_intersections_true" {{ old('srtf')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
+                                      <option value="nb_intersections_pvalue" {{ old('srtf')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
+                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('srtf')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
+                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('srtf')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
+                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('srtf')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
+                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('srtf')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
+                                      <option value="summed_bp_overlaps_true" {{ old('srtf')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
+                                      <option value="summed_bp_overlaps_pvalue" {{ old('srtf')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
+                                    </select>
+
                                   
                                   </div>
 
@@ -299,12 +302,12 @@
           </div>
 
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h2 class="accordion-header" id="heading2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                 BED vs GTF (keys/values)
               </button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
+            <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -318,7 +321,7 @@
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
@@ -333,7 +336,7 @@
                         <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'">GTF keys</span>
                         <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></textarea>
+                        title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys"></textarea>
                       </div>
 
                       <div class="input-group mb-3">
@@ -357,20 +360,20 @@
                     
                     <div class="col-sm">
                       <div class="col text-center">
-                        <div class="accordion" id="accordionExample3">
+                        <div class="accordion" id="case2-accordion-advanced">
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingtwo-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsetwo-advanced" aria-expanded="true" aria-controls="collapsetwo-advanced">
+                            <h2 class="accordion-header" id="heading2-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2-advanced" aria-expanded="true" aria-controls="collapse2-advanced">
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapsetwo-advanced" class="accordion-collapse collapse" aria-labelledby="headingtwo-advanced" data-bs-parent="#accordionExample3">
+                            <div id="collapse2-advanced" class="accordion-collapse collapse show" aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="defaultCheck1" name="fcg">
                                       <label class="form-check-label" for="defaultCheck1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title=" Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file.">
                                         Force-chrom-gtf
@@ -378,7 +381,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="defaultCheck2" name="fcp">
                                       <label class="form-check-label" for="defaultCheck2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”.">
                                         Force-chrom-peak
@@ -386,7 +389,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="defaultCheck3" name="fcmb">
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
@@ -394,7 +397,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
                                         Display-fit-quality
@@ -402,7 +405,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
                                         Coord-flip
@@ -410,7 +413,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('hu') ? 'checked' : null }} id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
                                         Hide-undef
@@ -418,7 +421,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('pvt') ? 'checked' : null }} id="defaultCheck4" name="pvt">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">
                                         Pval-threshold
@@ -431,7 +434,7 @@
 
                                     <div class="input-group mb-3">
                                       <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">More BED</span>
                                     </div>
@@ -440,19 +443,19 @@
                                       <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting.">More BED labels</span>
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"> {{ old('mbedl') }} </textarea>
                                     </div>
 
                                      <div class="input-group mb-3">
-                                      <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
+                                      <input class="form-control " id="formFileSm1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
                                     </div>
@@ -465,42 +468,45 @@
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">Upstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" value="{{ old('ups') }}">
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">Downstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
 
-                                    <div class="dropdown">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Sort features
-                                      </button>
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">None</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_log2_fold_change</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_true</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_pvalue</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_true</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_pvalue</a></li>
-                                      </ul>
-                                    </div>
+                                    <label for="srtf" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
+                                    Sort features
+                                    </label>
+
+                                    <select class="form-select" aria-label="Default select example" name="srtf" value="{{ old('srtf') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
+                                      <option selected>None</option>
+                                      <option value="nb_intersections_expectation_shuffled" {{ old('srtf')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
+                                      <option value="nb_intersections_variance_shuffled" {{ old('srtf')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
+                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('srtf')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
+                                      <option value="nb_intersections_log2_fold_change" {{ old('srtf')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
+                                      <option value="nb_intersections_true" {{ old('srtf')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
+                                      <option value="nb_intersections_pvalue" {{ old('srtf')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
+                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('srtf')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
+                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('srtf')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
+                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('srtf')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
+                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('srtf')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
+                                      <option value="summed_bp_overlaps_true" {{ old('srtf')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
+                                      <option value="summed_bp_overlaps_pvalue" {{ old('srtf')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
+                                    </select>
+
                                   
                                   </div>
 
 
                                 </div>
                               </div>
-                            </div>
+                            </div>  
                           </div>
 
                       </div>
@@ -514,12 +520,12 @@
           </div>
 
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <h2 class="accordion-header" id="heading3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
                 BED vs BED
               </button>
             </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample1">
+            <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -565,20 +571,20 @@
                     
                     <div class="col-sm">
                       <div class="col text-center">
-                        <div class="accordion" id="accordionExample4">
+                        <div class="accordion" id="case3-accordion-advanced">
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingthree-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsethree-advanced" aria-expanded="true" aria-controls="collapsethree-advanced">
+                            <h2 class="accordion-header" id="heading3-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3-advanced" aria-expanded="true" aria-controls="collapse3-advanced">
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapsethree-advanced" class="accordion-collapse collapse" aria-labelledby="headingthree-advanced" data-bs-parent="#accordionExample4">
+                            <div id="collapse3-advanced" class="accordion-collapse collapse show" aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="defaultCheck1" name="fcg">
                                       <label class="form-check-label" for="defaultCheck1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title=" Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file.">
                                         Force-chrom-gtf
@@ -586,7 +592,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="defaultCheck2" name="fcp">
                                       <label class="form-check-label" for="defaultCheck2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”.">
                                         Force-chrom-peak
@@ -594,7 +600,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="defaultCheck3" name="fcmb">
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
@@ -602,7 +608,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
                                         Display-fit-quality
@@ -610,7 +616,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
                                         Coord-flip
@@ -618,7 +624,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('hu') ? 'checked' : null }} id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
                                         Hide-undef
@@ -626,7 +632,7 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('pvt') ? 'checked' : null }} id="defaultCheck4" name="pvt">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">
                                         Pval-threshold
@@ -641,19 +647,19 @@
                                       <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting.">More BED labels</span>
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"> {{ old('mbedl') }} </textarea>
                                     </div>
 
                                      <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
                                     </div>
@@ -666,34 +672,14 @@
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">Upstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)">
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" value="{{ old('ups') }}">
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">Downstream</span>
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)">
-                                    </div>
-
-                                    <div class="dropdown">
-                                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Sort features
-                                      </button>
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">None</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_log2_fold_change</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_true</a></li>
-                                        <li><a class="dropdown-item" href="#">nb_intersections_pvalue</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_expectation_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_variance_shuffled</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_negbinom_fit_quality</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_true</a></li>
-                                        <li><a class="dropdown-item" href="#">summed_bp_overlaps_pvalue</a></li>
-                                      </ul>
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
                                   
                                   </div>
@@ -720,7 +706,7 @@
                 BED vs BED (Combinations)
               </button>
             </h2>
-            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample1">
+            <div id="collapse4" class="accordion-collapse collapse show" aria-labelledby="heading4" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -759,14 +745,14 @@
                     
                     <div class="col-sm">
                       <div class="col text-center">
-                        <div class="accordion" id="accordionExample5">
+                        <div class="accordion" id="case4-accordion-advanced">
                           <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingfour-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour-advanced" aria-expanded="true" aria-controls="collapsefour-advanced">
+                            <h2 class="accordion-header" id="heading4-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4-advanced" aria-expanded="true" aria-controls="collapse4-advanced">
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapsefour-advanced" class="accordion-collapse collapse" aria-labelledby="headingfour-advanced" data-bs-parent="#accordionExample5">
+                            <div id="collapse4-advanced" class="accordion-collapse collapse show" aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
 
@@ -774,14 +760,14 @@
 
                                     <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “).">BED incl</span>
                                     </div>
 
                                     <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                       <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “).">BED excl</span>
                                     </div>
@@ -789,12 +775,12 @@
                                     <div class="input-group mb-3">
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned.">Max combinations</span>
-                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input type="text" class="form-control" name="max" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned.">
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('exact') ? 'checked' : null }} id="defaultCheck3" name="exact" >
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Exact : Whether to perform a transitive counting or not. For example, if true, observations of A+B+C will counts as observations of A+B. (but not as observations of A+B+D)">
                                         Exact

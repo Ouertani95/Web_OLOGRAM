@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateCase;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Jobs\ExecuteCommand;
@@ -16,17 +17,9 @@ class JobsController extends Controller
         return view('main');
     }
 
-    public function run_queued_job(Request $request)
-    {   
+    public function run_queued_job(ValidateCase $request)
+    {
         dd($request);
-        // Validate form fields
-        $validated = $request->validate([
-            'email' => 'bail|required|email|max:100',
-            'gtf' => ['required',new ValidateGTF],
-            'bed' => ['required',new ValidateBED],
-            'chr' => 'required'
-        ]);
-        
         // dd ($request->file("gtf")->getContent());
         
         // Add form information  to Jobs database using Job model
@@ -81,4 +74,5 @@ class JobsController extends Controller
             "pvt" => " -g ",
         ];
     }
+
 }
