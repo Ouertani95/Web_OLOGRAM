@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '6012482b9b6c3e79e9a93ea78bb801278caee5d0',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -374,12 +374,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '6012482b9b6c3e79e9a93ea78bb801278caee5d0',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -976,6 +976,15 @@
             'aliases' => array(),
             'reference' => '2b54c8c66f2d280f25e15064ebe3d5e3eda19820',
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-validation-rules' => array(
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-validation-rules',
+            'aliases' => array(),
+            'reference' => '40affd1d4eb4c084f041a79822b9fe8d17b5e877',
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.0.7',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39d3f87d1e5e43f9598ab7a4b049954a",
+    "content-hash": "603220956223ed12e06179131d7ffdcf",
     "packages": [
         {
             "name": "brick/math",
@@ -2725,6 +2725,78 @@
                 }
             ],
             "time": "2022-03-27T21:42:02+00:00"
+        },
+        {
+            "name": "spatie/laravel-validation-rules",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-validation-rules.git",
+                "reference": "40affd1d4eb4c084f041a79822b9fe8d17b5e877"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-validation-rules/zipball/40affd1d4eb4c084f041a79822b9fe8d17b5e877",
+                "reference": "40affd1d4eb4c084f041a79822b9fe8d17b5e877",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "league/iso3166": "^3.0",
+                "myclabs/php-enum": "^1.6",
+                "orchestra/testbench": "^6.23|^7.0",
+                "phpunit/phpunit": "^9.4",
+                "spatie/enum": "^2.2|^3.0"
+            },
+            "suggest": {
+                "league/iso3166": "Needed for the CountryCode rule and Currency rule"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\ValidationRules\\ValidationRulesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ValidationRules\\": "src",
+                    "Spatie\\ValidationRules\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A set of useful Laravel validation rules",
+            "homepage": "https://github.com/spatie/laravel-validation-rules",
+            "keywords": [
+                "laravel-validation-rules",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-validation-rules/issues",
+                "source": "https://github.com/spatie/laravel-validation-rules/tree/3.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-12T08:33:31+00:00"
         },
         {
             "name": "symfony/console",
