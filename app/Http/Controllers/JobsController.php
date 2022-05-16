@@ -19,7 +19,7 @@ class JobsController extends Controller
 
     public function run_queued_job(ValidateCase $request)
     {
-        dd($request);
+        dd($request->file("mbed"));
         // dd ($request->file("gtf")->getContent());
         
         // Add form information  to Jobs database using Job model
@@ -64,7 +64,7 @@ class JobsController extends Controller
     
     public function build_command()
     {
-        $options = [
+        $args = [
             "fcg" => " -f ",
             "fcp" => " -w ",
             "fcmb" => " -q ",
@@ -72,7 +72,22 @@ class JobsController extends Controller
             "cf" => " -r ",
             "hu" => " -a ",
             "pvt" => " -g ",
+            "gtf" => " -i ",
+            "chr" => " -c ",
+            "bed" => " -p ",
+            "mbed" => " -b ",
+            "mbedl" => " -l ",
+            "bedin" => " -bi ",
+            "bedex" => " -e ",
+            "ups" => " -u ",
+            "dns" => " -d ",
+            "srtf" => " -j ",
+            "keys" => " -m ",
+            "exact" => " -ex ",
+            "max" => " -monc "
         ];
+
+        
     }
 
 }
