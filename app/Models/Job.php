@@ -12,5 +12,5 @@ class Job extends Model
     // By default the model links to the table that is the plural of it's name
     protected $table = 'Jobs';
     // the fillable variable is used when calling the create method of a class
-    protected $fillable = ['email','gtf','bed','chr'];
+    protected $fillable = ['email','command'];
 }

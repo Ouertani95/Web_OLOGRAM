@@ -326,7 +326,7 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">GTF</span>
@@ -340,14 +340,14 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
@@ -539,26 +539,26 @@
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name="email" value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control" type="file" id="formFileMultiple" name="mbed" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">Ref BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" type="file" name="bed" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm3" type="file" name="chr" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
@@ -720,19 +720,19 @@
                       <div class="input-group mb-3">
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
-                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" value="{{ old('email') }}" placeholder="name@example.com"
+                        <input type="email" class="form-control form-control-sm" id="exampleFormControlInput1" name="email" value="{{ old('email') }}" placeholder="name@example.com"
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control" type="file" id="formFileMultiple" name="mbed" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">Ref BED</span>
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control " id="formFileSm2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control " id="formFileSm2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which combinations are searched.">
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which combinations are searched.">BED</span>

@@ -16,12 +16,12 @@ class SendResults extends Mailable
      *
      * @return void
      */
-    protected $inputs;
+    protected $uploaded_files_names;
     protected $results_paths;
     protected $results_link;
-    public function __construct($inputs,$results_paths,$results_link)
+    public function __construct($uploaded_files_names,$results_paths,$results_link)
     {
-        $this->inputs = $inputs;
+        $this->uploaded_files_names = $uploaded_files_names;
         $this->results_paths = $results_paths;
         $this->results_link = $results_link;
     }
@@ -36,9 +36,7 @@ class SendResults extends Mailable
         $email_message = $this->subject('OLOGRAM Results')
                             ->markdown('emails.ologram-results')
                             ->with([
-                                'gtf' => $this->inputs['gtf'],
-                                'bed' => $this->inputs['bed'],
-                                'chr' => $this->inputs['chr'],
+                                'uploaded_files_names' => $this->uploaded_files_names,
                                 'link' => $this->results_link
                             ]);
         foreach ($this->results_paths as $path){

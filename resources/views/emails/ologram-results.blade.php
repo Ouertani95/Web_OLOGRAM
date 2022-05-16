@@ -2,9 +2,9 @@
 Bonjour, 
 
 Voici ci-joint les résultats de votre analyse avec OLOGRAM en utilisant les fichiers suivants :
-- {{$gtf}}
-- {{$bed}}
-- {{$chr}}
+@foreach ($uploaded_files_names as $file)
+- {{$file}}   
+@endforeach
 
 Vous pouvez aussi les retrouver à travers ce lien :
 @component('mail::button',['url'=> "$link"])

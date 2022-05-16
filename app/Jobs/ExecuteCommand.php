@@ -25,13 +25,17 @@ class ExecuteCommand implements ShouldQueue
 
     public $command;
     public $directory;
-    public $inputs;
+    public $email;
+    public $uploaded_files_paths;
+    public $uploaded_files_names;
 
-    public function __construct($inputs,$command,$directory)
+    public function __construct($uploaded_files_paths,$uploaded_files_names,$email,$command,$directory)
     {
-        $this->inputs = $inputs;
+        $this->uploaded_files_paths = $uploaded_files_paths;
+        $this->email = $email;
         $this->command = $command;
         $this->directory = $directory;
+        $this->uploaded_files_names = $uploaded_files_names;
     }
 
     /**
@@ -42,16 +46,19 @@ class ExecuteCommand implements ShouldQueue
 
     public function handle()
     {   
+        var_dump($this->command);
         $results_directory = base_path("pygtftk_results/".$this->directory);
+
+        $nb_uploaded_files = count($this->uploaded_files_paths);
+        $nb_current_files = count(glob(base_path("pygtftk_results/$this->directory/*")));
         
         // Initialise output variables
         $output=null;
         $return_var=0;
-
-        // Check if directory already exists (meaning command has already been launched before)
-        if (!file_exists($results_directory)){
+        
+        // Check if directory already exists and new files have been created (meaning command has already been launched before)
+        if ($nb_current_files === $nb_uploaded_files){
             // Execute shell command in php
-            Storage::makeDirectory("/".$this->directory);
             exec($this->command, $output, $return_var);
         }
 
@@ -64,8 +71,8 @@ class ExecuteCommand implements ShouldQueue
             var_dump($output_string);
 
             // Delete uploaded files and results directory
-            Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
-            Storage::deleteDirectory($this->directory);
+            // Storage::delete(array_values($this->uploaded_files_paths));
+            // Storage::deleteDirectory($this->directory);
         }
         
         // If no errors send the results
@@ -83,14 +90,11 @@ class ExecuteCommand implements ShouldQueue
         
             // Send email with link and attachements
             
-            Mail::to($this->inputs["email"])
-                ->send(new SendResults($this->inputs,$results_paths,$results_link));
-                
-            
+            Mail::to($this->email)
+                ->send(new SendResults($this->uploaded_files_names,$results_paths,$results_link));
 
             // Delete uploaded files and results directory
-            Storage::delete([$this->inputs['gtf'],$this->inputs['bed'],$this->inputs['chr']]);
-            // Storage::deleteDirectory($this->directory);
+            Storage::delete(array_values($this->uploaded_files_paths));
 
             // Print success message
             echo ("success !!! ");
