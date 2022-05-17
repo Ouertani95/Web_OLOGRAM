@@ -82,11 +82,11 @@ class ExecuteCommand implements ShouldQueue
 
             // Run the Shiny app with the results 
             $tsv_path = $this->get_tsv_path($results_paths);
-            $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R -i $tsv_path '";
-            exec($shiny_command,$shiny_output);
-            $file_name = end($shiny_output);
+            // $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R'";
+            // exec($shiny_command,$shiny_output);
+            // $file_name = end($shiny_output);
 
-            $results_link = "http://localhost/results/".$file_name;
+            $results_link = "http://localhost:7775/?file=$tsv_path";
         
             // Send email with link and attachements
             
@@ -119,6 +119,7 @@ class ExecuteCommand implements ShouldQueue
     {
         foreach ($results_paths as $path){
             if (str_ends_with($path,".tsv")) {
+                str_replace("/var/www/html",".",$path);
                 return $path;
             }
         }
