@@ -1,0 +1,39 @@
+FROM r-base:latest
+
+WORKDIR /shiny
+
+# Installing R and all the dependencies :
+RUN apt-get update \
+    && apt-get install -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common \
+    && add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' \ 
+    && wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
+    # && apt-get update \
+    && apt-get install -y r-base \
+    && apt-get install -y r-base-dev \
+    && R -e 'install.packages("shiny",dependencies=TRUE)' \
+    && R -e 'install.packages("reshape2",dependencies=TRUE)' \
+    && R -e 'install.packages("ggplot2",dependencies=TRUE)' \
+    && R -e 'install.packages("dplyr",dependencies=TRUE)' \
+    && R -e 'install.packages("ggrepel",dependencies=TRUE)' \
+    && R -e 'install.packages("ggthemes",dependencies=TRUE)' \
+    && R -e 'install.packages("shinythemes",dependencies=TRUE)' \
+    && R -e 'install.packages("optparse",dependencies=TRUE)'
+
+RUN apt install -y libcurl4-openssl-dev \
+    && apt install -y  libssl-dev \
+    && R -e 'install.packages("plotly",dependencies=TRUE)' \
+    && R -e 'install.packages("flexdashboard",dependencies=TRUE)' \
+    && R -e 'install.packages("htmltools",dependencies=TRUE)' \
+    && R -e 'install.packages("DT",dependencies=TRUE)' 
+
+RUN apt install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev \
+    && R -e 'install.packages("xml2",dependencies=TRUE)' \
+    && R -e 'install.packages("devtools",dependencies=TRUE)' \
+    && R -e 'devtools::install_github("rstudio/crosstalk")' 
+    
+RUN apt install -y pandoc \
+    && R -e 'install.packages("rmarkdown",dependencies=TRUE)' 
+
+RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
+
+ENTRYPOINT ["Rscript", "app.R"]
