@@ -119,7 +119,7 @@ class ExecuteCommand implements ShouldQueue
     {
         foreach ($results_paths as $path){
             if (str_ends_with($path,".tsv")) {
-                str_replace("/var/www/html",".",$path);
+                $path = str_replace("/var/www/html/","",$path);
                 return $path;
             }
         }
