@@ -99,8 +99,15 @@ ui <- fluidPage(
                              width = NULL,
                              size = NULL
                            ),
+                           selectInput(
+                             inputId="volcanoplot_reactivity_input", 
+                             label="Reactivity",
+                             choices=c("Reactive","Static"),
+                             selected = "Reactive"
+                           ),
+                           conditionalPanel("input.volcanoplot_reactivity_input == 'Reactive'", plotlyOutput("volcano_plotly")),
                            br(),
-                           plotlyOutput("volcano_plot"),
+                           conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot")),
                   ),
                   tabPanel("Table", 
                            tableOutput("table")
@@ -138,7 +145,7 @@ server <- function(input, output,session) {
       user_volcano_table <- loading_and_preparing_ologram_table_volcano(query[['file']])
       user_volcano_table
     }
-  })
+    })
   
   
   # Generate a plot of the data ----
@@ -171,8 +178,8 @@ server <- function(input, output,session) {
       barly
     }
   })
-  
-  output$volcano_plot <- renderPlotly({
+
+  volcano_plot <- reactive({
     user_volcano_table <- prepare_volcanoplot()
     if (!is.null(user_volcano_table)) {
       
@@ -199,14 +206,26 @@ server <- function(input, output,session) {
         geom_hline(yintercept = 0, 
                    size=0.5) +
         geom_point() +
-        # geom_label_repel(box.padding = 0.5) +
+        
         coord_fliped +
         my_theme
       
-      ggplotly(volcano)
+    if (input$volcanoplot_reactivity_input == "Reactive"){
+        volcano <- ggplotly(volcano)
+        volcano
+      }
+    else{
+        volcano <- volcano + geom_label_repel(box.padding = 0.5)
+        volcano
+    volcano
     }
-    
+    }
   })
+  
+  output$volcano_plot <- renderPlot({volcano_plot()})
+  
+  output$volcano_plotly <- renderPlotly({volcano_plot()})
+  
   
   # Generate a summary of the data ----
   output$summary <- renderPrint({
