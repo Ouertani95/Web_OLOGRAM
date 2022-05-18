@@ -11,8 +11,14 @@ library(ggrepel)
 library(ggthemes)
 library(shinythemes)
 library(optparse)
-
+library(plotly)
 source("data_prep_functions.R")
+
+#--------------------------------------------------------------
+# Load shell files
+#--------------------------------------------------------------
+user_barplot_table <- loading_and_preparing_ologram_table_barplot("shell_file.tsv")
+user_volcano_table <- loading_and_preparing_ologram_table_volcano("shell_file.tsv")
 
 #--------------------------------------------------------------
 # List available ggplot themes
@@ -27,8 +33,6 @@ themes_avail <- c(grep("^theme_",
 
 themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
 
-user_barplot_table <- loading_and_preparing_ologram_table_barplot("shell_file.tsv")
-user_volcano_table <- loading_and_preparing_ologram_table_volcano("shell_file.tsv")
 
 #--------------------------------------------------------------
 # Define UI 
@@ -80,7 +84,7 @@ ui <- fluidPage(
                              size = NULL
                            ),
                            br(),
-                           plotOutput("barplot"),
+                           plotlyOutput("barplot"),
                   ),
                   tabPanel("Volcano Plot", 
                            br(),
@@ -96,7 +100,7 @@ ui <- fluidPage(
                              size = NULL
                            ),
                            br(),
-                           plotOutput("volcano_plot"),
+                           plotlyOutput("volcano_plot"),
                   ),
                   tabPanel("Table", 
                            tableOutput("table")
@@ -135,15 +139,15 @@ server <- function(input, output,session) {
       user_volcano_table
     }
   })
-
-
+  
+  
   # Generate a plot of the data ----
   # Also uses the inputs to build the plot label. Note that the
   # dependencies on the inputs and the data reactive expression are
   # both tracked, and all expressions are called in the sequence
   # implied by the dependency graph.
   
-  output$barplot <- renderPlot({
+  output$barplot <- renderPlotly({
     user_barplot_table <- prepare_barplot()
     if (!is.null(user_barplot_table)) {
       user_barplot_table <- user_barplot_table[user_barplot_table$Statistic == input$barplot_statistic_input,]
@@ -158,14 +162,17 @@ server <- function(input, output,session) {
       else
         my_theme <- do.call('theme_bw',list(base_size = 11))
       
-      ggplot(user_barplot_table, mapping=aes(x=Feature, y=Value, fill=Type)) + 
+      bar <- ggplot(user_barplot_table, mapping=aes(x=Feature, y=Value, fill=Type)) + 
         geom_bar(stat="identity", position = "dodge") +
         coord_fliped +
         my_theme
+      
+      barly <- ggplotly(bar)
+      barly
     }
   })
   
-  output$volcano_plot <- renderPlot({
+  output$volcano_plot <- renderPlotly({
     user_volcano_table <- prepare_volcanoplot()
     if (!is.null(user_volcano_table)) {
       
@@ -182,19 +189,21 @@ server <- function(input, output,session) {
       else
         my_theme <- do.call('theme_bw',list(base_size = 11))
       
-      ggplot(user_volcano_table, 
-             mapping=aes(x=.data[['log2(FC)']], 
-                         y=.data[['-log10(pvalue)']], 
-                         color=.data[['Statistic']],
-                         label=.data[['Feature']])) + 
+      volcano <- ggplot(user_volcano_table, 
+                        mapping=aes(x=.data[['log2(FC)']], 
+                                    y=.data[['-log10(pvalue)']], 
+                                    color=.data[['Statistic']],
+                                    label=.data[['Feature']])) + 
         geom_vline(xintercept = 0, 
                    size=0.5) +
         geom_hline(yintercept = 0, 
                    size=0.5) +
         geom_point() +
-        geom_label_repel(box.padding = 0.5) +
+        # geom_label_repel(box.padding = 0.5) +
         coord_fliped +
         my_theme
+      
+      ggplotly(volcano)
     }
     
   })
@@ -214,7 +223,7 @@ server <- function(input, output,session) {
       user_barplot_table
     }
   })
-
+  
 }
 
 shinyApp(ui, server,options = list("port"=7775,"host"='0.0.0.0'))

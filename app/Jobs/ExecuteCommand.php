@@ -71,8 +71,8 @@ class ExecuteCommand implements ShouldQueue
             var_dump($output_string);
 
             // Delete uploaded files and results directory
-            // Storage::delete(array_values($this->uploaded_files_paths));
-            // Storage::deleteDirectory($this->directory);
+            Storage::delete(array_values($this->uploaded_files_paths));
+            Storage::deleteDirectory($this->directory);
         }
         
         // If no errors send the results
@@ -80,16 +80,11 @@ class ExecuteCommand implements ShouldQueue
              // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
 
-            // Run the Shiny app with the results 
+            // Build file link
             $tsv_path = $this->get_tsv_path($results_paths);
-            // $shiny_command = "sg docker -c 'nohup Rscript app/Shiny/app.R'";
-            // exec($shiny_command,$shiny_output);
-            // $file_name = end($shiny_output);
-
             $results_link = "http://localhost:7775/?file=$tsv_path";
         
             // Send email with link and attachements
-            
             Mail::to($this->email)
                 ->send(new SendResults($this->uploaded_files_names,$results_paths,$results_link));
 
@@ -119,7 +114,7 @@ class ExecuteCommand implements ShouldQueue
     {
         foreach ($results_paths as $path){
             if (str_ends_with($path,".tsv")) {
-                $path = str_replace("/var/www/html/","",$path);
+                $path = str_replace("/var/www/html","",$path);
                 return $path;
             }
         }

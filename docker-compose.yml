@@ -79,7 +79,7 @@ services:
             - '7775:7775'
         volumes:
             - './app/Shiny:/shiny'
-            - './pygtftk_results:/shiny/pygtftk_results'
+            - './pygtftk_results:/pygtftk_results'
         networks:
             - sail
         
