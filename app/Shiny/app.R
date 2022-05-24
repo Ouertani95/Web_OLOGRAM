@@ -131,6 +131,7 @@ server <- function(input, output,session) {
   # defined below then use the value computed from this expression
   prepare_barplot <- reactive({
     query <- parseQueryString(session$clientData$url_search)
+    updateQueryString("/results")
     if (!is.null(query[['file']])) {
       query[['file']]
       user_barplot_table <- loading_and_preparing_ologram_table_barplot(query[['file']])
