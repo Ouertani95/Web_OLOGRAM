@@ -1,0 +1,2 @@
+# Load testing shiny app to have an approximation of number of users 
+https://rstudio.github.io/shinyloadtest/
