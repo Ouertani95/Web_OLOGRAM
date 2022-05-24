@@ -36,4 +36,6 @@ RUN apt install -y pandoc \
 
 RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
 
+COPY app/Shiny /shiny
+
 ENTRYPOINT ["Rscript", "app.R"]

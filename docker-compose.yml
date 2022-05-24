@@ -92,11 +92,11 @@ services:
             - '/usr/bin/docker:/usr/bin/docker'
             - '/usr/local/bin/docker-compose:/usr/local/bin/docker-compose'
             - '/etc/group:/etc/group'
-            - './app/Shinyproxy:/opt/shinyproxy'
+            - './app/Shinyproxy/shinyproxy:/opt/shinyproxy'
         networks:
             - sail
-        environment:
-            USER: 'sail'
+        # environment:
+        #     USER: 'sail'
 
         
 

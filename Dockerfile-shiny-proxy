@@ -37,4 +37,4 @@ RUN wget https://www.shinyproxy.io/downloads/shinyproxy_${VERSION}_amd64.deb \
     && apt install -y ./shinyproxy_${VERSION}_amd64.deb \
     && rm shinyproxy_${VERSION}_amd64.deb
 
-USER shinyproxy
+USER root
