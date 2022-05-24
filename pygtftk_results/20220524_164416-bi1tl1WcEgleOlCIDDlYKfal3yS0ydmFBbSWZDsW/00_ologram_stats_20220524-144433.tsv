@@ -1,0 +1,9 @@
+feature_type	nb_intersections_expectation_shuffled	nb_intersections_variance_shuffled	nb_intersections_negbinom_fit_quality	nb_intersections_log2_fold_change	nb_intersections_true	nb_intersections_pvalue	summed_bp_overlaps_expectation_shuffled	summed_bp_overlaps_variance_shuffled	summed_bp_overlaps_negbinom_fit_quality	summed_bp_overlaps_log2_fold_change	summed_bp_overlaps_true	summed_bp_overlaps_pvalue	combination_order	nb_intersections_empirical_pvalue	summed_bp_overlaps_empirical_pvalue	beta_summed_bp_overlaps_pvalue_ad_hoc_for_deep_sampling_only
+gene	2.77	1.86	0.81501	1.11247	6	0.04526	12.28	40.2	0.78034	0.84119	22	0.06963	1	0.0	0.065	0.07082
+transcript	2.76	1.74	0.80008	1.12029	6	0.04458	12.41	40.06	0.85758	0.826	22	0.07119	1	0.01	0.065	0.07548
+exon	3.17	2.24	0.82836	0.92276	6	0.06625	10.7	27.19	0.82232	1.04057	22	0.02637	1	0.025	0.005	0.01301
+CDS	1.82	1.39	0.82971	1.45403	5	0.03519	4.95	12.76	0.79416	1.69403	16	0.008539	1	0.0	0.0	0.001697
+Intergenic	11.04	1.07	0.57058	-0.00524	11	0.4252	59.1	37.86	0.74185	-0.21266	51	0.1635	1	0.355	0.1	0.09839
+Introns	0.73	0.74	0.9505	0.0	0	0.5	1.85	5.99	0.73147	0.0	0	0.3785	1	0.495	0.495	0.2821
+Promoters	13.0	0.0	0.36506	0.0	13	0.4269	73.0	0.0	0.35017	0.0	73	0.4689	1	0.0	0.0	0.0
+Terminator	13.0	0.0	0.36506	0.0	13	0.4269	73.0	0.0	0.35017	0.0	73	0.4689	1	0.0	0.0	0.0
