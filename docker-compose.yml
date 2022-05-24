@@ -50,7 +50,7 @@ services:
     myadmin:
         image: 'phpmyadmin:latest'
         ports:
-          - '8080:80'
+          - '8181:80'
         environment:
           MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
         links:
@@ -82,19 +82,37 @@ services:
             - './pygtftk_results:/pygtftk_results'
         networks:
             - sail
-    shinyproxy:
-        image: 'openanalytics/shinyproxy'
+    traefik:
+        image: traefik
+        command:
+            - "--web --docker --docker.domain=docker.localhost --logLevel=DEBUG"
+            - "--api=true"
+            - "--api.dashboard=true"
+            # - " --api.insecure=true" 
+            - "--api.debug=true"
+            - "--providers.docker=true"
+            - "--entrypoints.websecure.address=:443"
+            - "--entrypoints.dashboard.address=:8080"
+            - "--certificatesresolvers.mydnschallenge.acme.dnschallenge=true"
+            - "--certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=cloudflare"
+            - "--certificatesresolvers.mydnschallenge.acme.email=email@example.com"
+            - "--certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json"
+            - "--log.level=DEBUG"
         ports:
-            - '3838:8080'
+            - '420:80'
+            - '8080:8080'
+            - '443:443'
         volumes:
             - '/var/run/docker.sock:/var/run/docker.sock'
-            - '/usr/bin/docker:/usr/bin/docker'
-            - '/usr/local/bin/docker-compose:/usr/local/bin/docker-compose'
-            - '/etc/group:/etc/group'
+            - './traefik.toml:/traefik.toml'
+        labels:
+            - "traefik.http.routers.api.rule=Host(`example.com`)"
+            - "traefik.http.routers.api.entrypoints=dashboard"
+            # - "traefik.http.routers.api.rule=PathPrefix(`/api`) || PathPrefix(`/dashboard`)"
+            - "traefik.http.routers.api.service=api@internal"
         networks:
             - sail
-        environment:
-            USER: 'sail'
+
 
         
 
