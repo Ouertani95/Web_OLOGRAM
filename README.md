@@ -12,6 +12,8 @@ You must have Docker and Docker Compose installed on your computer to launch the
 If you need to install these components follow the instructions on the following website depending on your operating system : 
 - https://docs.docker.com/compose/install/
 
+=> It is recommended to install docker version 20.10 or above and docker-compose version 1.25 or above.
+
 You also need Git in order to clone the repository locally :
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
@@ -40,15 +42,10 @@ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 sail up -d
 sail artisan migrate
 ```
-Now open your web browser and open localhost.
+Now open your web browser and go to localhost.
 You should have the following page :
 
-![laravel](photos/laravel_page.png)
-
-Next go to localhost/main.
-You should have the following page :
-
-![ologram](photos/ologram_main_page.png)
+![laravel](photos/Latest_Web_OLOGRAM_2022-05-24_10-02-24.png)
 
 ## Troubleshooting :
 
