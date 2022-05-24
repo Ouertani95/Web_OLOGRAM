@@ -1,0 +1,1 @@
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch client/static/static-version/20171221_221446.psd'
