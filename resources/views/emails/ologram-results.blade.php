@@ -1,15 +1,15 @@
 @component('mail::message')
-Bonjour, 
+Hello, 
 
-Voici ci-joint les résultats de votre analyse avec OLOGRAM en utilisant les fichiers suivants :
+Your OLOGRAM request has been successfully completed using the following files:
 @foreach ($uploaded_files_names as $file)
 - {{$file}}   
 @endforeach
 
-Vous pouvez aussi les retrouver à travers ce lien :
+You can find your results through the following link:
 @component('mail::button',['url'=> "$link"])
-Résultats OLOGRAM
+OLOGRAM results
 @endcomponent
 
-Merci d'avoir choisi OLOGRAM et à bientôt !
+Thank you for choosing OLOGRAM and see you soon!
 @endcomponent
