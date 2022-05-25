@@ -70,25 +70,11 @@ services:
             - './pygtftk_results:/pygtftk'
         networks:
             - sail
-    shiny1:
+    shiny:
         build:
             context: .
             dockerfile: Dockerfile-shiny
         image: 'shiny-app:latest'
-        ports:
-            - '5001:7775'
-        volumes:
-            - './app/Shiny:/shiny'
-            - './pygtftk_results:/pygtftk_results'
-        networks:
-            - sail
-    shiny2:
-        build:
-            context: .
-            dockerfile: Dockerfile-shiny
-        image: 'shiny-app:latest'
-        ports:
-            - '5002:7775'
         volumes:
             - './app/Shiny:/shiny'
             - './pygtftk_results:/pygtftk_results'
@@ -102,8 +88,9 @@ services:
         volumes:
             - './nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
         depends_on:
-            - shiny1
-            - shiny2
+            - shiny
+        networks:
+            - sail
 
 
 networks:

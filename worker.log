@@ -1,3 +1,0 @@
-[2022-05-24 16:44:19][12] Processing: App\Jobs\ExecuteCommand
-string(390) "sg docker -c 'docker exec web_ologram_gtftk_1 conda run -n pygtftk gtftk ologram  -i 20220524_164416-bi1tl1WcEgleOlCIDDlYKfal3yS0ydmFBbSWZDsW/simple_07.gtf -p 20220524_164416-bi1tl1WcEgleOlCIDDlYKfal3yS0ydmFBbSWZDsW/simple_07_peaks.2.bed -c 20220524_164416-bi1tl1WcEgleOlCIDDlYKfal3yS0ydmFBbSWZDsW/simple_07.chromInfo -o 20220524_164416-bi1tl1WcEgleOlCIDDlYKfal3yS0ydmFBbSWZDsW  -k 8 2>&1 '"
-success !!! [2022-05-24 16:44:54][12] Processed:  App\Jobs\ExecuteCommand
