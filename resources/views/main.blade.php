@@ -96,7 +96,7 @@
                 BED vs GTF
               </button>
             </h2>
-            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#cases-accordion">
+            <div id="collapse1" class="accordion-collapse collapse " aria-labelledby="heading1" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -149,7 +149,7 @@
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapse1-advanced" class="accordion-collapse collapse show" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                            <div id="collapse1-advanced" class="accordion-collapse collapse " aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -307,7 +307,7 @@
                 BED vs GTF (keys/values)
               </button>
             </h2>
-            <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#cases-accordion">
+            <div id="collapse2" class="accordion-collapse collapse " aria-labelledby="heading2" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -367,7 +367,7 @@
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapse2-advanced" class="accordion-collapse collapse show" aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
+                            <div id="collapse2-advanced" class="accordion-collapse collapse " aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -525,7 +525,7 @@
                 BED vs BED
               </button>
             </h2>
-            <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#cases-accordion">
+            <div id="collapse3" class="accordion-collapse collapse " aria-labelledby="heading3" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -578,7 +578,7 @@
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapse3-advanced" class="accordion-collapse collapse show" aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
+                            <div id="collapse3-advanced" class="accordion-collapse collapse " aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -706,7 +706,7 @@
                 BED vs BED (Combinations)
               </button>
             </h2>
-            <div id="collapse4" class="accordion-collapse collapse show" aria-labelledby="heading4" data-bs-parent="#cases-accordion">
+            <div id="collapse4" class="accordion-collapse collapse " aria-labelledby="heading4" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -752,7 +752,7 @@
                                 Advanced options
                               </button>
                             </h2>
-                            <div id="collapse4-advanced" class="accordion-collapse collapse show" aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                            <div id="collapse4-advanced" class="accordion-collapse collapse " aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
                               <div class="accordion-body">
                                 <div class="row">
 
