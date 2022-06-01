@@ -63,7 +63,7 @@ class JobsController extends Controller
     
     public function build_command($directory_name,$uploaded_files_paths)
     {   
-        $basic_command = "sg docker -c '"."docker exec web_ologram_gtftk_1 conda run -n pygtftk gtftk ologram ";
+        $basic_command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram ";
 
         $validated_args = $this->request->validated();
 
