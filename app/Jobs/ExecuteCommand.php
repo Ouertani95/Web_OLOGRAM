@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendError;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -59,25 +60,35 @@ class ExecuteCommand implements ShouldQueue
         // Check if directory already exists and new files have been created (meaning command has already been launched before)
         if ($nb_current_files === $nb_uploaded_files){
             // Execute shell command in php
-            exec($this->command, $output, $return_var);
+            system($this->command, $return_var);
         }
 
         // Verify if errors occured during execution of command
-        if ($return_var!== 0) {
+        if ($return_var !== 0) {
 
-            $output_string = implode("\n",$output);
-
-            // If there are errors display the output of the error
-            var_dump($output_string);
-
+            echo ("I'm in error");
             // Delete uploaded files and results directory
             Storage::delete(array_values($this->uploaded_files_paths));
-            Storage::deleteDirectory($this->directory);
+            // Storage::deleteDirectory($this->directory);
+            exec("tail -n 2 pygtftk_results/$this->directory/ologram.log",$error_check);
+
+            $error_check = implode("\n",$error_check);
+            var_dump($error_check);
+
+            if (str_contains($error_check,"-ERROR")){
+                // Send email with link and attachements
+                Mail::to($this->email)
+                    ->send(new SendError($error_check));
+            }
+            
         }
         
         // If no errors send the results
         else{
-             // Get the result files
+
+            echo ("I'm not in error");
+
+            // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
 
             // Build file link
@@ -86,14 +97,14 @@ class ExecuteCommand implements ShouldQueue
         
             // Send email with link and attachements
             Mail::to($this->email)
-                ->send(new SendResults($this->uploaded_files_names,$results_paths,$results_link));
+                ->send(new SendResults($this->uploaded_files_names,$results_link));
+            }
 
             // Delete uploaded files and results directory
             Storage::delete(array_values($this->uploaded_files_paths));
 
             // Print success message
             echo ("success !!! ");
-        }   
     }
 
     public function get_results_paths($results_directory)
