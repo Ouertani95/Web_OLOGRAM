@@ -29,15 +29,33 @@ class JobsController extends Controller
 
         // Upload available files
         $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
+        $uploaded_files_names = array();
+        $uploaded_files_paths = array();   
+
         foreach($file_fields as $file)
         {
             if($request->hasfile($file))
             {
-                $name = $request->file($file)->getClientOriginalName();
-                Storage::putFileAs("/$directory_name",$request->file($file),$name);
-                $uploaded_files_paths[$file] = "$directory_name/".$name;
-                $uploaded_files_names[$file] = $name;
+                if ($file === "mbed"){
+                    $uploaded_files_names["mbed"] = array();
+                    $uploaded_files_paths["mbed"] = array();
+                    $mbed_files = array_values($request->file($file));
+                    foreach($mbed_files as $mbed_file){
+                        $name = $mbed_file->getClientOriginalName();
+                        Storage::putFileAs("/$directory_name",$mbed_file,$name);
+                        array_push($uploaded_files_paths[$file],"$directory_name/".$name);
+                        array_push($uploaded_files_names[$file],$name);
+                    }
+                }
+                else{
+                    $name = $request->file($file)->getClientOriginalName();
+                    Storage::putFileAs("/$directory_name",$request->file($file),$name);
+                    $uploaded_files_paths[$file] = "$directory_name/".$name;
+                    $uploaded_files_names[$file] = $name;
+                }
+                
             }
+
         }
 
         // Build command for gtftk
@@ -112,8 +130,18 @@ class JobsController extends Controller
                 $basic_command = $basic_command.$check_args[$arg];
             }
             elseif (array_key_exists($arg,$file_args)){
-                $file = $uploaded_files_paths[$arg];
-                $basic_command = $basic_command.$file_args[$arg].$file;
+                
+                $basic_command = $basic_command.$file_args[$arg];
+                if($arg === "mbed"){
+                    $files = $uploaded_files_paths[$arg];
+                    foreach ($files as $file){
+                        $basic_command = $basic_command." $file ";
+                    }
+                }
+                else{
+                    $file = $uploaded_files_paths[$arg];
+                    $basic_command = $basic_command.$file;
+                }
             }
             elseif (array_key_exists($arg,$text_args)){
                 $text = $this->request->input($arg);
@@ -121,7 +149,7 @@ class JobsController extends Controller
             }
         }
 
-        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 > pygtftk_results/$directory_name/ologram.log 2>&1' > pygtftk_results/$directory_name/bash.log 2>&1";
+        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1' > pygtftk_results/$directory_name/bash.log 2>&1";
 
         return $basic_command;
     }

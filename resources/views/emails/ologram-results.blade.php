@@ -3,7 +3,13 @@ Hello,
 
 Your OLOGRAM request has been successfully completed using the following files:
 @foreach ($uploaded_files_names as $file)
-- {{$file}}   
+@if (is_array($file))
+@foreach ($file as $subfile)
+- {{$subfile}}
+@endforeach
+@else
+- {{$file}}
+@endif
 @endforeach
 
 You can find your results through the following link:

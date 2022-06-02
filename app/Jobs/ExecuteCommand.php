@@ -49,16 +49,14 @@ class ExecuteCommand implements ShouldQueue
     {   
         var_dump($this->command);
         $results_directory = base_path("pygtftk_results/".$this->directory);
-
-        $nb_uploaded_files = count($this->uploaded_files_paths);
-        $nb_current_files = count(glob(base_path("pygtftk_results/$this->directory/*")));
         
         // Initialise output variables
-        $output=null;
         $return_var=0;
         
         // Check if directory already exists and new files have been created (meaning command has already been launched before)
-        if ($nb_current_files === $nb_uploaded_files){
+        $current_files = scandir($results_directory);
+        var_dump($current_files);
+        if (! in_array("commands.log",$current_files) ){
             // Execute shell command in php
             system($this->command, $return_var);
         }
@@ -99,6 +97,7 @@ class ExecuteCommand implements ShouldQueue
 
             // Build file link
             $tsv_path = $this->get_tsv_path($results_paths);
+            var_dump($tsv_path);
             $results_link = "http://localhost:7775/?file=$tsv_path";
         
             // Send email with link and attachements
@@ -107,7 +106,12 @@ class ExecuteCommand implements ShouldQueue
             }
 
             // Delete uploaded files and results directory
-            Storage::delete(array_values($this->uploaded_files_paths));
+            $uploaded_files = array_values($this->uploaded_files_paths);
+            var_dump($uploaded_files);
+            foreach ($uploaded_files as $up_file){
+                Storage::delete($up_file);
+            }
+            
 
             // Print success message
             echo ("success !!! ");

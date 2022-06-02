@@ -216,7 +216,7 @@
 
                                     <div class="input-group mb-3">
                                       <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed">
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">More BED</span>
                                     </div>
@@ -434,7 +434,7 @@
 
                                     <div class="input-group mb-3">
                                       <input class="form-control" type="file" id="formFileMultiple" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed">
+                                      title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features).">More BED</span>
                                     </div>
@@ -544,7 +544,7 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="formFileMultiple" name="mbed" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control" type="file" id="formFileMultiple" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">Ref BED</span>
@@ -725,7 +725,7 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control" type="file" id="formFileMultiple" name="mbed" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control" type="file" id="formFileMultiple" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">Ref BED</span>
