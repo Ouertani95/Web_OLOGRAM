@@ -83,6 +83,16 @@ ui <- fluidPage(
                              width = NULL,
                              size = NULL
                            ),
+                           selectInput(
+                             inputId="barplot_features_input", 
+                             label="Features",
+                             choices=sort(unique(user_barplot_table$Feature)),
+                             selected = NULL,
+                             multiple = TRUE,
+                             selectize = TRUE,
+                             width = NULL,
+                             size = NULL
+                           ),
                            br(),
                            plotlyOutput("barplot"),
                   ),
@@ -134,6 +144,7 @@ server <- function(input, output,session) {
     if (!is.null(query[['file']])) {
       query[['file']]
       user_barplot_table <- loading_and_preparing_ologram_table_barplot(query[['file']])
+
       user_barplot_table
     }
   })
@@ -158,6 +169,7 @@ server <- function(input, output,session) {
     user_barplot_table <- prepare_barplot()
     if (!is.null(user_barplot_table)) {
       user_barplot_table <- user_barplot_table[user_barplot_table$Statistic == input$barplot_statistic_input,]
+      user_barplot_table <- user_barplot_table[user_barplot_table$Feature %in% input$barplot_features_input,]
       
       if(input$barplot_coordflip_input)
         coord_fliped <- coord_flip()
@@ -239,6 +251,8 @@ server <- function(input, output,session) {
   output$table <- renderTable({
     if (!is.null(user_barplot_table)) {
       user_barplot_table <- prepare_barplot()
+      user_barplot_table <- user_barplot_table[user_barplot_table$Statistic == input$barplot_statistic_input,]
+      user_barplot_table <- user_barplot_table[user_barplot_table$Feature %in% input$barplot_features_input,]
       user_barplot_table
     }
   })
