@@ -75,6 +75,12 @@ class ExecuteCommand implements ShouldQueue
             $error_check = implode("\n",$error_check);
             var_dump($error_check);
 
+            if (str_contains($error_check,$this->directory)){
+                echo ("Found directory ");
+                $error_check = str_replace("$this->directory/","",$error_check);
+                var_dump($error_check);
+            }
+
             if (str_contains($error_check,"-ERROR")){
                 // Send email with link and attachements
                 Mail::to($this->email)
