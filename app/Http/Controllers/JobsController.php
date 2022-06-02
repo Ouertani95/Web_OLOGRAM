@@ -121,7 +121,7 @@ class JobsController extends Controller
             }
         }
 
-        $basic_command = $basic_command." -o $directory_name "." -k 8 2>&1 '";
+        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 > pygtftk_results/$directory_name/ologram.log 2>&1' > pygtftk_results/$directory_name/bash.log 2>&1";
 
         return $basic_command;
     }
