@@ -17,12 +17,10 @@ class SendResults extends Mailable
      * @return void
      */
     protected $uploaded_files_names;
-    protected $results_paths;
     protected $results_link;
-    public function __construct($uploaded_files_names,$results_paths,$results_link)
+    public function __construct($uploaded_files_names,$results_link)
     {
         $this->uploaded_files_names = $uploaded_files_names;
-        $this->results_paths = $results_paths;
         $this->results_link = $results_link;
     }
 
@@ -39,9 +37,6 @@ class SendResults extends Mailable
                                 'uploaded_files_names' => $this->uploaded_files_names,
                                 'link' => $this->results_link
                             ]);
-        foreach ($this->results_paths as $path){
-            $email_message->attach($path);
-        }
         return $email_message;
 
     }
