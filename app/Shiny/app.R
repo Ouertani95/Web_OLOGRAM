@@ -87,7 +87,7 @@ ui <- fluidPage(
                              inputId="barplot_features_input", 
                              label="Features",
                              choices=sort(unique(user_barplot_table$Feature)),
-                             selected = NULL,
+                             selected = sort(unique(user_barplot_table$Feature)),
                              multiple = TRUE,
                              selectize = TRUE,
                              width = NULL,
@@ -144,6 +144,10 @@ server <- function(input, output,session) {
     if (!is.null(query[['file']])) {
       query[['file']]
       user_barplot_table <- loading_and_preparing_ologram_table_barplot(query[['file']])
+      updateSelectInput(session, "barplot_features_input",
+                        choices=sort(unique(user_barplot_table$Feature)),
+                        selected=sort(unique(user_barplot_table$Feature))
+                        )
 
       user_barplot_table
     }
