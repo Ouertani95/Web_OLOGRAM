@@ -99,8 +99,6 @@ class JobsController extends Controller
             "fcg" => " -f ",
             "fcp" => " -w ",
             "fcmb" => " -q ",
-            "dfq" => " -y ",
-            "cf" => " -r ",
             "hu" => " -a ",
             "pvt" => " -g ",
             "exact" => " -ex "

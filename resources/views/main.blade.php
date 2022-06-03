@@ -179,22 +179,6 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
-                                        Display-fit-quality
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
-                                        Coord-flip
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('hu') ? 'checked' : null }} id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
@@ -397,22 +381,6 @@
                                     </div>
 
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
-                                        Display-fit-quality
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
-                                        Coord-flip
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('hu') ? 'checked' : null }} id="defaultCheck4" name="hu">
                                       <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
@@ -604,22 +572,6 @@
                                       <label class="form-check-label" for="defaultCheck3" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”.">
                                         Force-chrom-more-bed
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('dfq') ? 'checked' : null }} id="defaultCheck4" name="dfq">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Display-fit-quality : Display the negative binomial fit quality on the diagrams. Also draws temporary file histograms for each combination">
-                                        Display-fit-quality
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('cf') ? 'checked' : null }} id="defaultCheck4" name="cf">
-                                      <label class="form-check-label" for="defaultCheck4" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Coord-flip : The horizontal axis becomes vertical, and vertical becomes horizontal">
-                                        Coord-flip
                                       </label>
                                     </div>
 

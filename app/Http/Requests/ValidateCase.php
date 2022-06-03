@@ -43,8 +43,6 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "dfq" => "filled",
-                "cf" => "filled",
                 "hu" => "filled",
                 "pvt" => "filled",
                 "srtf" => "exclude_if:srtf,None|filled"
@@ -69,8 +67,6 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "dfq" => "filled",
-                "cf" => "filled",
                 "hu" => "filled",
                 "pvt" => "filled",
                 "srtf" => "exclude_if:srtf,None|filled"
@@ -93,8 +89,6 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "dfq" => "filled",
-                "cf" => "filled",
                 "hu" => "filled",
                 "pvt" => "filled"
             ];
