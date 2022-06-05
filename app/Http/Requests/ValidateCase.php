@@ -43,8 +43,8 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "hu" => "filled",
-                "pvt" => "filled",
+                "hu" => "exclude_if:hu,None|filled",
+                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1',
                 "srtf" => "exclude_if:srtf,None|filled"
                 
             ];
@@ -67,8 +67,8 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "hu" => "filled",
-                "pvt" => "filled",
+                "hu" => "exclude_if:hu,None|filled",
+                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1',
                 "srtf" => "exclude_if:srtf,None|filled"
             ];
         }
@@ -89,8 +89,8 @@ class ValidateCase extends FormRequest
                 "fcg" => "filled",
                 "fcp" => "filled",
                 "fcmb" => "filled",
-                "hu" => "filled",
-                "pvt" => "filled"
+                "hu" => "exclude_if:hu,None|filled",
+                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1'
             ];
         }
 

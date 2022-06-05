@@ -102,8 +102,6 @@ class JobsController extends Controller
             "fcg" => " -f ",
             "fcp" => " -w ",
             "fcmb" => " -q ",
-            "hu" => " -a ",
-            "pvt" => " -g ",
             "exact" => " -ex "
         ];
         // Prepare file input type arguments
@@ -123,6 +121,8 @@ class JobsController extends Controller
             "dns" => " -d ",
             "max" => " -monc ",
             "srtf" => " -j ",
+            "hu" => " -a ",
+            "pvt" => " -g "
         ];
         // Build the rest of the command
         foreach (array_keys($validated_args)  as $arg){
