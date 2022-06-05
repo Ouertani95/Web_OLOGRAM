@@ -81,10 +81,13 @@ class JobsController extends Controller
     
     public function build_command($directory_name,$uploaded_files_paths)
     {   
+        // Prepare basic command structure
         $basic_command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram ";
 
+        // Get validated args from request
         $validated_args = $this->request->validated();
 
+        // Add case specific argument
         if ($validated_args["caseId"]==="case2"){
             $basic_command = $basic_command." -n ";
         }
@@ -94,7 +97,7 @@ class JobsController extends Controller
         elseif($validated_args["caseId"]==="case4"){
             $basic_command = $basic_command." -z ";
         }
-
+        // Prepare check box type arguments
         $check_args = [
             "fcg" => " -f ",
             "fcp" => " -w ",
@@ -103,7 +106,7 @@ class JobsController extends Controller
             "pvt" => " -g ",
             "exact" => " -ex "
         ];
-
+        // Prepare file input type arguments
         $file_args = [
             "gtf" => " -i ",
             "chr" => " -c ",
@@ -112,7 +115,7 @@ class JobsController extends Controller
             "bedin" => " -bi ",
             "bedex" => " -e "
         ];
-
+        // Prepare text input type arguments
         $text_args = [
             "mbedl" => " -l ",
             "keys" => " -m ",
@@ -121,7 +124,7 @@ class JobsController extends Controller
             "max" => " -monc ",
             "srtf" => " -j ",
         ];
-        
+        // Build the rest of the command
         foreach (array_keys($validated_args)  as $arg){
 
             if (array_key_exists($arg,$check_args)){

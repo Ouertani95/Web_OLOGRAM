@@ -47,15 +47,15 @@ class ExecuteCommand implements ShouldQueue
 
     public function handle()
     {   
-        var_dump($this->command);
+        // Prepare output results directory
         $results_directory = base_path("pygtftk_results/".$this->directory);
         
         // Initialise output variables
         $return_var=0;
         
-        // Check if directory already exists and new files have been created (meaning command has already been launched before)
+        // Check if log file already in results directory (meaning command has already been launched before)
         $current_files = scandir($results_directory);
-        var_dump($current_files);
+
         if (! in_array("commands.log",$current_files) ){
             // Execute shell command in php
             system($this->command, $return_var);
@@ -65,18 +65,18 @@ class ExecuteCommand implements ShouldQueue
         if ($return_var !== 0) {
 
             echo ("I'm in error");
-            // Delete uploaded files and results directory
+
+            // Delete uploaded files
             Storage::delete(array_values($this->uploaded_files_paths));
-            // Storage::deleteDirectory($this->directory);
+            // Execute shell command to get error message
             exec("tail -n 2 pygtftk_results/$this->directory/ologram.log",$error_check);
 
             $error_check = implode("\n",$error_check);
-            var_dump($error_check);
 
             if (str_contains($error_check,$this->directory)){
                 echo ("Found directory ");
+                // Remove directory path from error message
                 $error_check = str_replace("$this->directory/","",$error_check);
-                var_dump($error_check);
             }
 
             if (str_contains($error_check,"-ERROR")){
@@ -100,14 +100,13 @@ class ExecuteCommand implements ShouldQueue
             var_dump($tsv_path);
             $results_link = "http://localhost:7775/?file=$tsv_path";
         
-            // Send email with link and attachements
+            // Send email with link and file names
             Mail::to($this->email)
                 ->send(new SendResults($this->uploaded_files_names,$results_link));
             }
 
-            // Delete uploaded files and results directory
+            // Delete uploaded files 
             $uploaded_files = array_values($this->uploaded_files_paths);
-            var_dump($uploaded_files);
             foreach ($uploaded_files as $up_file){
                 Storage::delete($up_file);
             }

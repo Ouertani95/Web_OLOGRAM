@@ -86,10 +86,12 @@
         @endif
       </div>
     </div>
+
     <div class="row">
       <div class="col text-center">
         <div class="accordion" id="cases-accordion">
 
+          {{-- Case 1 accordion item --}}
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading1">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
@@ -285,6 +287,7 @@
             </div>
           </div>
 
+          {{-- Case 2 accordion item --}}
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading2">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
@@ -487,6 +490,7 @@
             </div>
           </div>
 
+          {{-- Case 3 accordion item --}}
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading3">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
@@ -652,6 +656,7 @@
             </div>
           </div>
 
+          {{-- Case 4 accordion item --}}
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading4">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">

@@ -22,15 +22,11 @@ Route::get('/', [JobsController::class,'index']);
 // Route for form submission goes to JobsController class
 Route::post('/', [JobsController::class,'run_queued_job']);
 
+// Email testing route
 Route::get('/test-mail', function() {
     Mail::raw('bonjour',function($message){
         $message->subject('Email de test 2')
                 ->to('ouertani2006@gmail.com');
     });
     return 'OK! Le mail a été envoyé !';
-});
-
-Route::get('/results/{id?}',function($id){
-    $results="results.".$id;
-    return view("$results");
 });
