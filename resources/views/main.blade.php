@@ -230,56 +230,6 @@
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
 
-                                    <div class="input-group mb-3">
-                                      <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">Pval-threshold</span>
-                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold." name="pvt" value="{{ old('pvt') }}">
-                                    </div>
-
-                                    <label for="srtf" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
-                                    Sort features
-                                    </label>
-
-                                    <select class="form-select" aria-label="Default select example" name="srtf" value="{{ old('srtf') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
-                                      <option selected>None</option>
-                                      <option value="nb_intersections_expectation_shuffled" {{ old('srtf')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
-                                      <option value="nb_intersections_variance_shuffled" {{ old('srtf')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
-                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('srtf')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
-                                      <option value="nb_intersections_log2_fold_change" {{ old('srtf')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
-                                      <option value="nb_intersections_true" {{ old('srtf')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
-                                      <option value="nb_intersections_pvalue" {{ old('srtf')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
-                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('srtf')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
-                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('srtf')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
-                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('srtf')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
-                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('srtf')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
-                                      <option value="summed_bp_overlaps_true" {{ old('srtf')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
-                                      <option value="summed_bp_overlaps_pvalue" {{ old('srtf')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
-                                    </select>
-
-                                    <label for="hu" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                    Hide-undef
-                                    </label>
-
-                                    <select class="form-select" aria-label="Default select example" name="hu" value="{{ old('hu') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                      <option selected>None</option>
-                                      <option value="nb_intersections_expectation_shuffled" {{ old('hu')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
-                                      <option value="nb_intersections_variance_shuffled" {{ old('hu')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
-                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('hu')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
-                                      <option value="nb_intersections_log2_fold_change" {{ old('hu')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
-                                      <option value="nb_intersections_true" {{ old('hu')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
-                                      <option value="nb_intersections_pvalue" {{ old('hu')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
-                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('hu')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
-                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('hu')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
-                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('hu')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
-                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('hu')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
-                                      <option value="summed_bp_overlaps_true" {{ old('hu')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
-                                      <option value="summed_bp_overlaps_pvalue" {{ old('hu')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
-                                    </select>
                                   
                                   </div>
 
@@ -445,56 +395,8 @@
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
 
-                                    <div class="input-group mb-3">
-                                      <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">Pval-threshold</span>
-                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold." name="pvt" value="{{ old('pvt') }}">
-                                    </div>
 
-                                    <label for="srtf" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
-                                    Sort features
-                                    </label>
 
-                                    <select class="form-select" aria-label="Default select example" name="srtf" value="{{ old('srtf') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Sort features : Whether to sort features in diagrams according to a computed statistic. Default to sorting by total number of basepairs for this combination in the true data (summed_bp_overlaps_true)s">
-                                      <option selected>None</option>
-                                      <option value="nb_intersections_expectation_shuffled" {{ old('srtf')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
-                                      <option value="nb_intersections_variance_shuffled" {{ old('srtf')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
-                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('srtf')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
-                                      <option value="nb_intersections_log2_fold_change" {{ old('srtf')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
-                                      <option value="nb_intersections_true" {{ old('srtf')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
-                                      <option value="nb_intersections_pvalue" {{ old('srtf')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
-                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('srtf')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
-                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('srtf')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
-                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('srtf')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
-                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('srtf')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
-                                      <option value="summed_bp_overlaps_true" {{ old('srtf')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
-                                      <option value="summed_bp_overlaps_pvalue" {{ old('srtf')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
-                                    </select>
-
-                                    <label for="hu" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                    Hide-undef
-                                    </label>
-
-                                    <select class="form-select" aria-label="Default select example" name="hu" value="{{ old('hu') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                      <option selected>None</option>
-                                      <option value="nb_intersections_expectation_shuffled" {{ old('hu')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
-                                      <option value="nb_intersections_variance_shuffled" {{ old('hu')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
-                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('hu')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
-                                      <option value="nb_intersections_log2_fold_change" {{ old('hu')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
-                                      <option value="nb_intersections_true" {{ old('hu')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
-                                      <option value="nb_intersections_pvalue" {{ old('hu')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
-                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('hu')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
-                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('hu')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
-                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('hu')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
-                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('hu')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
-                                      <option value="summed_bp_overlaps_true" {{ old('hu')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
-                                      <option value="summed_bp_overlaps_pvalue" {{ old('hu')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
-                                    </select>
 
                                   
                                   </div>
@@ -647,34 +549,8 @@
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
 
-                                    <div class="input-group mb-3">
-                                      <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold.">Pval-threshold</span>
-                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Pval-threshold : Hide combinations for which summed_bp_overlaps_pvalue is not lower or equal to --pval-threshold." name="pvt" value="{{ old('pvt') }}">
-                                    </div>
 
-                                    <label for="hu" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                    Hide-undef
-                                    </label>
 
-                                    <select class="form-select" aria-label="Default select example" name="hu" value="{{ old('hu') }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Hide-undef : Do not display combinations if this column has undefined value (typically summed_bp_overlaps_pvalue)">
-                                      <option selected>None</option>
-                                      <option value="nb_intersections_expectation_shuffled" {{ old('hu')=="nb_intersections_expectation_shuffled" ? 'selected' : ''  }}>nb_intersections_expectation_shuffled</option>
-                                      <option value="nb_intersections_variance_shuffled" {{ old('hu')=='nb_intersections_variance_shuffled' ? 'selected' : ''  }}>nb_intersections_variance_shuffled</option>
-                                      <option value="nb_intersections_negbinom_fit_quality" {{ old('hu')=='nb_intersections_negbinom_fit_quality' ? 'selected' : ''  }}>nb_intersections_negbinom_fit_quality</option>
-                                      <option value="nb_intersections_log2_fold_change" {{ old('hu')=='nb_intersections_log2_fold_change' ? 'selected' : ''  }}>nb_intersections_log2_fold_change</option>
-                                      <option value="nb_intersections_true" {{ old('hu')=='nb_intersections_true' ? 'selected' : ''  }}>nb_intersections_true</option>
-                                      <option value="nb_intersections_pvalue" {{ old('hu')=='nb_intersections_pvalue' ? 'selected' : ''  }}>nb_intersections_pvalue</option>
-                                      <option value="summed_bp_overlaps_expectation_shuffled" {{ old('hu')=='summed_bp_overlaps_expectation_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_expectation_shuffled</option>
-                                      <option value="summed_bp_overlaps_variance_shuffled" {{ old('hu')=='summed_bp_overlaps_variance_shuffled' ? 'selected' : ''  }}>summed_bp_overlaps_variance_shuffled</option>
-                                      <option value="summed_bp_overlaps_negbinom_fit_quality" {{ old('hu')=='summed_bp_overlaps_negbinom_fit_quality' ? 'selected' : ''  }}>summed_bp_overlaps_negbinom_fit_quality</option>
-                                      <option value="summed_bp_overlaps_log2_fold_change" {{ old('hu')=='summed_bp_overlaps_log2_fold_change' ? 'selected' : ''  }}>summed_bp_overlaps_log2_fold_change</option>
-                                      <option value="summed_bp_overlaps_true" {{ old('hu')=='summed_bp_overlaps_true' ? 'selected' : ''  }}>summed_bp_overlaps_true</option>
-                                      <option value="summed_bp_overlaps_pvalue" {{ old('hu')=='summed_bp_overlaps_pvalue' ? 'selected' : ''  }}>summed_bp_overlaps_pvalue</option>
-                                    </select>
                                   
                                   </div>
 

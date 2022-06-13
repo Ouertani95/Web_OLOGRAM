@@ -119,10 +119,7 @@ class JobsController extends Controller
             "keys" => " -m ",
             "ups" => " -u ",
             "dns" => " -d ",
-            "max" => " -monc ",
-            "srtf" => " -j ",
-            "hu" => " -a ",
-            "pvt" => " -g "
+            "max" => " -monc "
         ];
         // Build the rest of the command
         foreach (array_keys($validated_args)  as $arg){
