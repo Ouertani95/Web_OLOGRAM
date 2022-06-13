@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Requests\\ValidateCase' => $baseDir . '/app/Http/Requests/ValidateCase.php',
     'App\\Jobs\\ExecuteCommand' => $baseDir . '/app/Jobs/ExecuteCommand.php',
     'App\\Mail\\HelloMail' => $baseDir . '/app/Mail/HelloMail.php',
+    'App\\Mail\\SendError' => $baseDir . '/app/Mail/SendError.php',
     'App\\Mail\\SendResults' => $baseDir . '/app/Mail/SendResults.php',
     'App\\Models\\Job' => $baseDir . '/app/Models/Job.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
