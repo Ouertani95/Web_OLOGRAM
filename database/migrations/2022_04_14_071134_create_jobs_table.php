@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('Jobs', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->string('command',1000);
+            $table->string('command',10000);
             $table->timestamps();
         });
     }
