@@ -85,6 +85,10 @@ class ExecuteCommand implements ShouldQueue
                     ->send(new SendError($error_check));
             }
             
+            else{
+                Mail::to($this->email)
+                    ->send(new SendError($error_check));
+            }
         }
         
         // If no errors send the results
