@@ -31,7 +31,8 @@ class ValidateCase extends FormRequest
             return [
                 'caseId' => 'required',
                 'email' => 'bail|required|email|max:100',
-                'gtf' => ['required',new ValidateGTF],
+                'gtf' => ['required_without:ens_gtf',new ValidateGTF],
+                'ens_gtf' => 'exclude_if:ens_gtf,null|required_without:gtf',
                 'bed' => ['required',new ValidateBED],
                 'chr' => 'required',
                 'mbed.*' => [new ValidateBED],
@@ -42,10 +43,7 @@ class ValidateCase extends FormRequest
                 'dns' => 'exclude_if:dns,null|numeric',
                 "fcg" => "filled",
                 "fcp" => "filled",
-                "fcmb" => "filled",
-                "hu" => "exclude_if:hu,None|filled",
-                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1',
-                "srtf" => "exclude_if:srtf,None|filled"
+                "fcmb" => "filled"
                 
             ];
         }
@@ -66,10 +64,7 @@ class ValidateCase extends FormRequest
                 'dns' => 'exclude_if:dns,null|numeric',
                 "fcg" => "filled",
                 "fcp" => "filled",
-                "fcmb" => "filled",
-                "hu" => "exclude_if:hu,None|filled",
-                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1',
-                "srtf" => "exclude_if:srtf,None|filled"
+                "fcmb" => "filled"
             ];
         }
 
@@ -88,9 +83,7 @@ class ValidateCase extends FormRequest
                 'dns' => 'exclude_if:dns,null|numeric',
                 "fcg" => "filled",
                 "fcp" => "filled",
-                "fcmb" => "filled",
-                "hu" => "exclude_if:hu,None|filled",
-                "pvt" => 'exclude_if:pvt,null|numeric|between:0,1'
+                "fcmb" => "filled"
             ];
         }
 

@@ -116,6 +116,20 @@
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
+                      <div class="input-group mb-3 ">  
+                        <select class="form-select" aria-label="Default select example" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Choose reference GTF directly from Ensembl">
+                            <option selected></option>
+                            @foreach ($links as $species => $gtf_list)
+                            @foreach ($gtf_list as $gtf)
+                            <option value="http://ftp.ensembl.org/pub/current_gtf/{{ $species }}/{{ $gtf }}" >{{ $gtf }}</option>
+                            @endforeach
+                            @endforeach
+                        </select>
+                        <span class="input-group-text" id="basic-addon-sp" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Choose reference GTF directly from Ensembl">Ensembl GTF</span>
+                      </div>
+
                       <div class="input-group mb-3">
                         <input class="form-control "  name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
@@ -685,5 +699,18 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+
+  {{-- <script>
+
+      var select_box_element = document.querySelector('#species');
+  
+      dselect(select_box_element, {
+          search: true,
+          size: ''  
+      });
+  
+  </script> --}}
+
 </body>
 </html>

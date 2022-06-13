@@ -13,7 +13,22 @@ class JobsController extends Controller
 {
     public function index()
     {
-        return view('main');
+        exec("rsync -av --list-only rsync://ftp.ensembl.org/ensembl/pub/current_gtf/ |awk '{print $5}' |grep 'gtf.gz' |grep -v 'abinitio' |grep -v '\.chr\.'",$gtf_list);
+        // dd($gtf_list);
+
+        $exploded_gtf_list = array();
+        foreach ($gtf_list as $gtf){
+            $gtf_kv = explode("/",$gtf);
+            if (!array_key_exists($gtf_kv[0],$exploded_gtf_list)){
+                $exploded_gtf_list[$gtf_kv[0]] = array();
+                array_push($exploded_gtf_list[$gtf_kv[0]],$gtf_kv[1]);
+            }
+            else{
+                array_push($exploded_gtf_list[$gtf_kv[0]],$gtf_kv[1]);
+            }
+        }
+
+        return view('main')->with(['links' => $exploded_gtf_list]);
     }
 
     public function run_queued_job(ValidateCase $request)
@@ -28,7 +43,23 @@ class JobsController extends Controller
         Storage::makeDirectory($directory_name);
 
         // Upload available files
-        $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
+        if (array_key_exists("ens_gtf",$request->validated())){
+            $file_fields= ["bed","chr","mbed","bedin","bedex"];
+            $ensembl_link = $request->input("ens_gtf");
+            $ensembl_link_trunc = str_replace("http://ftp.ensembl.org/pub/current_gtf/","",$ensembl_link);
+            $species = explode("/",$ensembl_link_trunc)[0];
+            $gtf_name = explode("/",$ensembl_link_trunc)[1];
+            if (!Storage::exists("/Ensembl_GTF/$species")){
+                Storage::makeDirectory("/Ensembl_GTF/$species");
+                exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
+                dd("fuck yeah");
+            }
+
+        }
+        else{
+            $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
+        }
+
         $uploaded_files_names = array();
         $uploaded_files_paths = array();   
 
@@ -86,6 +117,15 @@ class JobsController extends Controller
 
         // Get validated args from request
         $validated_args = $this->request->validated();
+
+        // Verify if an Ensembl GTF is selected and remove GTF to upload if selected at the same time
+        if (array_key_exists("ens_gtf",$validated_args)){
+            if (array_key_exists("ens_gtf",$validated_args)){
+                unset($validated_args["gtf"]);
+            }
+        }
+        
+        dd($validated_args);
 
         // Add case specific argument
         if ($validated_args["caseId"]==="case2"){
