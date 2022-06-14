@@ -17,6 +17,7 @@ class JobsController extends Controller
         // dd($gtf_list);
 
         $exploded_gtf_list = array();
+
         foreach ($gtf_list as $gtf){
             $gtf_kv = explode("/",$gtf);
             if (!array_key_exists($gtf_kv[0],$exploded_gtf_list)){
@@ -42,17 +43,27 @@ class JobsController extends Controller
         $directory_name = $date.'-'.$random_str;
         Storage::makeDirectory($directory_name);
 
-        // Upload available files
+        // Verify if Ensembl GTF exists on server and download it if not 
         if (array_key_exists("ens_gtf",$request->validated())){
+
             $file_fields= ["bed","chr","mbed","bedin","bedex"];
+            
             $ensembl_link = $request->input("ens_gtf");
             $ensembl_link_trunc = str_replace("http://ftp.ensembl.org/pub/current_gtf/","",$ensembl_link);
             $species = explode("/",$ensembl_link_trunc)[0];
             $gtf_name = explode("/",$ensembl_link_trunc)[1];
+
             if (!Storage::exists("/Ensembl_GTF/$species")){
                 Storage::makeDirectory("/Ensembl_GTF/$species");
                 exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
-                dd("fuck yeah");
+                dd("directory + file done");
+            }
+            elseif (!Storage::exists("/Ensembl_GTF/$species/$gtf_name")){
+                exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
+                dd("file done !");
+            }
+            else {
+                dd("been there done that !");
             }
 
         }
@@ -60,8 +71,20 @@ class JobsController extends Controller
             $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
         }
 
+        // Upload available files
         $uploaded_files_names = array();
-        $uploaded_files_paths = array();   
+        $uploaded_files_paths = array();
+
+        function remove_special_chars($my_string){
+            $special_chars = '[@_!#$%^&*()<>?/|}{~:]';
+            $special_chars = str_split($special_chars);
+            foreach ($special_chars as $char){
+                if (str_contains($my_string,$char)){
+                    $my_string = str_replace($char,"",$my_string);
+                }
+            }
+            return $my_string;
+        }
 
         foreach($file_fields as $file)
         {
@@ -73,6 +96,7 @@ class JobsController extends Controller
                     $mbed_files = array_values($request->file($file));
                     foreach($mbed_files as $mbed_file){
                         $name = $mbed_file->getClientOriginalName();
+                        $name = remove_special_chars($name);
                         Storage::putFileAs("/$directory_name",$mbed_file,$name);
                         array_push($uploaded_files_paths[$file],"$directory_name/".$name);
                         array_push($uploaded_files_names[$file],$name);
@@ -80,6 +104,7 @@ class JobsController extends Controller
                 }
                 else{
                     $name = $request->file($file)->getClientOriginalName();
+                    $name = remove_special_chars($name);
                     Storage::putFileAs("/$directory_name",$request->file($file),$name);
                     $uploaded_files_paths[$file] = "$directory_name/".$name;
                     $uploaded_files_names[$file] = $name;
@@ -124,8 +149,6 @@ class JobsController extends Controller
                 unset($validated_args["gtf"]);
             }
         }
-        
-        dd($validated_args);
 
         // Add case specific argument
         if ($validated_args["caseId"]==="case2"){
