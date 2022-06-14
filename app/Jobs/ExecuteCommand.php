@@ -67,6 +67,10 @@ class ExecuteCommand implements ShouldQueue
 
             echo ("I'm in error\n");
 
+            if (array_key_exists("ens_gtf",$this->uploaded_files_paths)){
+                unset($this->uploaded_files_paths["ens_gtf"]);
+            }
+
             // Delete uploaded files
             Storage::delete(array_values($this->uploaded_files_paths));
             

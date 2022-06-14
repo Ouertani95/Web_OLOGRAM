@@ -53,17 +53,15 @@ class JobsController extends Controller
             $species = explode("/",$ensembl_link_trunc)[0];
             $gtf_name = explode("/",$ensembl_link_trunc)[1];
 
+            // Save path to requested Ensembl gtf file
+            $this->ensembl_gtf = "Ensembl_GTF/$species/$gtf_name";
+
             if (!Storage::exists("/Ensembl_GTF/$species")){
                 Storage::makeDirectory("/Ensembl_GTF/$species");
                 exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
-                dd("directory + file done");
             }
             elseif (!Storage::exists("/Ensembl_GTF/$species/$gtf_name")){
                 exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
-                dd("file done !");
-            }
-            else {
-                dd("been there done that !");
             }
 
         }
@@ -112,6 +110,10 @@ class JobsController extends Controller
                 
             }
 
+        }
+
+        if (array_key_exists("ens_gtf",$request->validated())){
+            $uploaded_files_paths["ens_gtf"] =  $this->ensembl_gtf;
         }
 
         // Build command for gtftk
@@ -174,7 +176,8 @@ class JobsController extends Controller
             "bed" => " -p ",
             "mbed" => " -b ",
             "bedin" => " -bi ",
-            "bedex" => " -e "
+            "bedex" => " -e ",
+            "ens_gtf" => " -i "
         ];
         // Prepare text input type arguments
         $text_args = [
