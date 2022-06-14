@@ -1,7 +1,7 @@
 @component('mail::message')
 Hello, 
 
-We are sorry to inform you that your OLOGRAM request faced the following error while executing:
+We are sorry to inform you that your OLOGRAM request faced the following errors while executing:
 - {{$error_message}}
 
 You can rerun your command after making the appropriate changes related to the error.
