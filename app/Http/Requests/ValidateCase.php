@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\ValidateBED;
+use App\Rules\ValidateCHR;
 use App\Rules\ValidateGTF;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\ValidationRules\Rules\Delimited;
@@ -34,7 +35,7 @@ class ValidateCase extends FormRequest
                 'gtf' => ['required_without:ens_gtf',new ValidateGTF],
                 'ens_gtf' => 'exclude_if:ens_gtf,null|required_without:gtf',
                 'bed' => ['required',new ValidateBED],
-                'chr' => 'required',
+                'chr' => ['required',new ValidateCHR],
                 'mbed.*' => [new ValidateBED],
                 'mbedl' => ['exclude_if:mbedl,null',new Delimited('alpha_dash')],
                 'bedin' => [new ValidateBED],
@@ -52,10 +53,11 @@ class ValidateCase extends FormRequest
             return [
                 'caseId' => 'required',
                 'email' => 'bail|required|email|max:100',
-                'gtf' => ['required',new ValidateGTF],
+                'gtf' => ['required_without:ens_gtf',new ValidateGTF],
+                'ens_gtf' => 'exclude_if:ens_gtf,null|required_without:gtf',
                 'bed' => ['required',new ValidateBED],
                 'keys' => ['required',new Delimited('alpha_dash')],
-                'chr' => 'required',
+                'chr' => ['required',new ValidateCHR],
                 'mbed.*' => [new ValidateBED],
                 'mbedl' => ['exclude_if:mbedl,null',new Delimited('alpha_dash')],
                 'bedin' => [new ValidateBED],
@@ -75,7 +77,7 @@ class ValidateCase extends FormRequest
                 'mbed' => 'required',
                 'mbed.*' => [new ValidateBED],
                 'bed' => ['required',new ValidateBED],
-                'chr' => 'required',
+                'chr' => ['required',new ValidateCHR],
                 'mbedl' => ['exclude_if:mbedl,null',new Delimited('alpha_dash')],
                 'bedin' => [new ValidateBED],
                 'bedex' => [new ValidateBED],

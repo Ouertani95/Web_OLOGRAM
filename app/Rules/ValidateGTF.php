@@ -14,7 +14,7 @@ class ValidateGTF implements Rule
      */
     public function __construct()
     {
-        //
+        // 
     }
 
     /**
@@ -26,7 +26,20 @@ class ValidateGTF implements Rule
      */
     public function passes($attribute, $value)
     {   
-        return Str::endsWith(strtoupper($value->getClientOriginalName()),["GTF","GFF","GTF.GZ","GFF.GZ"]); 
+        $size = filesize($value);
+        $extension = Str::endsWith(strtoupper($value->getClientOriginalName()),["GTF","GFF","GTF.GZ","GFF.GZ"]);
+
+        if (!$extension){
+            $this->error_message = "Please submit a valid GTF/GFF file.";
+            return false;
+        }
+        elseif ($size === 0){
+            $this->error_message = "Please submit a GTF file that is not empty.";
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     /**
@@ -36,6 +49,6 @@ class ValidateGTF implements Rule
      */
     public function message()
     {
-        return 'Please submit a valid GTF/GFF file.';
+        return $this->error_message;
     }
 }

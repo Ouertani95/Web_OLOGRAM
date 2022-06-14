@@ -3,10 +3,8 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Str;
 
-
-class ValidateBED implements Rule
+class ValidateCHR implements Rule
 {
     /**
      * Create a new rule instance.
@@ -15,7 +13,7 @@ class ValidateBED implements Rule
      */
     public function __construct()
     {
-        //      
+        //
     }
 
     /**
@@ -27,21 +25,14 @@ class ValidateBED implements Rule
      */
     public function passes($attribute, $value)
     {
-        $extension = Str::endsWith(strtoupper($value->getClientOriginalName()),["BED"]);
         $size = filesize($value);
-
-        if (!$extension){
-            $this->error_message = "Please submit a valid BED file in $attribute.";
+        if ($size === 0){
+            $this->error_message = "Please submit a CHR file that is not empty.";
             return false;
         }
-        elseif ($size === 0){
-            $this->error_message = "Please submit a BED file that is not empty in $attribute";
-            return false;
-        }
-        else{
+        else {
             return true;
         }
-        
     }
 
     /**
@@ -50,7 +41,7 @@ class ValidateBED implements Rule
      * @return string
      */
     public function message()
-    {   
+    {
         return $this->error_message;
     }
 }
