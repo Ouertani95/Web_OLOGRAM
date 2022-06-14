@@ -47,6 +47,7 @@ class ExecuteCommand implements ShouldQueue
 
     public function handle()
     {   
+        var_dump($this->command);
         // Prepare output results directory
         $results_directory = base_path("pygtftk_results/".$this->directory);
         
@@ -64,44 +65,37 @@ class ExecuteCommand implements ShouldQueue
         // Verify if errors occured during execution of command
         if ($return_var !== 0) {
 
-            echo ("I'm in error");
+            echo ("I'm in error\n");
 
             // Delete uploaded files
             Storage::delete(array_values($this->uploaded_files_paths));
+            
             // Execute shell command to get error message
-            exec("tail -n 2 pygtftk_results/$this->directory/ologram.log",$error_check);
+            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run'",$error_check);
 
             $error_check = implode("\n",$error_check);
 
             if (str_contains($error_check,$this->directory)){
-                echo ("Found directory ");
+                echo ("Found directory : deleting it from log \n");
                 // Remove directory path from error message
                 $error_check = str_replace("$this->directory/","",$error_check);
             }
 
-            if (str_contains($error_check,"-ERROR")){
-                // Send email with link and attachements
-                Mail::to($this->email)
-                    ->send(new SendError($error_check));
-            }
+            Mail::to($this->email)
+                ->send(new SendError($error_check));
             
-            else{
-                Mail::to($this->email)
-                    ->send(new SendError($error_check));
-            }
         }
         
         // If no errors send the results
         else{
 
-            echo ("I'm not in error");
+            echo ("I'm not in error\n");
 
             // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
 
             // Build file link
             $tsv_path = $this->get_tsv_path($results_paths);
-            var_dump($tsv_path);
             $results_link = "http://localhost:7775/?file=$tsv_path";
         
             // Send email with link and file names
@@ -117,7 +111,7 @@ class ExecuteCommand implements ShouldQueue
             
 
             // Print success message
-            echo ("success !!! ");
+            echo ("success !!! \n");
     }
 
     public function get_results_paths($results_directory)
