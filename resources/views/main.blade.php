@@ -288,6 +288,20 @@
                          data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
                       </div>
 
+                      <div class="input-group mb-3 ">  
+                        <select class="form-select" aria-label="Default select example" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Choose reference GTF directly from Ensembl">
+                            <option selected></option>
+                            @foreach ($links as $species => $gtf_list)
+                            @foreach ($gtf_list as $gtf)
+                            <option value="http://ftp.ensembl.org/pub/current_gtf/{{ $species }}/{{ $gtf }}" >{{ $gtf }}</option>
+                            @endforeach
+                            @endforeach
+                        </select>
+                        <span class="input-group-text" id="basic-addon-sp" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Choose reference GTF directly from Ensembl">Ensembl GTF</span>
+                      </div>
+
                       <div class="input-group mb-3">
                         <input class="form-control " id="formFileSm1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
