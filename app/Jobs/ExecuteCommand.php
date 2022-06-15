@@ -50,7 +50,7 @@ class ExecuteCommand implements ShouldQueue
         var_dump($this->command);
         // Prepare output results directory
         $results_directory = base_path("pygtftk_results/".$this->directory);
-        
+        var_dump($results_directory);
         // Initialise output variables
         $return_var=0;
         
@@ -67,6 +67,7 @@ class ExecuteCommand implements ShouldQueue
 
             echo ("I'm in error\n");
 
+            shell_exec("echo '\n\nYour request has stopped with an error ! Please check your email for the exact error' >> $results_directory/ologram.log ");
             if (array_key_exists("ens_gtf",$this->uploaded_files_paths)){
                 unset($this->uploaded_files_paths["ens_gtf"]);
             }
@@ -94,7 +95,7 @@ class ExecuteCommand implements ShouldQueue
         else{
 
             echo ("I'm not in error\n");
-
+            shell_exec("echo '\n\nYour request finished successfully ! Please check your email for the results' >> $results_directory/ologram.log ");
             // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
 

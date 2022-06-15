@@ -127,20 +127,25 @@ class JobsController extends Controller
 
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
-
+        $feed_link = "http://localhost/live-feed/$directory_name";
         // Return success message
-        return $this->show_message();
+        return $this->show_message($feed_link);
     }
 
-    public function show_message()
+    public function show_message($feed_link)
     {
-        return redirect()->to('/')->with('success', 'Job is running !');
+        return redirect()->to('/')->with([
+            'success'=>"Your request has been successfully submitted.
+                        </br> You will receive an email once your request is done.
+                        </br> Click on the button below to see request progress in real time.",
+            'feed_link' => $feed_link
+        ]);
     }
     
     public function build_command($directory_name,$uploaded_files_paths)
     {   
         // Prepare basic command structure
-        $basic_command = "sg docker -c '"."docker exec gtftk conda run -n pygtftk gtftk ologram ";
+        $basic_command = "docker exec -t gtftk conda run --no-capture-output -n pygtftk gtftk ologram ";
 
         // Get validated args from request
         $validated_args = $this->request->validated();
@@ -213,7 +218,7 @@ class JobsController extends Controller
             }
         }
 
-        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1' > pygtftk_results/$directory_name/bash.log 2>&1";
+        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1";
 
         return $basic_command;
     }

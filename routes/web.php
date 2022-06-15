@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\LogsController;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -30,3 +31,5 @@ Route::get('/test-mail', function() {
     });
     return 'OK! Le mail a été envoyé !';
 });
+
+Route::get('/live-feed/{id?}', [LogsController::class,'display_log']);

@@ -60,8 +60,9 @@
         @if (\Session::has('success'))
         <div class="alert alert-success">
             <ul>
-                <li>{!! \Session::get('success') !!}</li>
+                <li id="success_field">{!! \Session::get('success') !!}</li>
             </ul>
+            <a class="btn btn-primary" href="{!! \Session::get('feed_link') !!}" role="button" target="_blank" rel=noopener>Live feed</a>
         </div>
         @endif
         
@@ -69,7 +70,7 @@
         @if (\Session::has('error'))
         <div class="alert alert-danger alert-block">
             <ul>
-                <li>{!! \Session::get('error') !!}</li>
+                <li id="error_field">{!! \Session::get('error') !!}</li>
             </ul>
         </div>
         @endif
@@ -101,7 +102,7 @@
             <div id="collapse1" class="accordion-collapse collapse " aria-labelledby="heading1" data-bs-parent="#cases-accordion">
               <div class="accordion-body">
                 <!-- This is the actual form -->
-                <form action='/' method='POST' enctype="multipart/form-data" >
+                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm">
                   @csrf 
                   <!-- @csrf is mandatory for forms with post method -->
                   <div class="row">
@@ -131,11 +132,16 @@
                       </div>
 
                       <div class="input-group mb-3">
-                        <input class="form-control "  name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <input class="form-control "  id="gtf" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">GTF</span>
                       </div>
+
+                      <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      
 
                       <div class="input-group mb-3">
                         <input class="form-control "  name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -711,20 +717,36 @@
     </div>
   </div>
 
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
-
-  {{-- <script>
-
-      var select_box_element = document.querySelector('#species');
   
-      dselect(select_box_element, {
-          search: true,
-          size: ''  
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
-  
-  </script> --}}
+      $('#uploadForm').submit(function(e) {
+        e.preventDefault();
+        var form = $("#Form");
+        var formData = new FormData(this);
+        var $this = $(this);
+        $.ajax(
+          xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = Math.round(((evt.loaded / evt.total) * 100)) ;
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete+'%');
+                        }
+                    }, false);
+                    return xhr;
+            }).done(function(response) {$this.unbind('submit').submit();});
+        }); 
+      });
+    </script>
 
 </body>
 </html>
