@@ -10,13 +10,32 @@ class LogsController extends Controller
     {
         $file_name = "../pygtftk_results/$id/ologram.log";
         if(file_exists($file_name)){
-            $file_content = file_get_contents($file_name);
-            $file_content = explode("\n",$file_content);
+            $file_content_string = file_get_contents($file_name);
+            $file_content_array = explode("\n",$file_content_string );
         }
         else{
-            $file_content = array("File not Found") ;
+            $file_content_string = "";
+            $file_content_array = array("File not Found") ;
         }
 
-        return view("live-feed")->with(['file' => $file_content]);
+        if(str_contains($file_content_string,"successfully")){
+            $results_directory = "../pygtftk_results/$id/";
+            $available_files = scandir($results_directory);
+            foreach ($available_files as $file) {
+                if (str_ends_with($file,".tsv")){
+                    $dash_link = $results_directory.$file;
+                    $dash_link = str_replace("..","",$dash_link);
+                }
+            }
+            session()->now('success', $dash_link);
+            return view("live-feed")->with(['file' => $file_content_array]);
+        }
+
+        if(str_contains($file_content_string,"stopped")){
+            session()->now('error', "Your request failed ! Please check the below log or your email for the exact error!");
+            return view("live-feed")->with(['file' => $file_content_array]);
+        }
+
+        return view("live-feed")->with(['file' => $file_content_array]);
     }
 }

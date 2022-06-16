@@ -37,9 +37,31 @@
     </nav>
 
     <div class="container">
-        <div class="row">
-        <h1 class="text-center mb-3">OLOGRAM live-feed</h1>
-        <p class="text-center">This page will refresh every 10 seconds.</p>
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8 text-start text-center">
+                <h1 class="text-center mb-3">OLOGRAM live-feed</h1>
+                <p class="text-center">This page will refresh every 10 seconds.</p>
+
+                {{-- @if (\Session::has('success'))
+                <a class="btn btn-success" href="{!! \Session::get('success') !!}" role="button" target="_blank" rel=noopener>OLOGRAM Results</a>
+                @endif --}}
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li id="success_field">Your results are ready !</li>
+                    </ul>
+                    <a class="btn btn-success " href="{!! \Session::get('success') !!}" role="button" target="_blank" rel=noopener>OLOGRAM Results</a>
+                </div>
+                @endif
+
+                @if (\Session::has('error'))
+                <div class="alert alert-danger alert-block">
+                    <ul>
+                        <li id="error_field">{!! \Session::get('error') !!}</li>
+                    </ul>
+                </div>
+                @endif
+            </div>
         </div>
         <div class="row justify-content-md-center">
             <div class="col-sm-8 text-start border border-info">
