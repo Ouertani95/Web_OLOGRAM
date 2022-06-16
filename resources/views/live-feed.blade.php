@@ -69,12 +69,23 @@
             </div>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-sm-8 text-start border border-info">
+            <div class="col-sm-8 text-start">
                 
-                
-                @foreach ($file as $line )
-                    <div>{{ $line }}.</div>
-                @endforeach
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                           <strong class="text-center"> Request log </strong> 
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            @foreach ($file as $line )
+                                <div>{{ $line }}.</div>
+                            @endforeach
+                        </div>
+                      </div>
+                    </div>
 
             </div>
         </div>
