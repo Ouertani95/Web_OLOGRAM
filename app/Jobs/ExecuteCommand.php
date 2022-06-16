@@ -79,7 +79,7 @@ class ExecuteCommand implements ShouldQueue
             Storage::delete(array_values($this->uploaded_files_paths));
             
             // Execute shell command to get error message
-            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run |grep -v 'email'",$error_check);
+            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run' |grep -v 'email'",$error_check);
 
             $error_check = implode("\n",$error_check);
 
