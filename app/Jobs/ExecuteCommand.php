@@ -57,13 +57,16 @@ class ExecuteCommand implements ShouldQueue
         // Check if log file already in results directory (meaning command has already been launched before)
         $current_files = scandir($results_directory);
 
-        if (! in_array("commands.log",$current_files) ){
+        if (! in_array("ologram.log",$current_files) ){
             // Execute shell command in php
             system($this->command, $return_var);
         }
 
+        exec("cat $results_directory/ologram.log",$log_content);
+        $log_content = implode("\n",$log_content);
+
         // Verify if errors occured during execution of command
-        if ($return_var !== 0) {
+        if (($return_var !== 0)||(str_contains($log_content,"ERROR"))) {
 
             echo ("I'm in error\n");
 
@@ -76,7 +79,7 @@ class ExecuteCommand implements ShouldQueue
             Storage::delete(array_values($this->uploaded_files_paths));
             
             // Execute shell command to get error message
-            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run'",$error_check);
+            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run |grep -v 'email'",$error_check);
 
             $error_check = implode("\n",$error_check);
 
