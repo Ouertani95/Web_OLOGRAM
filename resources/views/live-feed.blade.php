@@ -52,14 +52,19 @@
                     </ul>
                     <a class="btn btn-success " href="{!! \Session::get('success') !!}" role="button" target="_blank" rel=noopener>OLOGRAM Results</a>
                 </div>
-                @endif
 
-                @if (\Session::has('error'))
+                @elseif (\Session::has('error'))
                 <div class="alert alert-danger alert-block">
                     <ul>
                         <li id="error_field">{!! \Session::get('error') !!}</li>
                     </ul>
                 </div>
+
+                @else
+                <div class="alert alert-dark" role="alert">
+                    Your request is still running !
+                </div>                  
+
                 @endif
             </div>
         </div>
