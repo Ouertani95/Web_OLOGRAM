@@ -23,8 +23,9 @@ class LogsController extends Controller
             $available_files = scandir($results_directory);
             foreach ($available_files as $file) {
                 if (str_ends_with($file,".tsv")){
-                    $dash_link = $results_directory.$file;
+                    $dash_link = "http://localhost:7775/?file=".$results_directory.$file;
                     $dash_link = str_replace("..","",$dash_link);
+                    // dd($dash_link);
                 }
             }
             session()->now('success', $dash_link);
