@@ -96,9 +96,11 @@ class ValidateCase extends FormRequest
                 'mbed' => 'required',
                 'mbed.*' => [new ValidateBED],
                 'bed' => ['required',new ValidateBED],
+                'chr' => ['required',new ValidateCHR],
                 'bedin' => [new ValidateBED],
                 'bedex' => [new ValidateBED],
-                'max'=> 'numeric|nullable'
+                'max' => 'exclude_if:max,null|numeric|nullable',
+                'exact' => "filled"
             ];
         }
     }

@@ -643,6 +643,13 @@
                         title="BED file containing the set of regions for which combinations are searched.">BED</span>
                       </div>
 
+                      <div class="input-group mb-3">
+                        <input class="form-control " id="formFileSm3" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                        <span class="input-group-text " id="basic-addon3" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">CHR</span>
+                      </div>
+
                       <button type="submit" class="btn btn-primary">Start job</button></br><br>
 
                     </div>
@@ -747,6 +754,6 @@
             }).done(function(response) {$this.unbind('submit').submit();});
         }); 
       });
-
+  </script>
 </body>
 </html>
