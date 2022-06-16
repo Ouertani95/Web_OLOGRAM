@@ -23,7 +23,8 @@ class LogsController extends Controller
             $available_files = scandir($results_directory);
             foreach ($available_files as $file) {
                 if (str_ends_with($file,".tsv")){
-                    $dash_link = "http://localhost:7775/?file=".$results_directory.$file;
+                    $current_address = env("APP_URL");
+                    $dash_link = "$current_address:7775/?file=".$results_directory.$file;
                     $dash_link = str_replace("..","",$dash_link);
                     // dd($dash_link);
                 }

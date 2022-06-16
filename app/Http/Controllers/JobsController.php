@@ -127,7 +127,8 @@ class JobsController extends Controller
 
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
-        $feed_link = "http://localhost/live-feed/$directory_name";
+        $current_address = env("APP_URL");
+        $feed_link = "$current_address/live-feed/$directory_name";
         // Return success message
         return $this->show_message($feed_link);
     }

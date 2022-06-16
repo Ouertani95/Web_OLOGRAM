@@ -104,7 +104,8 @@ class ExecuteCommand implements ShouldQueue
 
             // Build file link
             $tsv_path = $this->get_tsv_path($results_paths);
-            $results_link = "http://localhost:7775/?file=$tsv_path";
+            $current_address = env("APP_URL");
+            $results_link = "$current_address:7775/?file=$tsv_path";
         
             // Send email with link and file names
             Mail::to($this->email)
