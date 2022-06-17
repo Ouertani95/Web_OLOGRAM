@@ -137,7 +137,6 @@ class JobsController extends Controller
     {
         return redirect()->to('/')->with([
             'success'=>"Your request has been successfully submitted.
-                        </br> You will receive an email once your request is done.
                         </br> Click on the button below to see request progress in real time.",
             'feed_link' => $feed_link
         ]);
@@ -219,7 +218,7 @@ class JobsController extends Controller
             }
         }
 
-        $basic_command = $basic_command." -o $directory_name -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1";
+        $basic_command = $basic_command." -o $directory_name -x -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1";
 
         return $basic_command;
     }
