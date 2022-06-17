@@ -161,7 +161,7 @@ class JobsController extends Controller
             $basic_command = $basic_command." -z ";
         }
         elseif($validated_args["caseId"]==="case4"){
-            $basic_command = $basic_command." -z ";
+            $basic_command = $basic_command." -z --more-bed-multiple-overlap ";
         }
         // Prepare check box type arguments
         $check_args = [
