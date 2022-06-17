@@ -12,6 +12,20 @@ class LogsController extends Controller
         if(file_exists($file_name)){
             $file_content_string = file_get_contents($file_name);
             $file_content_array = explode("\n",$file_content_string );
+            $words_list = array("python","conda","docker");
+            foreach($file_content_array as $index => $line) {
+                if (str_contains($line,$id)){
+                    $line = str_replace("$id/","",$line);
+                    $file_content_array[$index] = $line;
+                }
+                foreach ($words_list as $word){
+                    if(str_contains($line,$word)) {
+                        unset($file_content_array[$index]);
+                        break;
+                    }
+                }
+                
+            }
         }
         else{
             $file_content_string = "";
@@ -26,15 +40,20 @@ class LogsController extends Controller
                     $current_address = env("APP_URL");
                     $dash_link = "$current_address:7775/?file=".$results_directory.$file;
                     $dash_link = str_replace("..","",$dash_link);
-                    // dd($dash_link);
                 }
             }
             session()->now('success', $dash_link);
             return view("live-feed")->with(['file' => $file_content_array]);
         }
 
-        if(str_contains($file_content_string,"stopped")){
-            session()->now('error', "Your request failed ! Please check the below log or your email for the exact error!");
+        elseif(str_contains($file_content_string,"stopped")){
+            $msg = "Your request failed with the following error(s): <br>";
+            foreach ($file_content_array as $line){
+                if ((str_contains($line ,"ERROR"))){
+                    $msg .= "$line<br>";
+                }
+            }
+            session()->now('error', $msg);
             return view("live-feed")->with(['file' => $file_content_array]);
         }
 
