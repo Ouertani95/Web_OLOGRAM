@@ -75,11 +75,14 @@ class ExecuteCommand implements ShouldQueue
                 unset($this->uploaded_files_paths["ens_gtf"]);
             }
 
-            // Delete uploaded files
-            Storage::delete(array_values($this->uploaded_files_paths));
+            // Delete uploaded files 
+            $uploaded_files = array_values($this->uploaded_files_paths);
+            foreach ($uploaded_files as $up_file){
+                Storage::delete($up_file);
+            }
             
             // Execute shell command to get error message
-            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda.cli.main_run' |grep -v 'email'",$error_check);
+            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda\|email\|python\|docker'",$error_check);
 
             $error_check = implode("\n",$error_check);
 
