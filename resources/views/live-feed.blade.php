@@ -83,7 +83,7 @@
                       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body text-break">
                             @foreach ($file as $line )
-                                <div>{{ $line }}.</div>
+                                <div>{{ $line }}</div>
                             @endforeach
                         </div>
                       </div>

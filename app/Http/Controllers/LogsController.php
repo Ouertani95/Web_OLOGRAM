@@ -12,10 +12,14 @@ class LogsController extends Controller
         if(file_exists($file_name)){
             $file_content_string = file_get_contents($file_name);
             $file_content_array = explode("\n",$file_content_string );
-            $words_list = array("python","conda","docker");
+            $words_list = array("python","conda","docker","threads");
             foreach($file_content_array as $index => $line) {
                 if (str_contains($line,$id)){
                     $line = str_replace("$id/","",$line);
+                    $file_content_array[$index] = $line;
+                }
+                if (str_contains($line,"-WARNING")){
+                    $line = str_replace("-WARNING","",$line);
                     $file_content_array[$index] = $line;
                 }
                 foreach ($words_list as $word){
