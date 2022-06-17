@@ -128,18 +128,14 @@ class JobsController extends Controller
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
         $current_address = env("APP_URL");
-        $feed_link = "$current_address/live-feed/$directory_name";
+        $feed_link = "/live-feed/$directory_name";
         // Return success message
         return $this->show_message($feed_link);
     }
 
     public function show_message($feed_link)
     {
-        return redirect()->to('/')->with([
-            'success'=>"Your request has been successfully submitted.
-                        </br> Click on the button below to see request progress in real time.",
-            'feed_link' => $feed_link
-        ]);
+        return redirect()->to("$feed_link");
     }
     
     public function build_command($directory_name,$uploaded_files_paths)
