@@ -34,4 +34,7 @@ RUN conda config --add channels defaults && \
     
 RUN echo "alias cndr ='conda run -n pygtftk'" >> ~/.bash_aliases
 
+ENV TZ=Europe/Paris
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 ENTRYPOINT ["tail", "-f", "/dev/null"]
