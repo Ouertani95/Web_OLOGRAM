@@ -737,7 +737,7 @@
       });
       $('#uploadForm').submit(function(e) {
         e.preventDefault();
-        var form = $("#Form");
+        // var form = $("#Form");
         var formData = new FormData(this);
         var $this = $(this);
         $.ajax(
@@ -751,7 +751,27 @@
                         }
                     }, false);
                     return xhr;
-            }).done(function(response) {$this.unbind('submit').submit();});
+            },
+            type:'POST',
+            url: "",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+            this.reset();
+            alert('File has been uploaded successfully');
+            console.log(data);
+            },
+            error: function(data){
+              error: function (xhr) {
+                $('#error_field').html('');
+                $.each(xhr.responseJSON.errors, function(key,value) {
+                  $('#error_field').append('<div class="alert alert-danger">'+value+'</div');
+                }); 
+              };
+              console.log(data);
+            });
         }); 
       });
   </script>
