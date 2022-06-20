@@ -60,10 +60,17 @@
                     </ul>
                 </div>
 
-                @else
+                @elseif (\Session::has('queue'))
+                <div class="alert alert-primary alert-block">
+                    <ul>
+                        <li id="queue_field"> <strong> {!! \Session::get('queue') !!}</strong></li>
+                    </ul>
+                </div>
+
+                @elseif (\Session::has('running'))
                 <div class="alert alert-dark" role="alert">
                     <div class="d-flex align-items-center">
-                        <strong>Your request is still running ... </strong>
+                        <strong>Your request is running ... </strong>
                         <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
                     </div>
                 </div>                  

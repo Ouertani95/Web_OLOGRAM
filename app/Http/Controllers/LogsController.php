@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendError;
+use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LogsController extends Controller
 {
     public function display_log($id)
     {
+
+        $status_request =  Job::where('location_id', $id)
+                        ->get()
+                        ->pluck('status');
+        $status = $status_request[0];
+
+
         $file_name = "../pygtftk_results/$id/ologram.log";
+
         if(file_exists($file_name)){
             $file_content_string = file_get_contents($file_name);
             $file_content_array = explode("\n",$file_content_string );
@@ -33,10 +44,17 @@ class LogsController extends Controller
         }
         else{
             $file_content_string = "";
-            $file_content_array = array("File not Found") ;
+            $file_content_array = array("Loading ...") ;
         }
 
-        if(str_contains($file_content_string,"successfully")){
+        if ($status === "queued") {
+            session()->now('queue','Your request will start shortly, thank you for your patience !');
+        }
+
+        elseif ($status === "running") {
+            session()->now('running','Your request is running ... ');
+        }
+        elseif($status === "success"){
             $results_directory = "../pygtftk_results/$id/";
             $available_files = scandir($results_directory);
             foreach ($available_files as $file) {
@@ -47,10 +65,9 @@ class LogsController extends Controller
                 }
             }
             session()->now('success', $dash_link);
-            return view("live-feed")->with(['file' => $file_content_array]);
         }
 
-        elseif(str_contains($file_content_string,"stopped")){
+        elseif($status === "error"){
             $msg = "Your request failed with the following error(s): <br>";
             foreach ($file_content_array as $line){
                 if ((str_contains($line ,"ERROR"))){
@@ -58,7 +75,6 @@ class LogsController extends Controller
                 }
             }
             session()->now('error', $msg);
-            return view("live-feed")->with(['file' => $file_content_array]);
         }
 
         return view("live-feed")->with(['file' => $file_content_array]);

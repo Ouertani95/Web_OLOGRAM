@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendResults;
+use App\Models\Job;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,10 +48,12 @@ class ExecuteCommand implements ShouldQueue
 
     public function handle()
     {   
-        var_dump($this->command);
+        Job::where('location_id', $this->directory)
+            ->update(['status' => "running"]);
+
         // Prepare output results directory
         $results_directory = base_path("pygtftk_results/".$this->directory);
-        var_dump($results_directory);
+
         // Initialise output variables
         $return_var=0;
         
@@ -70,7 +73,11 @@ class ExecuteCommand implements ShouldQueue
 
             echo ("I'm in error\n");
 
-            shell_exec("echo '\n\nYour request has stopped with an error ! Please check your email for the exact error' >> $results_directory/ologram.log ");
+            // Modify job status
+            Job::where('location_id', $this->directory)
+                ->update(['status' => "error"]);
+
+            // remove ensemble gtf value from paths
             if (array_key_exists("ens_gtf",$this->uploaded_files_paths)){
                 unset($this->uploaded_files_paths["ens_gtf"]);
             }
@@ -84,14 +91,17 @@ class ExecuteCommand implements ShouldQueue
             // Execute shell command to get error message
             exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda\|email\|python\|docker'",$error_check);
 
+            // Transform errors to string
             $error_check = implode("\n",$error_check);
 
+            // remove directory name from all the lines
             if (str_contains($error_check,$this->directory)){
                 echo ("Found directory : deleting it from log \n");
                 // Remove directory path from error message
                 $error_check = str_replace("$this->directory/","",$error_check);
             }
 
+            // Send error email
             Mail::to($this->email)
                 ->send(new SendError($error_check));
             
@@ -101,7 +111,11 @@ class ExecuteCommand implements ShouldQueue
         else{
 
             echo ("I'm not in error\n");
-            shell_exec("echo '\n\nYour request finished successfully ! Please check your email for the results' >> $results_directory/ologram.log ");
+
+            // Modify job status
+            Job::where('location_id', $this->directory)
+                ->update(['status' => "success"]);
+
             // Get the result files
             $results_paths = $this->get_results_paths($results_directory);
 

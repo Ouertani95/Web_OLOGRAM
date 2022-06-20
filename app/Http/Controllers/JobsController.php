@@ -119,14 +119,19 @@ class JobsController extends Controller
         // Build command for gtftk
         $command = $this->build_command($directory_name,$uploaded_files_paths);
 
-        // // Add form information  to Jobs database using Job model
-        Job::create([
-            'email' => request('email'),
-            'command' => $command
-        ]);
+       
 
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
+        
+         // // Add form information  to Jobs database using Job model
+         Job::create([
+            'email' => request('email'),
+            'command' => $command,
+            'location_id' => "$directory_name",
+            'status' => "queued"
+        ]);
+        
         $current_address = env("APP_URL");
         $feed_link = "/live-feed/$directory_name";
         // Return success message

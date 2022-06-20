@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('Jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('location_id')->unique();
             $table->string('email');
             $table->string('command',10000);
+            $table->string('status');
             $table->timestamps();
         });
     }
