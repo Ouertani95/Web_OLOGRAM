@@ -11,13 +11,17 @@ class LogsController extends Controller
 {
     public function display_log($id)
     {
-
+        // Get the status of the request using $id
         $status_request =  Job::where('location_id', $id)
                         ->get()
                         ->pluck('status');
         $status = $status_request[0];
 
+        $recovered_args = file_get_contents("../pygtftk_results/$id/validated.json");
+        $recovered_args_array = json_decode($recovered_args,true);
+        $case = $recovered_args_array["caseId"];
 
+        // Prepare and filter log file if it exists 
         $file_name = "../pygtftk_results/$id/ologram.log";
 
         if(file_exists($file_name)){
@@ -47,6 +51,8 @@ class LogsController extends Controller
             $file_content_array = array("Loading ...") ;
         }
 
+
+        // Prepare message according to status
         if ($status === "queued") {
             session()->now('queue','Your request will start shortly, thank you for your patience !');
         }
@@ -73,10 +79,16 @@ class LogsController extends Controller
                 if ((str_contains($line ,"ERROR"))){
                     $msg .= "$line<br>";
                 }
+                
             }
-            session()->now('error', $msg);
+            $msg .= "Please reupload your files with the appropriate changes.";
+            return redirect()->to("/")->withInput($recovered_args_array)->with([
+                                                                                'error'=>$msg,
+                                                                                $case."_show"=>true
+                                                                            ]);
         }
 
+        // Show the page with the corresponding message
         return view("live-feed")->with(['file' => $file_content_array]);
     }
 }

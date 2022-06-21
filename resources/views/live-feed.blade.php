@@ -42,9 +42,6 @@
                 <h1 class="text-center mb-3">OLOGRAM live-feed</h1>
                 <p class="text-center">This page will refresh every 5 seconds.</p>
 
-                {{-- @if (\Session::has('success'))
-                <a class="btn btn-success" href="{!! \Session::get('success') !!}" role="button" target="_blank" rel=noopener>OLOGRAM Results</a>
-                @endif --}}
                 @if (\Session::has('success'))
                 <div class="alert alert-success">
                     <ul>

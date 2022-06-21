@@ -99,7 +99,13 @@
                 BED vs GTF
               </button>
             </h2>
-            <div id="collapse1" class="accordion-collapse collapse " aria-labelledby="heading1" data-bs-parent="#cases-accordion">
+
+            @if (\Session::has('case1_show'))
+            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#cases-accordion">
+            @else
+            <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#cases-accordion">
+            @endif
+
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm">
@@ -171,7 +177,13 @@
                                 Advanced options
                               </button>
                             </h2>
+
+                            @if (\Session::has('case1_show'))
+                            <div id="collapse1-advanced" class="accordion-collapse collapse show" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                            @else
                             <div id="collapse1-advanced" class="accordion-collapse collapse " aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                            @endif
+
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -276,7 +288,13 @@
                 BED vs GTF (keys/values)
               </button>
             </h2>
+
+            @if (\Session::has('case2_show'))
+            <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#cases-accordion">
+            @else
             <div id="collapse2" class="accordion-collapse collapse " aria-labelledby="heading2" data-bs-parent="#cases-accordion">
+            @endif
+            
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -350,7 +368,13 @@
                                 Advanced options
                               </button>
                             </h2>
+
+                            @if (\Session::has('case2_show'))
+                            <div id="collapse2-advanced" class="accordion-collapse collapse show" aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
+                            @else
                             <div id="collapse2-advanced" class="accordion-collapse collapse " aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
+                            @endif
+
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -458,7 +482,13 @@
                 BED vs BED
               </button>
             </h2>
+
+            @if (\Session::has('case3_show'))
+            <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#cases-accordion">
+            @else
             <div id="collapse3" class="accordion-collapse collapse " aria-labelledby="heading3" data-bs-parent="#cases-accordion">
+            @endif
+            
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -511,7 +541,13 @@
                                 Advanced options
                               </button>
                             </h2>
+
+                            @if (\Session::has('case3_show'))
+                            <div id="collapse3-advanced" class="accordion-collapse collapse show" aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
+                            @else
                             <div id="collapse3-advanced" class="accordion-collapse collapse " aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
+                            @endif
+
                               <div class="accordion-body">
                                 <div class="row">
                                   <div class="col-sm-3 text-start">
@@ -611,7 +647,13 @@
                 BED vs BED (Combinations)
               </button>
             </h2>
+
+            @if (\Session::has('case4_show'))
+            <div id="collapse4" class="accordion-collapse collapse show" aria-labelledby="heading4" data-bs-parent="#cases-accordion">
+            @else
             <div id="collapse4" class="accordion-collapse collapse " aria-labelledby="heading4" data-bs-parent="#cases-accordion">
+            @endif
+
               <div class="accordion-body">
                 <!-- This is the actual form -->
                 <form action='/' method='POST' enctype="multipart/form-data" >
@@ -664,7 +706,13 @@
                                 Advanced options
                               </button>
                             </h2>
+
+                            @if (\Session::has('case4_show'))
+                            <div id="collapse4-advanced" class="accordion-collapse collapse show" aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                            @else
                             <div id="collapse4-advanced" class="accordion-collapse collapse " aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                            @endif
+                            
                               <div class="accordion-body">
                                 <div class="row">
 

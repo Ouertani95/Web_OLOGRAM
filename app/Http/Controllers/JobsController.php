@@ -45,6 +45,9 @@ class JobsController extends Controller
         $directory_name = $date.'-'.$random_str;
         Storage::makeDirectory($directory_name);
 
+        $validated_args = json_encode($this->request->validated());
+        file_put_contents("../pygtftk_results/$directory_name/validated.json",$validated_args);
+
         // Verify if Ensembl GTF exists on server and download it if not 
         if (array_key_exists("ens_gtf",$request->validated())){
 
@@ -143,11 +146,6 @@ class JobsController extends Controller
                 ->send(new SendLive($full_feed_link));
 
         // Return success message
-        return $this->show_message($feed_link);
-    }
-
-    public function show_message($feed_link)
-    {
         return redirect()->to("$feed_link");
     }
     
