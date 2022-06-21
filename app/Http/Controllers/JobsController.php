@@ -6,6 +6,8 @@ use App\Http\Requests\ValidateCase;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Jobs\ExecuteCommand;
+use App\Mail\SendLive;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -134,6 +136,12 @@ class JobsController extends Controller
         
         $current_address = env("APP_URL");
         $feed_link = "/live-feed/$directory_name";
+
+        $full_feed_link = $current_address.$feed_link;
+
+        Mail::to($request->email)
+                ->send(new SendLive($full_feed_link));
+
         // Return success message
         return $this->show_message($feed_link);
     }
