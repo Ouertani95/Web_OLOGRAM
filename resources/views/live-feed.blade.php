@@ -17,7 +17,7 @@
     
 
     {{-- This is the navigation bar on the top --}}
-    <nav class="navbar navbar-light navbar-expand-lg ">
+    <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-lg">
         <div class="container-fluid">
         <a class="navbar-brand" href="/">OLOGRAM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mb-5 mt-5 pt-3">
         <div class="row justify-content-md-center">
             <div class="col-sm-8 text-start text-center">
                 <h1 class="text-center mb-3">OLOGRAM live-feed</h1>

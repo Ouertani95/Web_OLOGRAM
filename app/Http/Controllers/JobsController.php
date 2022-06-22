@@ -133,7 +133,7 @@ class JobsController extends Controller
         $to_remove = ["-L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1",
                     "$directory_name/",
                     "docker exec -t gtftk conda run --no-capture-output -n pygtftk ",
-                    " -o $directory_name "];
+                    " -o $directory_name"];
         foreach ($to_remove as $command_substring){
             $filtered_command = str_replace($command_substring,"",$filtered_command);
         }
