@@ -8,7 +8,12 @@
 
     <title>live-feed</title>
 </head>
+
+@if (\Session::has('success'))
+<body>
+@else
 <body onload = "JavaScript:AutoRefresh(5000);">
+@endif
     
 
     {{-- This is the navigation bar on the top --}}
@@ -40,7 +45,11 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-8 text-start text-center">
                 <h1 class="text-center mb-3">OLOGRAM live-feed</h1>
+
+                @if (!\Session::has('success'))
                 <p class="text-center">This page will refresh every 5 seconds.</p>
+                @endif
+
 
                 @if (\Session::has('success'))
                 <div class="alert alert-success">
@@ -77,22 +86,44 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-8 text-start">
                 
+                
+                @if (\Session::has('success'))
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2">
+                            <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                            <strong class="text-center"> OLOGRAM command </strong> 
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#accordion2">
+                            <div class="accordion-body text-center">
+                                <div class="input-group mb-3">
+                                    <textarea class="form-control" rows="3" id="command" readonly>{{ $command }}</textarea>
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="JavaScript:copy()">Copy command</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                           <strong class="text-center"> Request log </strong> 
-                        </button>
-                      </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body text-break">
-                            @foreach ($file as $line )
-                                <div>{{ $line }}</div>
-                            @endforeach
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong class="text-center"> Request log </strong> 
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body text-break">
+                                @foreach ($file as $line )
+                                    <div>{{ $line }}</div>
+                                @endforeach
+                            </div>
                         </div>
-                      </div>
                     </div>
-
+                </div>
             </div>
         </div>
     </div>
@@ -104,6 +135,14 @@
         function AutoRefresh( t ) {
             setTimeout("location.reload(true);", t);
         }
+        function copy() {
+            var content = document.getElementById('command');
+    
+            content.select();
+            document.execCommand('copy');
+
+            alert("Copied!");
+        } 
     </script>
     
 </body>

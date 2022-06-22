@@ -27,20 +27,6 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-          {{-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Link
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li> --}}
-          {{-- <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
-          </li> --}}
         </ul>
         <form class="d-flex">
           <input type="search" class="form-control" id="search-input" placeholder="Search docs..." aria-label="Search docs for..." autocomplete="off" data-bd-docs-version="5.0">
@@ -337,7 +323,7 @@
                         <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'">GTF keys</span>
                         <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys"></textarea>
+                        title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys">{{ old('keys') }}</textarea>
                       </div>
 
                       <div class="input-group mb-3">
@@ -421,7 +407,7 @@
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl"> {{ old('mbedl') }} </textarea>
                                     </div>
 
-                                     <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
                                       <input class="form-control " id="formFileSm1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                       <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -452,13 +438,8 @@
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" value="{{ old('dns') }}">
                                     </div>
-
-
-
-
                                   
                                   </div>
-
 
                                 </div>
                               </div>
@@ -736,7 +717,7 @@
                                       <span class="input-group-text" id="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned.">Max combinations</span>
                                       <input type="text" class="form-control" name="max" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned.">
+                                      title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned." value="{{ old('max') }}">
                                     </div>
 
                                     <div class="form-check">

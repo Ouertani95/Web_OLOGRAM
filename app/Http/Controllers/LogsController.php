@@ -17,8 +17,11 @@ class LogsController extends Controller
                         ->pluck('status');
         $status = $status_request[0];
 
+        // Get all the validated arguments from the json file
         $recovered_args = file_get_contents("../pygtftk_results/$id/validated.json");
         $recovered_args_array = json_decode($recovered_args,true);
+
+        // Extract caseId used to launch the request
         $case = $recovered_args_array["caseId"];
 
         // Prepare and filter log file if it exists 
@@ -56,8 +59,7 @@ class LogsController extends Controller
         if ($status === "queued") {
             session()->now('queue','Your request will start shortly, thank you for your patience !');
         }
-
-        elseif ($status === "running") {
+        elseif($status === "running") {
             session()->now('running','Your request is running ... ');
         }
         elseif($status === "success"){
@@ -70,9 +72,10 @@ class LogsController extends Controller
                     $dash_link = str_replace("..","",$dash_link);
                 }
             }
+            $command = file_get_contents("../pygtftk_results/$id/command.txt");
             session()->now('success', $dash_link);
+            return view("live-feed")->with(['file' => $file_content_array,'command'=>$command]);
         }
-
         elseif($status === "error"){
             $msg = "Your request failed with the following error(s): <br>";
             foreach ($file_content_array as $line){
