@@ -113,10 +113,8 @@
                         <select class="form-select" aria-label="Default select example" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Choose reference GTF directly from Ensembl">
                             <option selected></option>
-                            @foreach ($links as $species => $gtf_list)
-                            @foreach ($gtf_list as $gtf)
-                            <option value="http://ftp.ensembl.org/pub/current_gtf/{{ $species }}/{{ $gtf }}" >{{ $gtf }}</option>
-                            @endforeach
+                            @foreach ($links as $link)
+                            <option value="{{ $link }}" >{{ $link }}</option>
                             @endforeach
                         </select>
                         <span class="input-group-text" id="basic-addon-sp" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -302,10 +300,8 @@
                         <select class="form-select" aria-label="Default select example" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Choose reference GTF directly from Ensembl">
                             <option selected></option>
-                            @foreach ($links as $species => $gtf_list)
-                            @foreach ($gtf_list as $gtf)
-                            <option value="http://ftp.ensembl.org/pub/current_gtf/{{ $species }}/{{ $gtf }}" >{{ $gtf }}</option>
-                            @endforeach
+                            @foreach ($links as $link)
+                            <option value="{{ $link }}" >{{ $link }}</option>
                             @endforeach
                         </select>
                         <span class="input-group-text" id="basic-addon-sp" data-bs-toggle="tooltip" data-bs-placement="top" 

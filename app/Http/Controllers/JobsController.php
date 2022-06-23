@@ -15,23 +15,13 @@ class JobsController extends Controller
 {
     public function index()
     {
-        exec("rsync -av --list-only rsync://ftp.ensembl.org/ensembl/pub/current_gtf/ |awk '{print $5}' |grep 'gtf.gz' |grep -v 'abinitio' |grep -v '\.chr\.'",$gtf_list);
-        // dd($gtf_list);
 
-        $exploded_gtf_list = array();
-
-        foreach ($gtf_list as $gtf){
-            $gtf_kv = explode("/",$gtf);
-            if (!array_key_exists($gtf_kv[0],$exploded_gtf_list)){
-                $exploded_gtf_list[$gtf_kv[0]] = array();
-                array_push($exploded_gtf_list[$gtf_kv[0]],$gtf_kv[1]);
-            }
-            else{
-                array_push($exploded_gtf_list[$gtf_kv[0]],$gtf_kv[1]);
-            }
+        $links = Storage::allDirectories("Ensembl_GTF");
+        foreach ($links as $index => $link){
+            $links[$index] = str_replace("Ensembl_GTF/","",$link);
         }
 
-        return view('main')->with(['links' => $exploded_gtf_list]);
+        return view('main')->with(['links' => $links]);
     }
 
     public function run_queued_job(ValidateCase $request)
@@ -49,27 +39,11 @@ class JobsController extends Controller
         $validated_args = json_encode($this->request->validated());
         file_put_contents("../pygtftk_results/$directory_name/validated.json",$validated_args);
 
-        // Verify if Ensembl GTF exists on server and download it if not 
+        // Verify if Ensembl GTF is selected and ignore gtf and chr if selected
         if (array_key_exists("ens_gtf",$request->validated())){
 
-            $file_fields= ["bed","chr","mbed","bedin","bedex"];
+            $file_fields= ["bed","mbed","bedin","bedex"];
             
-            $ensembl_link = $request->input("ens_gtf");
-            $ensembl_link_trunc = str_replace("http://ftp.ensembl.org/pub/current_gtf/","",$ensembl_link);
-            $species = explode("/",$ensembl_link_trunc)[0];
-            $gtf_name = explode("/",$ensembl_link_trunc)[1];
-
-            // Save path to requested Ensembl gtf file
-            $this->ensembl_gtf = "Ensembl_GTF/$species/$gtf_name";
-
-            if (!Storage::exists("/Ensembl_GTF/$species")){
-                Storage::makeDirectory("/Ensembl_GTF/$species");
-                exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
-            }
-            elseif (!Storage::exists("/Ensembl_GTF/$species/$gtf_name")){
-                exec("wget $ensembl_link -O ../pygtftk_results/Ensembl_GTF/$species/$gtf_name 2>&1");
-            }
-
         }
         else{
             $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
@@ -119,10 +93,12 @@ class JobsController extends Controller
             }
 
         }
-
+        
         // Add Ensembl GTF path 
         if (array_key_exists("ens_gtf",$request->validated())){
-            $uploaded_files_paths["ens_gtf"] =  $this->ensembl_gtf;
+            $ensembl_base_name = $request->input("ens_gtf");
+            $uploaded_files_paths["ens_gtf"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.gtf.gz";
+            $uploaded_files_paths["chr"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.chrominfo";
         }
 
         // Build command for gtftk
