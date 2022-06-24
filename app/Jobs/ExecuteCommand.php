@@ -68,6 +68,12 @@ class ExecuteCommand implements ShouldQueue
         exec("cat $results_directory/ologram.log",$log_content);
         $log_content = implode("\n",$log_content);
 
+        // remove ensemble gtf value and chr from paths if ens_gtf is chosen
+        if (array_key_exists("ens_gtf",$this->uploaded_files_paths)){
+            unset($this->uploaded_files_paths["ens_gtf"]);
+            unset($this->uploaded_files_paths["chr"]);
+        }
+
         // Verify if errors occured during execution of command
         if (($return_var !== 0)||(str_contains($log_content,"ERROR"))) {
 
@@ -76,11 +82,6 @@ class ExecuteCommand implements ShouldQueue
             // Modify job status
             Job::where('location_id', $this->directory)
                 ->update(['status' => "error"]);
-
-            // remove ensemble gtf value from paths
-            if (array_key_exists("ens_gtf",$this->uploaded_files_paths)){
-                unset($this->uploaded_files_paths["ens_gtf"]);
-            }
 
             // Delete uploaded files 
             $uploaded_files = array_values($this->uploaded_files_paths);

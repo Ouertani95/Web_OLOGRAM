@@ -94,7 +94,7 @@ class JobsController extends Controller
 
         }
         
-        // Add Ensembl GTF path 
+        // Add Ensembl GTF and chr paths 
         if (array_key_exists("ens_gtf",$request->validated())){
             $ensembl_base_name = $request->input("ens_gtf");
             $uploaded_files_paths["ens_gtf"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.gtf.gz";
@@ -113,6 +113,14 @@ class JobsController extends Controller
         foreach ($to_remove as $command_substring){
             $filtered_command = str_replace($command_substring,"",$filtered_command);
         }
+
+        if (array_key_exists("ens_gtf",$request->validated())){
+            $Ens_GTF_paths = Storage::allDirectories("Ensembl_GTF");
+            foreach ($Ens_GTF_paths as $command_substring){
+                $filtered_command = str_replace("$command_substring/","",$filtered_command);
+            }
+        }
+
 
         // Get used command inside a file to be extracted later
         file_put_contents("../pygtftk_results/$directory_name/command.txt",$filtered_command);
@@ -149,11 +157,10 @@ class JobsController extends Controller
         // Get validated args from request
         $validated_args = $this->request->validated();
 
-        // Verify if an Ensembl GTF is selected and remove GTF to upload if selected at the same time
+        // Verify if an Ensembl GTF is selected and remove GTF and CHR to upload if selected at the same time
         if (array_key_exists("ens_gtf",$validated_args)){
-            if (array_key_exists("ens_gtf",$validated_args)){
-                unset($validated_args["gtf"]);
-            }
+            unset($validated_args["gtf"]);
+            unset($validated_args["chr"]);
         }
 
         // Add case specific argument
@@ -205,6 +212,11 @@ class JobsController extends Controller
                     foreach ($files as $file){
                         $basic_command = $basic_command." $file ";
                     }
+                }
+                elseif($arg === "ens_gtf"){
+                    $ens_file = $uploaded_files_paths[$arg];
+                    $chr_file = $uploaded_files_paths["chr"];
+                    $basic_command = $basic_command.$ens_file." -c $chr_file ";
                 }
                 else{
                     $file = $uploaded_files_paths[$arg];
