@@ -33,3 +33,5 @@ Route::get('/test-mail', function() {
 });
 
 Route::get('/live-feed/{id?}', [LogsController::class,'display_log']);
+
+Route::view("/test","test");
