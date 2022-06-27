@@ -83,30 +83,48 @@
                 @endif
             </div>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col-sm-8 text-start">
+
+        <div class="row justify-content-md-center mb-3">
+            <div class="col-sm-8 text-center">
                 
                 
                 @if (\Session::has('success'))
                 <div class="accordion" id="accordion2">
-                    <div class="accordion-item">
+                    <div class="accordion-item justify-content-md-center">
                         <h2 class="accordion-header" id="heading2">
                             <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-                            <strong class="text-center"> OLOGRAM command </strong> 
+                               <strong class="text-center"> OLOGRAM command </strong> 
                             </button>
                         </h2>
                         <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#accordion2">
-                            <div class="accordion-body text-center">
+                            <div class="accordion-body text-center ">
                                 <div class="input-group mb-3">
                                     <textarea class="form-control" rows="3" id="command" readonly>{{ $command }}</textarea>
                                     <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="JavaScript:copy()">Copy command</button>
                                 </div>
+
+                                @if (\Session::has('download'))
+                                <a class="btn btn-success mb-3" href="{!! \Session::get('download') !!}" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                                    </svg>
+                                    Download Ensembl GTF + CHR
+                                </a>
+                        @endif
                             </div>
                         </div>
+                        
                     </div>
+                    
                 </div>
                 @endif
 
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8 text-start">
 
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -116,7 +134,7 @@
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body text-break">
+                            <div class="accordion-body text-break text-start">
                                 @foreach ($file as $line )
                                     <div>{{ $line }}</div>
                                 @endforeach
@@ -124,8 +142,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
     
     <script type="text/javascript" src={{ asset("js/bootstrap-5.1.3.min.js") }} ></script>

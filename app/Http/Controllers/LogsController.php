@@ -6,6 +6,7 @@ use App\Mail\SendError;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class LogsController extends Controller
 {
@@ -73,6 +74,24 @@ class LogsController extends Controller
                 }
             }
             $command = file_get_contents("../pygtftk_results/$id/command.txt");
+
+            // Prepare for download button if Ensembl GTF + CHR is used
+            $Ensembl_directories = Storage::directories("Ensembl_GTF");
+            // Remove parent directory name
+            foreach ($Ensembl_directories as $index=>$directory){
+                $Ensembl_directories[$index] = str_replace("Ensembl_GTF/","",$directory);
+            }
+            // Search for Ensembl GTF name in command
+            foreach ($Ensembl_directories as $directory){
+                if (str_contains($command,$directory)){
+                    $current_address = env("APP_URL");
+                    $download_link = $current_address."/download/$directory";
+                    session()->now('download',$download_link);
+                    session()->now('success', $dash_link);
+                    return view("live-feed")->with(['file' => $file_content_array,'command'=>$command]);
+                }
+        }
+
             session()->now('success', $dash_link);
             return view("live-feed")->with(['file' => $file_content_array,'command'=>$command]);
         }
