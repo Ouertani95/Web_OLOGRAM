@@ -81,8 +81,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   
   
   text_s <- sapply(text_s, format_p_value)
-  dmm_s$Pval_1 <- dm[,'summed_bp_overlaps_pvalue']
-  dmm_s$Pval_2 <- text_s
+  dmm_s$Pval <- text_s
   dmm_s$Neg_binom <- dm[,'summed_bp_overlaps_negbinom_fit_quality']
   
   
@@ -112,8 +111,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   
   text_n <- dm[, 'nb_intersections_pvalue']
   text_n <- sapply(text_n, format_p_value)
-  dmm_n$Pval_1 <- dm[,'nb_intersections_pvalue']
-  dmm_n$Pval_2 <- text_n
+  dmm_n$Pval <- text_n
   dmm_n$Neg_binom <- dm[,'nb_intersections_negbinom_fit_quality']
   
   # Merge s and n tables

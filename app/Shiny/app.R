@@ -12,6 +12,7 @@ library(ggthemes)
 library(shinythemes)
 library(optparse)
 library(plotly)
+library(DT)
 source("data_prep_functions.R")
 
 #--------------------------------------------------------------
@@ -119,8 +120,9 @@ ui <- fluidPage(
                            br(),
                            conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot")),
                   ),
-                  tabPanel("Table", 
-                           tableOutput("table")
+                  tabPanel("Table",
+                           br(),
+                           DT::dataTableOutput("table")
                   )
       )
       
@@ -252,13 +254,21 @@ server <- function(input, output,session) {
   })
   
   # Generate an HTML table view of the data ----
-  output$table <- renderTable({
-    if (!is.null(user_barplot_table)) {
-      user_barplot_table <- prepare_barplot()
-      user_barplot_table <- user_barplot_table[user_barplot_table$Statistic == input$barplot_statistic_input,]
-      user_barplot_table <- user_barplot_table[user_barplot_table$Feature %in% input$barplot_features_input,]
-      user_barplot_table
-    }
+  output$table <- DT::renderDataTable({
+    DT::datatable(prepare_barplot(),rownames = FALSE, class = 'cell-border stripe',extensions = 'Buttons', options = list(
+      dom = 'Bfrtip',
+      buttons = 
+        list('colvis','copy', 'print', list(
+          extend = 'collection',
+          buttons = c('csv', 'excel', 'pdf'),
+          text = 'Download'
+        )),
+      lengthMenu = list(c( -1,10,30, 50), 
+                        c('All','10', '30', '50')),
+                        paging = T)
+      
+      
+    )
   })
   
 }
