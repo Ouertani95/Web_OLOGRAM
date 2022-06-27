@@ -149,8 +149,8 @@ server <- function(input, output,session) {
       updateSelectInput(session, "barplot_features_input",
                         choices=sort(unique(user_barplot_table$Feature)),
                         selected=sort(unique(user_barplot_table$Feature))
-                        )
-
+      )
+      
       user_barplot_table
     }
   })
@@ -162,7 +162,7 @@ server <- function(input, output,session) {
       user_volcano_table <- loading_and_preparing_ologram_table_volcano(query[['file']])
       user_volcano_table
     }
-    })
+  })
   
   
   # Generate a plot of the data ----
@@ -196,7 +196,7 @@ server <- function(input, output,session) {
       barly
     }
   })
-
+  
   volcano_plot <- reactive({
     user_volcano_table <- prepare_volcanoplot()
     if (!is.null(user_volcano_table)) {
@@ -228,15 +228,15 @@ server <- function(input, output,session) {
         coord_fliped +
         my_theme
       
-    if (input$volcanoplot_reactivity_input == "Reactive"){
+      if (input$volcanoplot_reactivity_input == "Reactive"){
         volcano <- ggplotly(volcano)
         volcano
       }
-    else{
+      else{
         volcano <- volcano + geom_label_repel(box.padding = 0.5)
         volcano
-    volcano
-    }
+        volcano
+      }
     }
   })
   
@@ -265,7 +265,7 @@ server <- function(input, output,session) {
         )),
       lengthMenu = list(c( -1,10,30, 50), 
                         c('All','10', '30', '50')),
-                        paging = T)
+      paging = T)
       
       
     )

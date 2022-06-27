@@ -56,8 +56,8 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   dmm_s$Statistic <- rep('Total overlap length per region type', nrow(dmm_s))
   
   colnames(dmm_s) <- c('Feature', 'Type', 'Value', 'Statistic')
-  dmm_s$Variance <- sqrt(dm[,'summed_bp_overlaps_variance_shuffled'])
-  
+  dmm_s$Variance <- formatC(sqrt(dm[,'summed_bp_overlaps_variance_shuffled']),format="f",digits=2) 
+  dmm_s$Variance <- as.numeric(dmm_s$Variance)
   # P-value
   #---------
   
@@ -73,7 +73,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
     }else if(x == -1){
       r <- 'p=NA'  # If the p-value was -1, we write 'Not applicable'
     }else{
-      r <- paste("p=", formatC(x, format = "e", digits = 2))  # Add 'p=' before and format the p value
+      r <- formatC(x, format = "e", digits = 2) # format the p value
     }
     
     return(r)
@@ -81,7 +81,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   
   
   text_s <- sapply(text_s, format_p_value)
-  dmm_s$Pval <- text_s
+  dmm_s$Pval <- as.numeric(text_s) 
   dmm_s$Neg_binom <- dm[,'summed_bp_overlaps_negbinom_fit_quality']
   
   
@@ -104,14 +104,14 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   dmm_n <- melt(data_ni_n, id_vars='Feature')
   dmm_n$Statistic <- rep('Total nb. of intersections per region type', nrow(dmm_n))
   colnames(dmm_n) <- c('Feature', 'Type', 'Value', 'Statistic')
-  dmm_n$Variance <- sqrt(dm[,'nb_intersections_variance_shuffled'])
-  
+  dmm_n$Variance <- formatC(sqrt(dm[,'nb_intersections_variance_shuffled']),format="f",digits=2)  
+  dmm_n$Variance <- as.numeric(dmm_n$Variance)
   # P-value
   #---------
   
   text_n <- dm[, 'nb_intersections_pvalue']
   text_n <- sapply(text_n, format_p_value)
-  dmm_n$Pval <- text_n
+  dmm_n$Pval <- as.numeric(text_n) 
   dmm_n$Neg_binom <- dm[,'nb_intersections_negbinom_fit_quality']
   
   # Merge s and n tables
@@ -190,13 +190,13 @@ loading_and_preparing_ologram_table_volcano <- function(table_path){
 # List available ggplot themes
 #--------------------------------------------------------------
 loading_available_themes <- function(){
-themes_avail <- c(grep("^theme_", 
-                       ls("package:ggplot2"), 
-                       val=TRUE), 
-                  grep("^theme_", 
-                       ls("package:ggthemes"), 
-                       val=TRUE))
-
-themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
+  themes_avail <- c(grep("^theme_", 
+                         ls("package:ggplot2"), 
+                         val=TRUE), 
+                    grep("^theme_", 
+                         ls("package:ggthemes"), 
+                         val=TRUE))
+  
+  themes_avail <- themes_avail[-grep("^theme_get$", themes_avail)]
   return(themes_avail) 
 }
