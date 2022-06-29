@@ -1,23 +1,3 @@
-# #--------------------------------------------------------------
-# # Argument Parser
-# #--------------------------------------------------------------
-# 
-# option_list = list(
-#   make_option(c("-i", "--inputfile"), 
-#               type="character", 
-#               default=NULL, 
-#               help="Path to the csv file produced by OLOGRAM(-MODL).", 
-#               metavar="INPUTFILE")
-# )
-# 
-# 
-# opt_parser = OptionParser(option_list=option_list);
-# opt = parse_args(opt_parser);
-# 
-# if (is.null(opt$inputfile)){
-#   stop("Path to the csv file produced by OLOGRAM(-MODL) is mandatory (--inputfile)", call.=FALSE)
-# }
-
 #--------------------------------------------------------------
 # Functions to load and prepare the dataset for Barplot
 #--------------------------------------------------------------
@@ -26,7 +6,6 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   #---------------
   # loading table
   #---------------
-  
   
   data_user <- read.table(table_path, 
                           sep="\t",
@@ -40,6 +19,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   
   dm <- data_user
   
+  #-----------------------------------------------
   # Create table for summed_bp_overlaps statistics
   #-----------------------------------------------
   
@@ -58,12 +38,14 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   colnames(dmm_s) <- c('Feature', 'Type', 'Value', 'Statistic')
   dmm_s$Variance <- formatC(sqrt(dm[,'summed_bp_overlaps_variance_shuffled']),format="f",digits=2) 
   dmm_s$Variance <- as.numeric(dmm_s$Variance)
+
+  #---------
   # P-value
   #---------
   
   text_s <- dm[, 'summed_bp_overlaps_pvalue']
   
-  
+  #----------------
   # Format the text
   #----------------
   
@@ -81,13 +63,13 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   
   
   text_s <- sapply(text_s, format_p_value)
-  dmm_s$Pval <- as.numeric(text_s) 
-  dmm_s$Neg_binom <- dm[,'summed_bp_overlaps_negbinom_fit_quality']
+  dmm_s$Pval <- as.numeric(as.character(text_s)) 
+  dmm_s$Neg_binom_fit <- dm[,'summed_bp_overlaps_negbinom_fit_quality']
   
-  
+  #---------------------------------------------
   # Create table for nb_intersections statistics
   #---------------------------------------------
-  
+
   data_ni_n = dm[, c('feature_type', 
                      'nb_intersections_expectation_shuffled', 
                      'nb_intersections_true')]
@@ -106,14 +88,17 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   colnames(dmm_n) <- c('Feature', 'Type', 'Value', 'Statistic')
   dmm_n$Variance <- formatC(sqrt(dm[,'nb_intersections_variance_shuffled']),format="f",digits=2)  
   dmm_n$Variance <- as.numeric(dmm_n$Variance)
+
+  #---------
   # P-value
   #---------
   
   text_n <- dm[, 'nb_intersections_pvalue']
   text_n <- sapply(text_n, format_p_value)
-  dmm_n$Pval <- as.numeric(text_n) 
-  dmm_n$Neg_binom <- dm[,'nb_intersections_negbinom_fit_quality']
+  dmm_n$Pval <- as.numeric(as.character(text_n)) 
+  dmm_n$Neg_binom_fit <- dm[,'nb_intersections_negbinom_fit_quality']
   
+  #---------------------
   # Merge s and n tables
   #---------------------
   
@@ -138,46 +123,56 @@ loading_and_preparing_ologram_table_volcano <- function(table_path){
                           header=TRUE,
                           quote='')
   
-  data_user[,"feature_type"] <- gsub(":", "\n", data_user[,"feature_type"]) 
-  
+  data_user[,"feature_type"] <- gsub(":", "\n", data_user[,"feature_type"])
+
+  #----------------------------------------------
   # Preparing a dataframe containing N statistics
-  #---------------------------------------------
+  #----------------------------------------------
   mat_n = data_user[, c('feature_type',
                         'nb_intersections_log2_fold_change',
                         'nb_intersections_pvalue')]
-  
+
+  #----------------------------------
   # Unavailable p-value are discarded
-  #---------------------------------------------
+  #----------------------------------
   
   mat_n <- mat_n[!mat_n$nb_intersections_pvalue == -1,]
   
+  #--------------------------------------
   # Pval set to 0 are changed to  1e-320
-  #---------------------------------------------
+  #--------------------------------------
+
   mat_n[mat_n$nb_intersections_pvalue == 0, 'nb_intersections_pvalue'] <- 1e-320
   mat_n$minus_log10_pvalue <- -log10(mat_n$nb_intersections_pvalue)
   colnames(mat_n) <- c('Feature', 'log2(FC)', 'p-value', '-log10(pvalue)')
   mat_n$Statistic <- rep('Total nb. of intersections per region type', nrow(mat_n))
   
+  #----------------------------------------------
   # Preparing a dataframe containing S statistics
-  #---------------------------------------------
+  #----------------------------------------------
   
   mat_s <- data_user[,c('feature_type',
                         'summed_bp_overlaps_log2_fold_change',
                         'summed_bp_overlaps_pvalue')]
+  
+  #----------------------------------
   # Unavailable p-value are discarded
-  #---------------------------------------------
+  #----------------------------------
   
   
   mat_s <- mat_s[!mat_s$summed_bp_overlaps_pvalue == -1,]
   
+  #-------------------------------------
   # Pval set to 0 are changed to  1e-320
-  #---------------------------------------------
+  #-------------------------------------
+
   mat_s[mat_s$summed_bp_overlaps_pvalue == 0, 'summed_bp_overlaps_pvalue'] <- 1e-320
   mat_s$minus_log10_pvalue <- -log10(mat_s$summed_bp_overlaps_pvalue)
   colnames(mat_s) <- c('Feature', 'log2(FC)', 'p-value', '-log10(pvalue)')
   mat_s$Statistic <- rep('Total overlap length per region type', nrow(mat_s))
   
   
+  #---------------------
   # Merge s and n tables
   #---------------------
   
@@ -186,9 +181,9 @@ loading_and_preparing_ologram_table_volcano <- function(table_path){
   return(df_volc)
 }
 
-#--------------------------------------------------------------
+#-----------------------------
 # List available ggplot themes
-#--------------------------------------------------------------
+#-----------------------------
 loading_available_themes <- function(){
   themes_avail <- c(grep("^theme_", 
                          ls("package:ggplot2"), 
