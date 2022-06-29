@@ -13,6 +13,9 @@ library(shinythemes)
 library(optparse)
 library(plotly)
 library(DT)
+library(shinydashboard)
+library(shinyWidgets)
+# library(shinydashboardPlus)
 source("data_prep_functions.R")
 
 #--------------------------------------------------------------
@@ -32,93 +35,113 @@ themes_avail <- loading_available_themes()
 #--------------------------------------------------------------
 
 
-ui <- navbarPage(
-                  # App title ----
-                  "Web-OLOGRAM",
-                  # App theme ----
-                  theme = shinytheme("cosmo"),
+ui <- dashboardPage(skin = "black",
+      dashboardHeader(title = "Web_OLOGRAM"),
+      dashboardSidebar(
+                      sidebarMenu(
+                        menuItem("Bar plot", tabName = "Barplot"),
+                        menuItem("Volcano plot", tabName = "Volcanoplot"),
+                        menuItem("table", tabName = "Table")
+                      )
+        ),
+      dashboardBody(
+          tabItems(
+            tabItem("Barplot",
+              fluidRow(
+                box(
+                      width = 3, status = "info",
+                      title = "Barplot Input",
+                      # switchInput(inputId = "barplot_coordflip_input",label="Flip Coordinates", value = FALSE,width = NULL),
+                      materialSwitch(inputId = "barplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                      # checkboxInput("barplot_coordflip_input", "Flip Coordinates", value = FALSE, width = NULL),
+                      # Input: Dopdown for Satistics to use ----
+                      materialSwitch(inputId = "barplot_show_pvalue_input", label = "Show P-value", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                      # checkboxInput("barplot_show_pvalue_input", "Show P-value", value = FALSE, width = NULL),
+                      selectInput(
+                        inputId="theme_input", 
+                        label="Theme",
+                        choices=themes_avail,
+                        selected = NULL,
+                        multiple = FALSE,
+                        selectize = TRUE,
+                        width = NULL,
+                        size = NULL
+                      ),
+                      # br(),
+                      # Input: Dopdown for Satistics to use ----
+                      selectInput(
+                        inputId="barplot_statistic_input", 
+                        label="Statistics",
+                        choices=sort(unique(user_barplot_table$Statistic)),
+                        selected = NULL,
+                        multiple = FALSE,
+                        selectize = TRUE,
+                        width = NULL,
+                        size = NULL
+                      ),
+                      pickerInput(
+                        inputId = "barplot_features_input", 
+                        label = "Features", 
+                        choices = sort(unique(user_barplot_table$Feature)), 
+                        options = list(
+                          `actions-box` = TRUE, 
+                          size = 10,
+                          `selected-text-format` = "count > 3"
+                        ), 
+                        multiple = TRUE
+                      )
+                  ),
+                box(
+                    width = 9, status = "info", solidHeader = TRUE,
+                    title = "Barplot Graph",
+                    plotlyOutput("barplot")
+                  )
+              )
+            ),
+            tabItem("Volcanoplot",
+              fluidRow(
+                box(
+                      width = 3, status = "info",
+                      title = "Volcanoplot Input",
+                      # br(),
+                      # Input: Dopdown for Satistics to use ----
+                      materialSwitch(inputId = "volcanoplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                      # checkboxInput("volcanoplot_coordflip_input", "Flip Coordinates", value = FALSE, width = NULL),
+                      selectInput(
+                        inputId="volcano_statistic_input", 
+                        label="Statistics",
+                        choices=c("Both", sort(unique(user_volcano_table$Statistic))),
+                        selected = NULL,
+                        multiple = FALSE,
+                        selectize = TRUE,
+                        width = NULL,
+                        size = NULL
+                      ),
+                      selectInput(
+                        inputId="volcanoplot_reactivity_input", 
+                        label="Reactivity",
+                        choices=c("Reactive","Static"),
+                        selected = "Reactive"
+                      )
+                  ),
+                box(
+                    width = 9, status = "info", solidHeader = TRUE,
+                    title = "Volcanoplot Graph",
+                    conditionalPanel("input.volcanoplot_reactivity_input == 'Reactive'", plotlyOutput("volcano_plotly")),
+                    conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot"))
+                  )
+              )
+            ),
+            tabItem("Table",
+              fluidRow(
+                box(width = 12,
+                    DT::dataTableOutput("table")
+                  )
+              )
+            )
+          )
+      ),
 
-                  tabPanel("Barplot",
-                            sidebarLayout(
-                              sidebarPanel( width=3,
-                                            checkboxInput("barplot_coordflip_input", "Flip Coordinates", value = FALSE, width = NULL),
-                                            # Input: Dopdown for Satistics to use ----
-                                            selectInput(
-                                              inputId="theme_input", 
-                                              label="Theme",
-                                              choices=themes_avail,
-                                              selected = NULL,
-                                              multiple = FALSE,
-                                              selectize = TRUE,
-                                              width = NULL,
-                                              size = NULL
-                                            ),
-                                            br(),
-                                            # Input: Dopdown for Satistics to use ----
-                                            selectInput(
-                                              inputId="barplot_statistic_input", 
-                                              label="Statistics",
-                                              choices=sort(unique(user_barplot_table$Statistic)),
-                                              selected = NULL,
-                                              multiple = FALSE,
-                                              selectize = TRUE,
-                                              width = NULL,
-                                              size = NULL
-                                            ),
-                                            selectInput(
-                                              inputId="barplot_features_input", 
-                                              label="Features",
-                                              choices=sort(unique(user_barplot_table$Feature)),
-                                              selected = sort(unique(user_barplot_table$Feature)),
-                                              multiple = TRUE,
-                                              selectize = TRUE,
-                                              width = NULL,
-                                              size = NULL
-                                            ),
-                                            
-                                          ),
-                              mainPanel(
-                                      width=9,               
-                                      plotlyOutput("barplot"),
-                                      )
-                              )
-                            ),
-
-                        
-                  tabPanel("Volcano Plot",
-                            sidebarLayout(
-                              sidebarPanel( width=3,
-                                            br(),
-                                            # Input: Dopdown for Satistics to use ----
-                                            selectInput(
-                                              inputId="volcano_statistic_input", 
-                                              label="Statistics",
-                                              choices=c("Both", sort(unique(user_volcano_table$Statistic))),
-                                              selected = NULL,
-                                              multiple = FALSE,
-                                              selectize = TRUE,
-                                              width = NULL,
-                                              size = NULL
-                                            ),
-                                            selectInput(
-                                              inputId="volcanoplot_reactivity_input", 
-                                              label="Reactivity",
-                                              choices=c("Reactive","Static"),
-                                              selected = "Reactive"
-                                            )
-                                          ),
-                              mainPanel(
-                                      width=9,
-                                      conditionalPanel("input.volcanoplot_reactivity_input == 'Reactive'", plotlyOutput("volcano_plotly")),
-                                      conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot"))
-                                      )
-                                        )
-                            
-                            ),
-                  tabPanel("Table",
-                            DT::dataTableOutput("table")
-                            )
-                  
 )
 
 
@@ -180,9 +203,16 @@ server <- function(input, output,session) {
       
       bar <- ggplot(user_barplot_table, mapping=aes(x=Feature, y=Value, fill=Type)) + 
         geom_bar(stat="identity", position = "dodge") +
+        # geom_text(data = user_barplot_table[user_barplot_table$Type =="True",],aes(y=Pval+Value,label = paste("Pval = ",Pval)),vjust = 1,size=2) +
+        # annotate("text",size=3, x = user_barplot_table[user_barplot_table$Type =="True",]$Feature, y = user_barplot_table[user_barplot_table$Type =="True",]$Value, label = paste(user_barplot_table[user_barplot_table$Type =="True",]$Pval))+
         coord_fliped +
         my_theme + 
         theme (axis.text.x = element_text(angle = 45))
+
+      if(input$barplot_show_pvalue_input)
+        bar <- bar + annotate("text",size=3, x = user_barplot_table[user_barplot_table$Type =="True",]$Feature, y = user_barplot_table[user_barplot_table$Type =="True",]$Value, label = paste(user_barplot_table[user_barplot_table$Type =="True",]$Pval))
+      else
+        bar <- bar
       
       barly <- ggplotly(bar)
       barly
@@ -196,7 +226,7 @@ server <- function(input, output,session) {
       if(input$volcano_statistic_input != 'Both')
         user_volcano_table <- user_volcano_table[user_volcano_table$Statistic == input$volcano_statistic_input, ]
       
-      if(input$barplot_coordflip_input)
+      if(input$volcanoplot_coordflip_input)
         coord_fliped <- coord_flip()
       else
         coord_fliped <- NULL
