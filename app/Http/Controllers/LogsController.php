@@ -69,8 +69,9 @@ class LogsController extends Controller
             foreach ($available_files as $file) {
                 if (str_ends_with($file,".tsv")){
                     $current_address = env("APP_URL");
-                    $dash_link = "$current_address:7775/?file=".$results_directory.$file;
-                    $dash_link = str_replace("..","",$dash_link);
+                    $dash_link = "$current_address/results/$id/$file";
+                    $dash_link = str_replace("../pygtftk_results/","",$dash_link);
+                    
                 }
             }
             $command = file_get_contents("../pygtftk_results/$id/command.txt");
