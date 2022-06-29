@@ -38,3 +38,8 @@ Route::get('/live-feed/{id?}', [LogsController::class,'display_log']);
 Route::view("/test","test");
 
 Route::get('/download/{species?}', [DownloadController::class,'download_files']);
+
+Route::get('/results/{id?}/{file?}', function($id,$file) {
+    
+    return view("results")->with(["id"=>$id,"file"=>$file]);
+});
