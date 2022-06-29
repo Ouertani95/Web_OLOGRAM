@@ -751,6 +751,8 @@
 
   <script type="text/javascript" src={{ asset("js/bootstrap-5.1.3.min.js") }} ></script>
   <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>
+  <script type="text/javascript" src={{ asset("js/fontawesome-6.1.1.js") }}></script>
+
 
   <script type="text/javascript">
     $(document).ready(function (e) {
@@ -800,4 +802,20 @@
       });
   </script>
 </body>
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-light">
+    
+  <p class="col-md-2 mb-0 text-muted justify-content-center">© 2022 Web-OLOGRAM </p>
+
+  <div class="col-md-8 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto">
+
+    <a href="https://dputhier.github.io/pygtftk/ologram.html" class="link-dark text-decoration-none">
+      <i class="fa-brands fa-github fa-l">OLOGRAM Docs</i>
+    </a>
+  </div>
+
+  <p class="col-md-2 mb-0 text-muted justify-content-center">PYGTFTK v1.6.2 </p>
+  
+
+</nav>
 </html>
