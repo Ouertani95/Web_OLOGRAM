@@ -106,12 +106,12 @@
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
                         <input type="email" class="form-control form-control-sm" id="email1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
-                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                       </div>
 
                       <div class="input-group mb-3">
                         <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which the enrichment will be calculated.">
+                        title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
@@ -292,12 +292,12 @@
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
                         <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
-                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                       </div>
 
                       <div class="input-group mb-3">
                         <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which the enrichment will be calculated.">
+                        title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
@@ -479,7 +479,14 @@
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
                         <input type="email" class="form-control form-control-sm" id="email3" name="email" value="{{ old('email') }}" placeholder="name@example.com"
-                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input class="form-control " id="bed3" type="file" name="bed" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which the enrichment will be calculated." required>
+                        <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
@@ -487,13 +494,6 @@
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files to be considered as genomic annotations.">Ref BED</span>
-                      </div>
-
-                      <div class="input-group mb-3">
-                        <input class="form-control " id="bed3" type="file" name="bed" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which the enrichment will be calculated.">
-                        <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which the enrichment will be calculated.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
@@ -644,7 +644,14 @@
                         <span class="input-group-text " id="basic-addon0" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Required email address to send the final results to.">EMAIL</span>
                         <input type="email" class="form-control form-control-sm" id="email4" name="email" value="{{ old('email') }}" placeholder="name@example.com"
-                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to.">
+                         data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input class="form-control " id="bed4" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which combinations are searched." required>
+                        <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="BED file containing the set of regions for which combinations are searched.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
@@ -652,13 +659,6 @@
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
                         <span class="input-group-text" id="basic-addon1" data-bs-toggle="tooltip" data-bs-placement="top" 
                         title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">Ref BED</span>
-                      </div>
-
-                      <div class="input-group mb-3">
-                        <input class="form-control " id="bed4" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which combinations are searched.">
-                        <span class="input-group-text " id="basic-addon2" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        title="BED file containing the set of regions for which combinations are searched.">BED</span>
                       </div>
 
                       <div class="input-group mb-3">
