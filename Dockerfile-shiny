@@ -36,4 +36,7 @@ RUN apt install -y pandoc \
 
 RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
 
+RUN R -e 'install.packages("shinydashboard",dependencies=TRUE)'
+RUN R -e 'install.packages("shinyWidgets",dependencies=TRUE)'
+
 ENTRYPOINT ["Rscript", "app.R"]
