@@ -29,7 +29,7 @@
 </head>
   
 <body>
-    <iframe src="http://localhost:7775/?file=/pygtftk_results/{{ $id }}/{{ $file }}"
+    <iframe src="{{ env("APP_URL") }}:7775/?file=/pygtftk_results/{{ $id }}/{{ $file }}"
             frameborder="0" 
             marginheight="0" 
             marginwidth="0" 
