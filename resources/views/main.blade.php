@@ -761,7 +761,7 @@
                               <div class="accordion-body">
                                 <div class="row">
 
-                                  <div class="col-sm text-start">
+                                  <div class="col-sm-6 text-start">
 
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('exact') ? 'checked' : null }} id="exact" name="exact" >
@@ -778,6 +778,10 @@
                                       title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned." value="{{ old('max') }}">
                                     </div>
 
+                                  </div>
+
+                                  <div class="col-sm-6 text-start">
+                                    
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control " id="bedin4" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
