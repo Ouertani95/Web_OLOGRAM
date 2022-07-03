@@ -132,7 +132,7 @@
                         
                         <input type="hidden" name="caseId" value="case1">
 
-                        <p class="text-start  mb-1">EMAIL <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1">EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Required email address to send the final results to."></i></p>
 
                         <div class="input-group-sm mb-3 ">
@@ -140,7 +140,7 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1">GTF <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1">GTF <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
 
                         <div class="input-group-sm mb-3">
@@ -153,7 +153,7 @@
                         
                       <div class="col-sm-4 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
                         
-                        <p class="text-start  mb-1">BED <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1">BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                    
                         <div class="input-group-sm mb-3">
@@ -165,7 +165,7 @@
                           <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div> --}}
 
-                        <p class="text-start  mb-1">CHR <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1">CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
 
                         <div class="input-group-sm ">
@@ -179,7 +179,7 @@
                       
                       <div class="col-sm-4 text-center">
 
-                        <p class="text-start  mb-1">Ensembl GTF + CHR <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1">Ensembl GTF + CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Choose reference GTF directly from Ensembl."></i></p>
 
                         <div class="input-group-sm mb-3 ">  
@@ -216,7 +216,7 @@
 
                                   <div class="col-sm-6 text-start">
 
-                                    <p class="text-start  mb-1">More BED <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">More BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control" type="file" id="mbed1" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -224,21 +224,21 @@
                                     </div>
 
 
-                                    <p class="text-start  mb-1">More BED labels <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">More BED labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" > {{ old('mbedl') }} </textarea>
                                     </div>
 
-                                    <p class="text-start  mb-1">BED incl <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control " id="bedin1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                     </div>
 
-                                    <p class="text-start  mb-1">BED excl <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control " id="bedex1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -251,30 +251,30 @@
 
                                     <div class="form-check" data-title="Test" data-intro="This is a test.">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg1" name="fcg">
-                                      <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
                                     </div>
 
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp1" name="fcp">
-                                      <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
                                     </div>
 
                                     <div class="form-check mb-3">
                                       <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb1" name="fcmb">
-                                      <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
                                     </div>
 
-                                    <p class="text-start  mb-1">Upstream <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups1" value="{{ old('ups') }}">
                                     </div>
 
-                                    <p class="text-start  mb-1">Downstream <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1">Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -334,7 +334,7 @@
 
                     <input type="hidden" name="caseId" value="case2">
 
-                    <p class="text-start  mb-1">EMAIL <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Required email address to send the final results to."></i></p>
                     <div class="input-group-sm mb-3">
                       <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
@@ -342,7 +342,7 @@
                     </div>
 
 
-                    <p class="text-start  mb-1">GTF <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">GTF <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -353,14 +353,14 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <p class="text-start  mb-1">BED <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated." required>
                     </div>
 
-                    <p class="text-start  mb-1">CHR <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -371,7 +371,7 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <p class="text-start  mb-1">Ensembl GTF + CHR <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">Ensembl GTF + CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Choose reference GTF directly from Ensembl."></i></p>
                     <div class="input-group-sm mb-3 "> 
                       <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -383,7 +383,7 @@
                       </select>
                     </div>
 
-                    <p class="text-start  mb-1">GTF keys <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1">GTF keys <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></i></p>
                     <div class="input-group-sm mb-3">
                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -420,28 +420,28 @@
 
                               <div class="col-sm-6 text-start">
 
-                                <p class="text-start  mb-1">More BED <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">More BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control" type="file" id="mbed2" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
                                 </div>
 
-                                <p class="text-start  mb-1">More BED labels <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">More BED labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2"> {{ old('mbedl') }} </textarea>
                                 </div>
 
-                                <p class="text-start  mb-1">BED incl <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control " id="bedin2"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
                                 </div>
 
-                                <p class="text-start  mb-1">BED excl <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control " id="bedex2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -454,30 +454,30 @@
 
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg2" name="fcg">
-                                  <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                  <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                     title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
                                 </div>
 
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp2" name="fcp">
-                                  <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                  <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                     title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
                                 </div>
 
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb2" name="fcmb">
-                                  <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                  <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                     title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
                                 </div>
 
-                                <p class="text-start  mb-1">Upstream <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups2" value="{{ old('ups') }}">
                                 </div>
 
-                                <p class="text-start  mb-1">Downstream <i class="bi bi-question-diamond-fill" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1">Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
