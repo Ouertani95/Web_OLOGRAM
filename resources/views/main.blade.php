@@ -17,10 +17,10 @@
           color: black;
       }
       .nav-link.border:hover {
-          color: tomato;
+          color: salmon;
       }
       .btn:hover {
-          color: tomato;
+          color: salmon;
       }
       .accordion-button {
         background-color: white;
@@ -28,7 +28,7 @@
       }
 
       .accordion-header>button:hover {
-        color: tomato;
+        color: salmon;
       }
 
       .accordion-button:not(.collapsed) {
@@ -38,7 +38,10 @@
       }
 
       .bi.bi-info-circle:hover {
-        color: tomato;
+        color: salmon;
+      }
+      .bi.bi-info-circle {
+        color:teal;
       }
       
   </style>
@@ -64,10 +67,10 @@
             <a class="nav-link" href="/about">About</a>
           </li>
         </ul>
-        <form class="d-flex">
+        {{-- <form class="d-flex">
           <input type="search" class="form-control" id="search-input" placeholder="Search docs..." aria-label="Search docs for..." autocomplete="off" data-bd-docs-version="5.0">
           <button class="btn btn-outline-success" type="submit" >Search</button>
-        </form>
+        </form> --}}
       </div>
     </div>
   </nav>
@@ -76,7 +79,7 @@
   <div class="container mb-5 mt-5 pt-3">
     <div class="row">
       <div class="col text-center">
-        <h1> WELCOME TO OLOGRAM </h1><br>
+        <h1 class="mt-3"> WELCOME TO OLOGRAM </h1><br>
 
         <!-- this part is needed to show the success message from the routing file with post -->
         @if (\Session::has('success'))
@@ -157,7 +160,7 @@
                       </div>
                     </div>
 
-                    <div class="row no-gutters text-center" data-title="Required options" data-intro="On the left side you have your required options.">
+                    <div class="row no-gutters text-center" id="case1-required" data-title="Required options" data-intro="On the left side you have your required options.">
                       
                       
                       <div class="col-sm-4 text-center" >
@@ -174,7 +177,7 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
 
                         <div class="input-group-sm mb-3">
@@ -187,7 +190,7 @@
                         
                       <div class="col-sm-4 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
                         
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                    
                         <div class="input-group-sm mb-3">
@@ -199,7 +202,7 @@
                           <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div> --}}
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
 
                         <div class="input-group-sm ">
@@ -213,7 +216,7 @@
                       
                       <div class="col-sm-4 text-center">
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark"></i> Ensembl GTF + CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Choose reference GTF directly from Ensembl."></i></p>
 
                         <div class="input-group-sm mb-3 ">  
@@ -234,7 +237,7 @@
                         <div class="accordion" id="case1-accordion-advanced">
                           <div class="accordion-item justify-content-center text-center">
                             <h2 class="accordion-header justify-content-center text-center border border-dark rounded-3" id="heading1-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1-advanced" aria-expanded="true" aria-controls="collapse1-advanced">
+                              <button class="accordion-button" id="case1-acc-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1-advanced" aria-expanded="true" aria-controls="collapse1-advanced">
                                 Advanced options
                               </button>
                             </h2>
@@ -250,7 +253,7 @@
 
                                   <div class="col-sm-6 text-start">
 
-                                    <p class="text-start  mb-1"><i class="bi bi-files"></i> More BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control" type="file" id="mbed1" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -258,21 +261,21 @@
                                     </div>
 
 
-                                    <p class="text-start  mb-1"><i class="bi bi-card-list"></i> More BED labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" > {{ old('mbedl') }} </textarea>
                                     </div>
 
-                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control " id="bedin1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                     </div>
 
-                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input class="form-control " id="bedex1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -331,7 +334,7 @@
 
                       <div class="col text-center mt-1">
 
-                        <button type="submit" class="btn btn-dark btn-lg" data-title="Submit button" data-intro="Once you finished adding your files and options you can click this button to submit.">Start job</button></br><br>
+                        <button type="submit" class="btn btn-dark btn-lg" id="case1-submit" data-title="Submit button" data-intro="Once you finished adding your files and options you can click this button to submit.">Submit request</button></br><br>
 
                       </div>
 
@@ -376,7 +379,7 @@
                     </div>
 
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -387,14 +390,14 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated." required>
                     </div>
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -405,7 +408,7 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark"></i> Ensembl GTF + CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Choose reference GTF directly from Ensembl."></i></p>
                     <div class="input-group-sm mb-3 "> 
                       <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -454,28 +457,28 @@
 
                               <div class="col-sm-6 text-start">
 
-                                <p class="text-start  mb-1"><i class="bi bi-files"></i> More BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control" type="file" id="mbed2" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
                                 </div>
 
-                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> More BED labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2"> {{ old('mbedl') }} </textarea>
                                 </div>
 
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control " id="bedin2"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
                                 </div>
 
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <input class="form-control " id="bedex2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -531,7 +534,7 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <button type="submit" class="btn btn-dark btn-lg mt-1" data-title="Submit button" data-intro="Once you finished adding your files and options you can click this button to submit.">Start job</button></br><br>
+                    <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
 
                   </div>
 
@@ -574,7 +577,7 @@
                       data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                     </div>
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
 
 
@@ -589,7 +592,7 @@
 
                   <div class="col-sm-6 text-center">
 
-                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Ref BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>
 
                     <div class="input-group-sm mb-3">
@@ -597,7 +600,7 @@
                       title="Ref BED : A list of bed files to be considered as genomic annotations.">
                     </div>
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
 
                     <div class="input-group-sm mb-3">
@@ -630,7 +633,7 @@
 
                               <div class="col-sm-6 text-start">
 
-                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> More BED labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
 
 
@@ -639,7 +642,7 @@
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl3"> {{ old('mbedl') }} </textarea>
                                 </div>
 
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
 
                                 <div class="input-group-sm mb-3">
@@ -647,7 +650,7 @@
                                   title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                 </div>
 
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                   title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
 
                                 <div class="input-group-sm mb-3">
@@ -705,7 +708,7 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <button type="submit" class="btn btn-dark btn-lg mt-1">Start job</button></br><br>
+                    <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
 
                   </div>
 
@@ -753,7 +756,7 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
 
                         <div class="input-group-sm mb-3">
@@ -764,7 +767,7 @@
 
                       <div class="col-sm-6 text-center">
 
-                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Ref BED <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>    
 
                         <div class="input-group-sm mb-3">
@@ -772,7 +775,7 @@
                           title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> CHR <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>    
 
                         <div class="input-group-sm mb-3">
@@ -824,7 +827,7 @@
 
                                   <div class="col-sm-6 text-start">
 
-                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED incl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>    
                                     
                                     <div class="input-group-sm mb-3">
@@ -832,7 +835,7 @@
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
                                     </div>
 
-                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED excl <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>    
 
                                     <div class="input-group-sm mb-3">
@@ -853,7 +856,7 @@
 
                       <div class="col-sm-4 text-center">
 
-                        <button type="submit" class="btn btn-dark btn-lg mt-1">Start job</button></br><br>
+                        <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
     
                       </div>
 
@@ -892,6 +895,49 @@
   {{-- <script>
     introJs().setOption("dontShowAgain", true).setOption("skipLabel", "Skip").start();
   </script> --}}
+
+  <script>
+    introJs().onbeforeexit(function () {
+  return confirm("Are you sure you want to exit the tour ?");
+}).setOptions({
+  steps: [{
+    title: 'Welcome',
+    intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
+  },
+  {
+    title: 'Different analysis cases',
+    element: document.querySelector('#nav-tab'),
+    intro: "First, you can click here to choose your analysis case."
+  },
+  {
+    title: 'Required input fields',
+    element: document.querySelector('#case1-required'),
+    intro: "Then, right below you will find the required input fields you need to fill."
+  },
+  {
+    title: 'Information guide',
+    element: document.querySelector('#bed1-info'),
+    intro: "If any field is unclear to you you can click on these icons for a popup information guide."
+  },
+  {
+    title: 'Advanced options',
+    element: document.querySelector('#heading1-advanced'),
+    onbeforechange: function(){
+      document.querySelector('#heading1-advanced').click();
+      },
+    intro: "Next you choose the advanced options you want to add to your request."
+  },
+  {
+    title: 'Submit button',
+    element: document.querySelector('#case1-submit'),
+    intro: "Finally, you can click here to submit your request."
+  }],
+  "dontShowAgain": true,
+  "skipLabel": "Skip",
+  showProgress: true,
+  disableInteraction: true,
+}).start();
+  </script>
 
   <script>
     $(document).ready(function(){
