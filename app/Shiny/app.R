@@ -160,7 +160,7 @@ server <- function(input, output,session) {
     if (!is.null(query[['file']])) {
       query[['file']]
       user_barplot_table <- loading_and_preparing_ologram_table_barplot(query[['file']])
-      updateSelectInput(session, "barplot_features_input",
+      updatePickerInput(session, "barplot_features_input",
                         choices=sort(unique(user_barplot_table$Feature)),
                         selected=sort(unique(user_barplot_table$Feature))
       )
