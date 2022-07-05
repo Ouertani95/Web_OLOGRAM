@@ -46,15 +46,15 @@
       
   </style>
 
-    <title>OLOGRAM test</title>
+    <title>Web-OLOGRAM</title>
 
 </head>
 <body>
 
   {{-- This is the navigation bar on the top --}}
-  <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-lg">
+  <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">OLOGRAM</a>
+      <a class="navbar-brand" href="#">Web-OLOGRAM</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,13 +64,30 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" aria-current="page" href="/about">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Documentation
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="https://github.com/Ouertani95/Web_OLOGRAM" target="_blank" rel=noopener><i class="bi bi-github"></i> Web-OLOGRAM</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/contact">Contact</a>
+          </li>
+          
+
+        </ul>
+        <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener>Report issue</a>
           </li>
         </ul>
-        {{-- <form class="d-flex">
-          <input type="search" class="form-control" id="search-input" placeholder="Search docs..." aria-label="Search docs for..." autocomplete="off" data-bd-docs-version="5.0">
-          <button class="btn btn-outline-success" type="submit" >Search</button>
-        </form> --}}
+
       </div>
     </div>
   </nav>
@@ -141,7 +158,7 @@
           @endif
 
         </div>
-    </nav>
+      </nav>
 
  
     <div class="tab-content" id="nav-tabContent1">
@@ -265,7 +282,7 @@
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" > {{ old('mbedl') }} </textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" >{{ old('mbedl') }}</textarea>
                                     </div>
 
                                     <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -468,7 +485,7 @@
                                   title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                 <div class="input-group-sm mb-3">
                                   <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2"> {{ old('mbedl') }} </textarea>
+                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2">{{ old('mbedl') }}</textarea>
                                 </div>
 
                                 <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -639,7 +656,7 @@
 
                                 <div class="input-group-sm mb-3">
                                   <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl3"> {{ old('mbedl') }} </textarea>
+                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl3">{{ old('mbedl') }}</textarea>
                                 </div>
 
                                 <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -871,19 +888,26 @@
     
   </div>
 
-  <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-light">
-    
-    <p class="col-md-2 mb-0 text-muted text-center">© 2022 Web-OLOGRAM </p>
-  
-    <div class="col-md-8 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto">
-  
-      <a href="https://dputhier.github.io/pygtftk/ologram.html" class="link-dark text-decoration-none">
-        <i class="fa-brands fa-github fa-l"> OLOGRAM Docs</i>
-      </a>
+  <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+
+    <div class="container-fluid">
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrollBottom" aria-controls="navbarScrollBottom" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScrollBottom">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">© 2022 Web-OLOGRAM </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">PYGTFTK v1.6.2 </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  
-    <p class="col-md-2 mb-0 text-muted text-center">PYGTFTK v1.6.2 </p>
-    
   
   </nav>
 
@@ -892,20 +916,16 @@
   <script type="text/javascript" src={{ asset("js/fontawesome-6.1.1.js") }}></script>
   <script type="text/javascript" src={{ asset("js/intro-5.1.0.min.js") }}></script>
 
-  {{-- <script>
-    introJs().setOption("dontShowAgain", true).setOption("skipLabel", "Skip").start();
-  </script> --}}
-
   <script>
     introJs().onbeforeexit(function () {
   return confirm("Are you sure you want to exit the tour ?");
-}).setOptions({
+  }).setOptions({
   steps: [{
     title: 'Welcome',
     intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
   },
   {
-    title: 'Different analysis cases',
+    title: 'Analysis cases',
     element: document.querySelector('#nav-tab'),
     intro: "First, you can click here to choose your analysis case."
   },
@@ -915,9 +935,10 @@
     intro: "Then, right below you will find the required input fields you need to fill."
   },
   {
-    title: 'Information guide',
+    title: 'Information',
     element: document.querySelector('#bed1-info'),
-    intro: "If any field is unclear to you you can click on these icons for a popup information guide."
+    intro: "If any field is unclear to you you can click on these icons for a popup information guide.",
+    position: 'bottom'
   },
   {
     title: 'Advanced options',
@@ -931,6 +952,12 @@
     title: 'Submit button',
     element: document.querySelector('#case1-submit'),
     intro: "Finally, you can click here to submit your request."
+  },
+  {
+    title: 'Issue report',
+    element: document.querySelector('#reportButton'),
+    intro: "If you encounter any bugs or errors please let us know by quickly filling the issue report.<br> Your feedback is very much appreciated to improve the app &#128522; <br>",
+    position: 'bottom'
   }],
   "dontShowAgain": true,
   "skipLabel": "Skip",
