@@ -24,7 +24,7 @@ class IssuesController extends Controller
         Mail::to("ouertani2006@gmail.com")
             ->send(new SendIssue($sender_email,$issue_title,$issue_description));
 
-        return back()->with(['success' => "The issue has been successfully submitted.<br> We will adress it as soon as possible.<br> Thank you for helping improve Web-OLOGRAM ! "]);
+        return back()->with(['success' => "The issue has been successfully submitted.<br> We will address it as soon as possible.<br> Thank you for helping improve Web-OLOGRAM ! "]);
 
     }
 }
