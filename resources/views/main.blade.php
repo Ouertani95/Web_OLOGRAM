@@ -186,7 +186,7 @@
                         
                         <input type="hidden" name="caseId" value="case1">
 
-                        <p class="text-start  mb-1"><i class="bi bi-envelope"></i> EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Required email address to send the final results to."></i></p>
 
                         <div class="input-group-sm mb-3 ">
@@ -194,7 +194,7 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
 
                         <div class="input-group-sm mb-3">
@@ -207,7 +207,7 @@
                         
                       <div class="col-sm-4 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
                         
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                    
                         <div class="input-group-sm mb-3">
@@ -388,7 +388,7 @@
 
                     <input type="hidden" name="caseId" value="case2">
 
-                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Required email address to send the final results to."></i></p>
                     <div class="input-group-sm mb-3">
                       <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
@@ -396,7 +396,7 @@
                     </div>
 
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -407,7 +407,7 @@
 
                   <div class="col-sm-4 text-center">
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                     <div class="input-group-sm mb-3">
                       <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -586,7 +586,7 @@
 
                     <input type="hidden" name="caseId" value="case3">
 
-                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="Required email address to send the final results to."></i></p>
 
                     <div class="input-group-sm mb-3">
@@ -594,7 +594,7 @@
                       data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                     </div>
 
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                       title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
 
 
@@ -765,7 +765,7 @@
 
                         <input type="hidden" name="caseId" value="case4">
 
-                        <p class="text-start  mb-1"><i class="bi bi-envelope"></i> EMAIL <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Required email address to send the final results to."></i></p>
           
                         <div class="input-group-sm mb-3">
@@ -773,7 +773,7 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
 
                         <div class="input-group-sm mb-3">
