@@ -43,3 +43,7 @@ Route::get('/results/{id?}/{file?}', function($id,$file) {
     
     return view("results")->with(["id"=>$id,"file"=>$file]);
 });
+
+Route::view("/about","about");
+
+Route::view("/issue","issue");
