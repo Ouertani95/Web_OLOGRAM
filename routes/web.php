@@ -49,6 +49,6 @@ Route::view("/about","about");
 
 Route::view("/issue","issue");
 
-Route::post('/', [IssuesController::class,'sendIssue']);
+Route::post('/issue', [IssuesController::class,'sendIssue']);
 
 Route::view("/contact","contact");

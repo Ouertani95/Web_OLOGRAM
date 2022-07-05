@@ -94,7 +94,7 @@
 
         <div class="row justify-content-md-center mb-3" id="issueReport">
             <div class="col-sm-8 text-center border border-dark rounded-3 p-3">
-                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm">
+                <form action='/issue' method='POST' enctype="multipart/form-data" id="uploadForm">
                     @csrf 
                     <!-- @csrf is mandatory for forms with post method -->
 
