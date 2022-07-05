@@ -103,5 +103,15 @@ class ValidateCase extends FormRequest
                 'exact' => "filled"
             ];
         }
+
+        if ($this->input('caseId') === "issue"){
+            return [
+                'caseId' => 'required',
+                'email' => 'bail|required|email|max:100',
+                'title' => 'required',
+                'description' => 'required'
+
+            ];
+        }
     }
 }

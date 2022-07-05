@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\IssuesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\LogsController;
@@ -47,3 +48,7 @@ Route::get('/results/{id?}/{file?}', function($id,$file) {
 Route::view("/about","about");
 
 Route::view("/issue","issue");
+
+Route::post('/', [IssuesController::class,'sendIssue']);
+
+Route::view("/contact","contact");
