@@ -52,3 +52,5 @@ Route::view("/issue","issue");
 Route::post('/issue', [IssuesController::class,'sendIssue']);
 
 Route::view("/contact","contact");
+
+Route::view("/mail","mail");
