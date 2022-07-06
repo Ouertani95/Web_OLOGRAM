@@ -44,15 +44,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
           <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Home</a>
+            <li class="nav-item border-end">
+              <a class="nav-link" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener>About</a>
+            <li class="nav-item border-end">
+              <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener><i class="fa-solid fa-person-chalkboard"></i> About</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown border-end">
               <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Documentation
+                <i class="fa-solid fa-book"></i> Documentation
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
@@ -61,14 +61,14 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/contact" target="_blank" rel=noopener>Contact</a>
+              <a class="nav-link" aria-current="page" href="/contact" target="_blank" rel=noopener><i class="fa-solid fa-address-card"></i> Contact</a>
             </li>
             
 
           </ul>
           <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-              <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener>Report issue</a>
+              <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue</a>
             </li>
           </ul>
 

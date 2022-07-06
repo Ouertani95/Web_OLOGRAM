@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-5.1.3.min.css") }}>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+
+  <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-5.1.3.min.css") }}>
+  <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-icons-1.8.3/bootstrap-icons.css") }}>
+  <style>
+    /*Code to change color of active link*/
+    .nav-link.border.active {
+        background-color: #212529;
+    }
+    .nav-link.border {
+        color: black;
+    }
+    .nav-link.border:hover {
+        color: salmon;
+    }
+    .btn:hover {
+        color: salmon;
+    }
+    .accordion-button {
+      background-color: white;
+      color: black;
+    }
+
+    .accordion-header>button:hover {
+      color: salmon;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: white;
+      color: black;
+      text-align: center;
+    }
+
+    .bi.bi-info-circle:hover {
+      color: salmon;
+    }
+    .bi.bi-info-circle {
+      color:teal;
+    }
+    
+</style>
 
     <title>live-feed</title>
 </head>
@@ -25,15 +64,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <li class="nav-item border-end">
+            <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/about">About</a>
+          <li class="nav-item border-end">
+            <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener><i class="fa-solid fa-person-chalkboard"></i> About</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown border-end">
             <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Documentation
+              <i class="fa-solid fa-book"></i> Documentation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
@@ -42,14 +81,14 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/contact">Contact</a>
+            <a class="nav-link" aria-current="page" href="/contact" target="_blank" rel=noopener><i class="fa-solid fa-address-card"></i> Contact</a>
           </li>
           
 
         </ul>
         <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener>Report issue</a>
+            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue</a>
           </li>
         </ul>
 
@@ -185,9 +224,9 @@
           </div>
         </div>
     
-    <script type="text/javascript" src={{ asset("js/bootstrap-5.1.3.min.js") }} ></script>
-    <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>
-
+        <script type="text/javascript" src={{ asset("js/bootstrap.bundle-5.1.3.min.js") }} ></script>
+        <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>
+        <script type="text/javascript" src={{ asset("js/fontawesome-6.1.1.js") }}></script>
     <script type = "text/JavaScript">
         function AutoRefresh( t ) {
             setTimeout("location.reload(true);", t);

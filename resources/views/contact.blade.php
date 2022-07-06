@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
 
     <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-5.1.3.min.css") }}>
-    <link rel="stylesheet" type="text/css" href={{ asset("css/introjs-5.1.0.min.css") }}>
     <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-icons-1.8.3/bootstrap-icons.css") }}>
     <style>
         /*Code to change color of active link*/
@@ -54,45 +53,44 @@
 
     {{-- This is the navigation bar on the top --}}
     <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-sm">
-    <div class="container-fluid">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">Web-OLOGRAM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-            <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <li class="nav-item border-end">
+              <a class="nav-link" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener>About</a>
+            <li class="nav-item border-end">
+              <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener><i class="fa-solid fa-person-chalkboard"></i> About</a>
             </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Documentation
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li class="nav-item dropdown border-end">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-book"></i> Documentation
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="https://github.com/Ouertani95/Web_OLOGRAM" target="_blank" rel=noopener><i class="bi bi-github"></i> Web-OLOGRAM</a></li>
-            </ul>
+              </ul>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/contact" target="_blank" rel=noopener>Contact</a>
+              <a class="nav-link active" aria-current="page" href="/contact" target="_blank" rel=noopener><i class="fa-solid fa-address-card"></i> Contact</a>
             </li>
             
 
-        </ul>
-        <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          </ul>
+          <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener>Report issue</a>
+              <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue</a>
             </li>
-        </ul>
+          </ul>
 
         </div>
-    </div>
+      </div>
     </nav>
-
         {{-- This is where the main components will be placed --}}
         <div class="container mb-5 mt-5 pt-3">
             <div class="row">
