@@ -61,7 +61,7 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item border-end">
-            <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
+            <a class="nav-link active" aria-current="page" id="homeButton" href="/"><i class="bi bi-house"></i> Home</a>
           </li>
           <li class="nav-item border-end">
             <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener><i class="fa-solid fa-person-chalkboard"></i> About</a>
@@ -71,6 +71,8 @@
               <i class="fa-solid fa-book"></i> Documentation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/index.html" target="_blank" rel=noopener><i class="bi bi-github"></i> PYGTFTK</a></li>
+              <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="https://github.com/Ouertani95/Web_OLOGRAM" target="_blank" rel=noopener><i class="bi bi-github"></i> Web-OLOGRAM</a></li>
@@ -930,13 +932,14 @@
   <script>
     $(document).ready(function(){
 
-      $('.nav-link').click(function(event){
+      $('.nav-link.border').click(function(event){
         var curId = event.target.getAttribute("data-bs-target");
         $(".tab-pane").removeClass("show active");
         $(".accordion-collapse").removeClass("show");
         $(".nav-link").removeClass("active");
         $(".tab-pane" + curId).addClass("show active"); 
         event.target.classList.add("active");
+        $("#homeButton").addClass("active");
         });
 
       $('#demoButton').click(function(event){
