@@ -45,7 +45,7 @@ sail artisan migrate
 Now open your web browser and go to localhost.
 You should have the following page :
 
-![laravel](photos/Latest_Web_OLOGRAM_2022-05-24_10-02-24.png)
+![laravel](photos/Latest_interface_Web-OLOGRAM_08-07-22.png)
 
 ## Troubleshooting :
 
