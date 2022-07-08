@@ -146,16 +146,16 @@
                 @if (\Session::has('success'))
                 <div class="accordion" id="accordion2">
                     <div class="accordion-item justify-content-md-center">
-                        <h2 class="accordion-header" id="heading2">
+                        <h2 class="accordion-header border border-dark rounded-3" id="heading2">
                             <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
                                <strong class="text-center"> OLOGRAM command </strong> 
                             </button>
                         </h2>
                         <div id="collapse2" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#accordion2">
-                            <div class="accordion-body text-center ">
+                            <div class="accordion-body text-center border border-dark rounded-3">
                                 <div class="input-group mb-3">
                                     <textarea class="form-control" rows="3" id="command" readonly>{{ $command }}</textarea>
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="JavaScript:copy()">Copy command</button>
+                                    <button class="btn btn-success" type="button" id="button-addon1" onclick="JavaScript:copy()">Copy command</button>
                                 </div>
 
                                 @if (\Session::has('download'))
@@ -183,13 +183,13 @@
 
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
+                        <h2 class="accordion-header border border-dark rounded-3" id="headingOne">
                             <button class="accordion-button d-block text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <strong class="text-center"> Request log </strong> 
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body text-break text-start">
+                            <div class="accordion-body text-break text-start border border-dark rounded-3">
                                 @foreach ($file as $line )
                                     <div>{{ $line }}</div>
                                 @endforeach
@@ -203,26 +203,37 @@
 
     </div>
 
-    <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+  </div>
 
-        <div class="container-fluid">
-          
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrollBottom" aria-controls="navbarScrollBottom" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScrollBottom">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">© 2022 Web-OLOGRAM </a>
-              </li>
-            </ul>
-            <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">PYGTFTK v1.6.2 </a>
-              </li>
-            </ul>
+  <div class="container fixed-bottom">
+    <div class="row no-gutters justify-content-center text-center">
+      <div class="col-6 text-center">
+        <nav class="navbar  navbar-expand-lg navbar-light bg-white">
+
+          <div class="container-fluid">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrollBottom" aria-controls="navbarScrollBottom" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScrollBottom">
+              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                  <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">© 2022 Web-OLOGRAM </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                  <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">PYGTFTK v1.6.2 </a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        
+        </nav>
+      </div>
+    </div>
+    
+  </div>
     
         <script type="text/javascript" src={{ asset("js/bootstrap.bundle-5.1.3.min.js") }} ></script>
         <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>

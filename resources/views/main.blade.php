@@ -84,7 +84,10 @@
         </ul>
         <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue</a>
+            <a class="btn btn-primary me-3" aria-current="page" id="demoButton"><i class="bi bi-play"></i> Run Tour </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue </a>
           </li>
         </ul>
 
@@ -888,94 +891,118 @@
     
   </div>
 
-  <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+  <div class="container fixed-bottom">
+    <div class="row no-gutters justify-content-center text-center">
+      <div class="col-6 text-center">
+        <nav class="navbar  navbar-expand-lg navbar-light bg-white">
 
-    <div class="container-fluid">
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrollBottom" aria-controls="navbarScrollBottom" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarScrollBottom">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">© 2022 Web-OLOGRAM </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">PYGTFTK v1.6.2 </a>
-          </li>
-        </ul>
+          <div class="container-fluid">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScrollBottom" aria-controls="navbarScrollBottom" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScrollBottom">
+              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                  <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">© 2022 Web-OLOGRAM </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                  <a class="col-md-2 mb-0 text-muted text-center text-decoration-none" aria-current="page" href="#">PYGTFTK v1.6.2 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        
+        </nav>
       </div>
     </div>
-  
-  </nav>
+    
+  </div>
 
   <script type="text/javascript" src={{ asset("js/bootstrap.bundle-5.1.3.min.js") }} ></script>
   <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>
   <script type="text/javascript" src={{ asset("js/fontawesome-6.1.1.js") }}></script>
   <script type="text/javascript" src={{ asset("js/intro-5.1.0.min.js") }}></script>
-
-  <script>
-    introJs().onbeforeexit(function () {
-  return confirm("Are you sure you want to exit the tour ?");
-  }).setOptions({
-  steps: [{
-    title: 'Welcome',
-    intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
-  },
-  {
-    title: 'Analysis cases',
-    element: document.querySelector('#nav-tab'),
-    intro: "First, you can click here to choose your analysis case."
-  },
-  {
-    title: 'Required input fields',
-    element: document.querySelector('#case1-required'),
-    intro: "Then, right below you will find the required input fields you need to fill."
-  },
-  {
-    title: 'Information',
-    element: document.querySelector('#bed1-info'),
-    intro: "If any field is unclear to you you can click on these icons for a popup information guide.",
-    position: 'bottom'
-  },
-  {
-    title: 'Advanced options',
-    element: document.querySelector('#heading1-advanced'),
-    onbeforechange: function(){
-      document.querySelector('#heading1-advanced').click();
-      },
-    intro: "Next you choose the advanced options you want to add to your request."
-  },
-  {
-    title: 'Submit button',
-    element: document.querySelector('#case1-submit'),
-    intro: "Finally, you can click here to submit your request."
-  },
-  {
-    title: 'Issue report',
-    element: document.querySelector('#reportButton'),
-    intro: "If you encounter any bugs or errors please let us know by quickly filling the issue report.<br> Your feedback is very much appreciated to improve the app &#128522; <br>",
-    position: 'bottom'
-  }],
-  "dontShowAgain": true,
-  "skipLabel": "Skip",
-  showProgress: true,
-  disableInteraction: true,
-}).start();
-  </script>
+  <script type="text/javascript" src={{ asset("js/glowCookies-3.1.7.min.js") }}></script>
 
   <script>
     $(document).ready(function(){
+
       $('.nav-link').click(function(event){
         var curId = event.target.getAttribute("data-bs-target");
         $(".tab-pane").removeClass("show active");
         $(".accordion-collapse").removeClass("show");
         $(".nav-link").removeClass("active");
-        $(".tab-pane" + curId).addClass("show active");
+        $(".tab-pane" + curId).addClass("show active"); 
         event.target.classList.add("active");
         });
+
+      $('#demoButton').click(function(event){
+        $(".tab-pane").removeClass("show active");
+        $(".accordion-collapse").removeClass("show");
+        $(".nav-link").removeClass("active");
+        $(".tab-pane" + "#case1").addClass("show active");
+        $(".nav-link" + "#nav-BED-GTF-tab").addClass("active");
+        introJs().onbeforeexit(function () {
+        return confirm("Are you sure you want to exit the tour ?");
+        }).setOptions({
+        steps: [{
+          title: 'Welcome',
+          intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
+        },
+        {
+          title: 'Analysis cases',
+          element: document.querySelector('#nav-tab'),
+          intro: "First, you can click here to choose your analysis case."
+        },
+        {
+          title: 'Required input fields',
+          element: document.querySelector('#case1-required'),
+          intro: "Then, right below you will find the required input fields you need to fill."
+        },
+        {
+          title: 'Information',
+          element: document.querySelector('#bed1-info'),
+          intro: "If any field is unclear to you you can click on these icons for a popup information guide.",
+          position: 'bottom'
+        },
+        {
+          title: 'Advanced options',
+          element: document.querySelector('#heading1-advanced'),
+          onbeforechange: function(){
+            document.querySelector('#heading1-advanced').click();
+            },
+          intro: "Next you choose the advanced options you want to add to your request."
+        },
+        {
+          title: 'Submit button',
+          element: document.querySelector('#case1-submit'),
+          intro: "Finally, you can click here to submit your request."
+        },
+        {
+          title: 'Issue report',
+          element: document.querySelector('#reportButton'),
+          intro: "If you encounter any bugs or errors please let us know by quickly filling the issue report.<br> Your feedback is very much appreciated to improve the app &#128522; <br>",
+          position: 'bottom'
+        }],
+        "skipLabel": "Skip",
+        showProgress: true,
+        disableInteraction: true,
+        }).start();
+        });
+      });
+  </script>
+
+
+  <script>
+      glowCookies.start('en', { 
+          style: 1,
+          analytics: 'G-FH87DE17XF', 
+          facebookPixel: '990955817632355',
+          policyLink: 'https://link-to-your-policy.com',
+          position: 'right',
       });
   </script>
 
