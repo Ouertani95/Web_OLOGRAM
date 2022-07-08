@@ -84,7 +84,7 @@
         </ul>
         <ul class="navbar-nav d-flex navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="btn btn-primary me-3" aria-current="page" id="demoButton"><i class="bi bi-play"></i> Run Tour </a>
+            <a class="btn btn-primary me-3" aria-current="page" id="demoButton"><i class="bi bi-play"></i> Run tour </a>
           </li>
           <li class="nav-item">
             <a class="btn btn-danger" aria-current="page" id="reportButton" href="/issue" target="_blank" rel=noopener><i class="bi bi-bug-fill"></i> Report issue </a>
@@ -945,9 +945,7 @@
         $(".nav-link").removeClass("active");
         $(".tab-pane" + "#case1").addClass("show active");
         $(".nav-link" + "#nav-BED-GTF-tab").addClass("active");
-        introJs().onbeforeexit(function () {
-        return confirm("Are you sure you want to exit the tour ?");
-        }).setOptions({
+        introJs().setOptions({
         steps: [{
           title: 'Welcome',
           intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
