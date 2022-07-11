@@ -37,7 +37,7 @@ class JobsController extends Controller
 
         // Save validated input fields in json format to be extracted later
         $validated_args = json_encode($this->request->validated());
-        file_put_contents("../pygtftk_results/$directory_name/validated.json",$validated_args);
+        file_put_contents("../ologram_results/$directory_name/validated.json",$validated_args);
 
         // Verify if Ensembl GTF is selected and ignore gtf and chr if selected
         if (array_key_exists("ens_gtf",$request->validated())){
@@ -106,7 +106,7 @@ class JobsController extends Controller
 
         // Filter command to send to user in case of succees
         $filtered_command = $command ;
-        $to_remove = ["-L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1",
+        $to_remove = ["-L $directory_name/arguments.log > ologram_results/$directory_name/ologram.log 2>&1",
                     "$directory_name/",
                     "docker exec -t gtftk conda run --no-capture-output -n pygtftk ",
                     " -o $directory_name"];
@@ -123,7 +123,7 @@ class JobsController extends Controller
 
 
         // Get used command inside a file to be extracted later
-        file_put_contents("../pygtftk_results/$directory_name/command.txt",$filtered_command);
+        file_put_contents("../ologram_results/$directory_name/command.txt",$filtered_command);
 
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
@@ -230,7 +230,7 @@ class JobsController extends Controller
         }
 
         // Add final arguments to complete the command
-        $basic_command = $basic_command." -o $directory_name -x -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1";
+        $basic_command = $basic_command." -o $directory_name -x -V 0 -k 8 -L $directory_name/arguments.log > ologram_results/$directory_name/ologram.log 2>&1";
 
         return $basic_command;
     }

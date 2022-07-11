@@ -32,7 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => base_path("pygtftk_results"),
+            'root' => base_path("ologram_results"),
             'throw' => false,
         ],
 

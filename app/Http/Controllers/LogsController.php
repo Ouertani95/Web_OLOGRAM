@@ -19,14 +19,14 @@ class LogsController extends Controller
         $status = $status_request[0];
 
         // Get all the validated arguments from the json file
-        $recovered_args = file_get_contents("../pygtftk_results/$id/validated.json");
+        $recovered_args = file_get_contents("../ologram_results/$id/validated.json");
         $recovered_args_array = json_decode($recovered_args,true);
 
         // Extract caseId used to launch the request
         $case = $recovered_args_array["caseId"];
 
         // Prepare and filter log file if it exists 
-        $file_name = "../pygtftk_results/$id/ologram.log";
+        $file_name = "../ologram_results/$id/ologram.log";
 
         if(file_exists($file_name)){
             $file_content_string = file_get_contents($file_name);
@@ -64,17 +64,17 @@ class LogsController extends Controller
             session()->now('running','Your request is running ... ');
         }
         elseif($status === "success"){
-            $results_directory = "../pygtftk_results/$id/";
+            $results_directory = "../ologram_results/$id/";
             $available_files = scandir($results_directory);
             foreach ($available_files as $file) {
                 if (str_ends_with($file,".tsv")){
                     $current_address = env("APP_URL");
                     $dash_link = "$current_address/results/$id/$file";
-                    $dash_link = str_replace("../pygtftk_results/","",$dash_link);
+                    $dash_link = str_replace("../ologram_results/","",$dash_link);
                     
                 }
             }
-            $command = file_get_contents("../pygtftk_results/$id/command.txt");
+            $command = file_get_contents("../ologram_results/$id/command.txt");
 
             // Prepare for download button if Ensembl GTF + CHR is used
             $Ensembl_directories = Storage::directories("Ensembl_GTF");
