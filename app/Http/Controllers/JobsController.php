@@ -37,18 +37,22 @@ class JobsController extends Controller
 
         // Save validated input fields in json format to be extracted later
         $validated_args = json_encode($this->request->validated());
-        file_put_contents("../ologram_results/$directory_name/validated.json",$validated_args);
+        file_put_contents("../pygtftk_results/$directory_name/validated.json",$validated_args);
 
         // Verify if Ensembl GTF is selected and ignore gtf and chr if selected
+        $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
         if (array_key_exists("ens_gtf",$request->validated())){
-
-            $file_fields= ["bed","mbed","bedin","bedex"];
-            
+            $index = array_search('gtf',$file_fields);
+            if($index !== FALSE){
+                unset($file_fields[$index]);
+            } 
         }
-        else{
-            $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
+        if (array_key_exists("ens_chr",$request->validated())){
+            $index = array_search('chr',$file_fields);
+            if($index !== FALSE){
+                unset($file_fields[$index]);
+            }
         }
-
 
         // Function to remove special chars from file names (special chars cause errors in command execution)
         function remove_special_chars($my_string){
@@ -98,15 +102,19 @@ class JobsController extends Controller
         if (array_key_exists("ens_gtf",$request->validated())){
             $ensembl_base_name = $request->input("ens_gtf");
             $uploaded_files_paths["ens_gtf"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.gtf.gz";
-            $uploaded_files_paths["chr"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.chrominfo";
         }
+        if (array_key_exists("ens_chr",$request->validated())){
+            $ensembl_base_name = $request->input("ens_chr");
+            $uploaded_files_paths["ens_chr"] =  "Ensembl_GTF/$ensembl_base_name/$ensembl_base_name.chrominfo";
+        }
+
 
         // Build command for gtftk
         $command = $this->build_command($directory_name,$uploaded_files_paths);
 
         // Filter command to send to user in case of succees
         $filtered_command = $command ;
-        $to_remove = ["-L $directory_name/arguments.log > ologram_results/$directory_name/ologram.log 2>&1",
+        $to_remove = ["-L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1",
                     "$directory_name/",
                     "docker exec -t gtftk conda run --no-capture-output -n pygtftk ",
                     " -o $directory_name"];
@@ -114,16 +122,15 @@ class JobsController extends Controller
             $filtered_command = str_replace($command_substring,"",$filtered_command);
         }
 
-        if (array_key_exists("ens_gtf",$request->validated())){
+        if (array_key_exists("ens_gtf",$request->validated()) || array_key_exists("ens_chr",$request->validated())){
             $Ens_GTF_paths = Storage::allDirectories("Ensembl_GTF");
             foreach ($Ens_GTF_paths as $command_substring){
                 $filtered_command = str_replace("$command_substring/","",$filtered_command);
             }
         }
 
-
         // Get used command inside a file to be extracted later
-        file_put_contents("../ologram_results/$directory_name/command.txt",$filtered_command);
+        file_put_contents("../pygtftk_results/$directory_name/command.txt",$filtered_command);
 
         // Send job to queue
         ExecuteCommand::dispatch($uploaded_files_paths,$uploaded_files_names,$request->email,$command,$directory_name);
@@ -157,11 +164,6 @@ class JobsController extends Controller
         // Get validated args from request
         $validated_args = $this->request->validated();
 
-        // Verify if an Ensembl GTF is selected and remove GTF and CHR to upload if selected at the same time
-        if (array_key_exists("ens_gtf",$validated_args)){
-            unset($validated_args["gtf"]);
-            unset($validated_args["chr"]);
-        }
 
         // Add case specific argument
         if ($validated_args["caseId"]==="case2"){
@@ -188,7 +190,8 @@ class JobsController extends Controller
             "mbed" => " -b ",
             "bedin" => " -bi ",
             "bedex" => " -e ",
-            "ens_gtf" => " -i "
+            "ens_gtf" => " -i ",
+            "ens_chr" => " -c "
         ];
         // Prepare text input type arguments
         $text_args = [
@@ -213,11 +216,6 @@ class JobsController extends Controller
                         $basic_command = $basic_command." $file ";
                     }
                 }
-                elseif($arg === "ens_gtf"){
-                    $ens_file = $uploaded_files_paths[$arg];
-                    $chr_file = $uploaded_files_paths["chr"];
-                    $basic_command = $basic_command.$ens_file." -c $chr_file ";
-                }
                 else{
                     $file = $uploaded_files_paths[$arg];
                     $basic_command = $basic_command.$file;
@@ -230,7 +228,7 @@ class JobsController extends Controller
         }
 
         // Add final arguments to complete the command
-        $basic_command = $basic_command." -o $directory_name -x -V 0 -k 8 -L $directory_name/arguments.log > ologram_results/$directory_name/ologram.log 2>&1";
+        $basic_command = $basic_command." -o $directory_name -x -V 0 -k 8 -L $directory_name/arguments.log > pygtftk_results/$directory_name/ologram.log 2>&1";
 
         return $basic_command;
     }
