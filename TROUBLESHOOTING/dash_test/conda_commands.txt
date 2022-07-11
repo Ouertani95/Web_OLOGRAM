@@ -1,5 +1,0 @@
-# prevent conda from automatically activating base env
-conda config --set auto_activate_base false
-
-# show all available envs 
-conda info --envs

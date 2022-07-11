@@ -1,6 +1,0 @@
-#Upgrade composer to version 2 :
- 
-sudo apt remove composer -y
-sudo curl -sS https://getcomposer.org/installer -o composer-setup.php
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-#Open and close terminal then run composer

@@ -1,2 +1,0 @@
-sudo netstat -nlpt |grep 3306
-sudo service apache2 stop

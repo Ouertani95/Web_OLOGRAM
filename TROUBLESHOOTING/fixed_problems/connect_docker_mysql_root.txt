@@ -1,3 +1,0 @@
-# connect to docker mysql :
-
-sail exec mysql mysql -u root -p

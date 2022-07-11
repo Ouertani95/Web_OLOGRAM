@@ -1,2 +1,0 @@
-#Fix vscode saving files problem only with sudo :
-sudo chown -R ouertani laravel_test_app/

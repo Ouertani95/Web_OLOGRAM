@@ -1,5 +1,0 @@
-#Add sail to docker group :
-sudo adduser sail
-usermod -aG docker sail
-newgrp docker
-
