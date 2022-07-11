@@ -52,7 +52,7 @@ class ExecuteCommand implements ShouldQueue
             ->update(['status' => "running"]);
 
         // Prepare output results directory
-        $results_directory = base_path("pygtftk_results/".$this->directory);
+        $results_directory = base_path("ologram_results/".$this->directory);
 
         // Initialise output variables
         $return_var=0;
@@ -92,7 +92,7 @@ class ExecuteCommand implements ShouldQueue
             }
             
             // Execute shell command to get error message
-            exec("cat pygtftk_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda\|email\|python\|docker'",$error_check);
+            exec("cat ologram_results/$this->directory/ologram.log |grep 'ERROR\|error' |grep -v 'conda\|email\|python\|docker'",$error_check);
 
             // Transform errors to string
             $error_check = implode("\n",$error_check);
@@ -124,7 +124,7 @@ class ExecuteCommand implements ShouldQueue
 
             // Build file link
             $tsv_path = $this->get_tsv_path($results_paths);
-            $tsv_path = str_replace("/pygtftk_results/","",$tsv_path);
+            $tsv_path = str_replace("/ologram_results/","",$tsv_path);
             $current_address = env("APP_URL");
             $results_link = "$current_address/results/$tsv_path";
 
