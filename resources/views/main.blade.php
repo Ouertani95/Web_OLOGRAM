@@ -185,7 +185,7 @@
                     <div class="row no-gutters text-center" id="case1-required" data-title="Required options" data-intro="On the left side you have your required options.">
                       
                       
-                      <div class="col-sm-4 text-center" >
+                      <div class="col-sm-6 text-center" >
 
                         
                         
@@ -199,19 +199,6 @@
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
-
-                        <div class="input-group-sm mb-3">
-                          <input class="form-control "  id="gtf1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top"
-                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
-                        </div>
-
-                        
-                      </div>
-                        
-                      <div class="col-sm-4 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
-                        
                         <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                    
@@ -219,39 +206,81 @@
                           <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" data-title="BED file" data-intro="This is the BED file containing the set of regions for which the enrichment will be calculated."
                           title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         </div>
+                       
+
+                        
+                      </div>
+                        
+                      <div class="col-sm-6 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
+
+                        <div id="ensgtf1input">
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose reference GTF directly from Ensembl."></i></p>
+                          <div class="input-group-sm mb-1 ">  
+                            <select class="form-select" aria-label="Default select example" id="ens_gtf1" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose reference GTF directly from Ensembl">
+                                <option selected></option>
+                                @foreach ($links as $link)
+                                <option value="{{ $link }}" >{{ $link }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        </div>
+                        
+
+                        <div class="d-none" id="gtf1input">
+                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
+                          <div class="input-group-sm mb-1">
+                            <input class="form-control "  id="gtf1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                          </div>
+                        </div>
+
+                        <div class="form-check form-switch text-start mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
+                          <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
+                        </div>
+
+                        
 
                         {{-- <div class="progress mb-3">
                           <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div> --}}
 
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-
-                        <div class="input-group-sm ">
-                          <input class="form-control "  id="chr1" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                        <div id="enschr1input">
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl"></i></p>
+                          <div class="input-group-sm mb-1 ">  
+                            <select class="form-select" aria-label="Default select example" id="ens_chr1" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl">
+                                <option selected></option>
+                                @foreach ($links as $link)
+                                <option value="{{ $link }}" >{{ $link }}</option>
+                                @endforeach
+                            </select>
+                          </div>
                         </div>
 
+                        <div class="d-none" id="chr1input">
+                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+                          <div class="input-group-sm mb-1">
+                            <input class="form-control "  id="chr1" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                          </div>
+                        </div>
 
-                      </div>
-                      
-                      
-                      <div class="col-sm-4 text-center">
-
-                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Choose reference GTF directly from Ensembl."></i></p>
-
-                        <div class="input-group-sm mb-3 ">  
-                          <select class="form-select" aria-label="Default select example" id="ens_gtf1" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Choose reference GTF directly from Ensembl">
-                              <option selected></option>
-                              @foreach ($links as $link)
-                              <option value="{{ $link }}" >{{ $link }}</option>
-                              @endforeach
-                          </select>
+                        <div class="form-check form-switch text-start mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch1" value="false">
+                          <label class="form-check-label" for="chrswitch1">Use personal CHR file</label>
                         </div>
                         
+
+
                       </div>
+                      
+                      
                     </div>
 
                     <div class="row no-gutters text-center">
@@ -941,6 +970,43 @@
         event.target.classList.add("active");
         $("#homeButton").addClass("active");
         });
+      
+      
+      $('#gtfswitch1').click(function(event){
+        var isChecked = event.target.getAttribute("value");
+        if (isChecked === "false") {
+          event.target.setAttribute("value","true");
+          $("#gtf1input").removeClass("d-none");
+          $("#ensgtf1input").addClass("d-none");
+          document.getElementById("ens_gtf1").value = "";
+          
+        }
+        else {
+          event.target.setAttribute("value","false")
+          $("#gtf1input").addClass("d-none");
+          $("#ensgtf1input").removeClass("d-none");
+          document.getElementById("gtf1").value = "";
+        }
+        });
+
+      $('#chrswitch1').click(function(event){
+        var isChecked = event.target.getAttribute("value");
+        if (isChecked === "false") {
+          event.target.setAttribute("value","true");
+          $("#chr1input").removeClass("d-none");
+          $("#enschr1input").addClass("d-none");
+          document.getElementById("ens_chr1").value = "";
+          
+        }
+        else {
+          event.target.setAttribute("value","false")
+          $("#chr1input").addClass("d-none");
+          $("#enschr1input").removeClass("d-none");
+          document.getElementById("chr1").value = "";
+        }
+        });
+
+        
 
       $('#demoButton').click(function(event){
         $(".tab-pane").removeClass("show active");
