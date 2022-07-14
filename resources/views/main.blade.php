@@ -8,43 +8,7 @@
     <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-5.1.3.min.css") }}>
     <link rel="stylesheet" type="text/css" href={{ asset("css/introjs-5.1.0.min.css") }}>
     <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-icons-1.8.3/bootstrap-icons.css") }}>
-    <style>
-      /*Code to change color of active link*/
-      .nav-link.border.active {
-          background-color: #212529;
-      }
-      .nav-link.border {
-          color: black;
-      }
-      .nav-link.border:hover {
-          color: salmon;
-      }
-      .btn:hover {
-          color: salmon;
-      }
-      .accordion-button {
-        background-color: white;
-        color: black;
-      }
-
-      .accordion-header>button:hover {
-        color: salmon;
-      }
-
-      .accordion-button:not(.collapsed) {
-        background-color: white;
-        color: black;
-        text-align: center;
-      }
-
-      .bi.bi-info-circle:hover {
-        color: salmon;
-      }
-      .bi.bi-info-circle {
-        color:teal;
-      }
-      
-  </style>
+    <link rel="stylesheet" type="text/css" href={{ asset("css/custom.css") }}>
 
     <title>Web-OLOGRAM</title>
 
@@ -99,6 +63,7 @@
   
   {{-- This is where the main components will be placed --}}
   <div class="container mb-5 mt-5 pt-3">
+
     <div class="row">
       <div class="col text-center">
         <h1 class="mt-3"> WELCOME TO OLOGRAM </h1><br>
@@ -135,790 +100,798 @@
       </div>
     </div>
 
-      <nav>
-        <div class="nav nav-pills nav-fill mb-3 mt-3" id="nav-tab" role="tab-list" data-title="Different cases" data-intro="These are the different cases of analysis for your BED files.">
-          
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <nav>
+          <div class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tab-list" data-title="Different cases" data-intro="These are the different cases of analysis for your BED files.">
+            
+            @if (\Session::has('case2_show')||\Session::has('case3_show')||\Session::has('case4_show'))
+              <button class="nav-link border border-dark rounded-3" id="nav-BED-GTF-tab" data-bs-toggle="tab" data-bs-target="#case1" type="button" role="tab" aria-controls="case1" aria-selected="true">BED vs GTF</button>
+            @else
+              <button class="nav-link border border-dark rounded-3 active" id="nav-BED-GTF-tab" data-bs-toggle="tab" data-bs-target="#case1" type="button" role="tab" aria-controls="case1" aria-selected="true">BED vs GTF</button>
+            @endif
+  
+            @if (\Session::has('case2_show'))
+              <button class="nav-link border border-dark rounded-3 active" id="nav-BED-GTF-keys-tab" data-bs-toggle="tab" data-bs-target="#case2" type="button" role="tab" aria-controls="case2" aria-selected="true">BED vs GTF (keys)</button>
+            @else
+              <button class="nav-link border border-dark rounded-3" id="nav-BED-GTF-keys-tab" data-bs-toggle="tab" data-bs-target="#case2" type="button" role="tab" aria-controls="case2" aria-selected="true">BED vs GTF (keys)</button>
+            @endif
+  
+            @if (\Session::has('case3_show'))
+              <button class="nav-link border border-dark rounded-3 active" id="nav-BED-BED-tab" data-bs-toggle="tab" data-bs-target="#case3" type="button" role="tab" aria-controls="case3" aria-selected="true">BED vs BED</button>        
+            @else
+              <button class="nav-link border border-dark rounded-3" id="nav-BED-BED-tab" data-bs-toggle="tab" data-bs-target="#case3" type="button" role="tab" aria-controls="case3" aria-selected="true">BED vs BED</button>
+            @endif
+  
+            @if (\Session::has('case4_show'))
+              <button class="nav-link border border-dark rounded-3 active" id="nav-BED-BED-combo-tab" data-bs-toggle="tab" data-bs-target="#case4" type="button" role="tab" aria-controls="case4" aria-selected="true">BED vs BED (combinations)</button>          
+            @else
+              <button class="nav-link border border-dark rounded-3" id="nav-BED-BED-combo-tab" data-bs-toggle="tab" data-bs-target="#case4" type="button" role="tab" aria-controls="case4" aria-selected="true">BED vs BED (combinations)</button>
+            @endif
+  
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col text-center">
+        <div class="tab-content" id="nav-tabContent1">
           @if (\Session::has('case2_show')||\Session::has('case3_show')||\Session::has('case4_show'))
-            <button class="nav-link border border-dark rounded-3" id="nav-BED-GTF-tab" data-bs-toggle="tab" data-bs-target="#case1" type="button" role="tab" aria-controls="case1" aria-selected="true">BED vs GTF</button>
-          @else
-            <button class="nav-link border border-dark rounded-3 active" id="nav-BED-GTF-tab" data-bs-toggle="tab" data-bs-target="#case1" type="button" role="tab" aria-controls="case1" aria-selected="true">BED vs GTF</button>
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case1" role="tabpanel" aria-labelledby="nav-BED-GTF-tab">
+          @else 
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case1" role="tabpanel" aria-labelledby="nav-BED-GTF-tab">
           @endif
-
-          @if (\Session::has('case2_show'))
-            <button class="nav-link border border-dark rounded-3 active" id="nav-BED-GTF-keys-tab" data-bs-toggle="tab" data-bs-target="#case2" type="button" role="tab" aria-controls="case2" aria-selected="true">BED vs GTF (keys)</button>
-          @else
-            <button class="nav-link border border-dark rounded-3" id="nav-BED-GTF-keys-tab" data-bs-toggle="tab" data-bs-target="#case2" type="button" role="tab" aria-controls="case2" aria-selected="true">BED vs GTF (keys)</button>
-          @endif
-
-          @if (\Session::has('case3_show'))
-            <button class="nav-link border border-dark rounded-3 active" id="nav-BED-BED-tab" data-bs-toggle="tab" data-bs-target="#case3" type="button" role="tab" aria-controls="case3" aria-selected="true">BED vs BED</button>        
-          @else
-            <button class="nav-link border border-dark rounded-3" id="nav-BED-BED-tab" data-bs-toggle="tab" data-bs-target="#case3" type="button" role="tab" aria-controls="case3" aria-selected="true">BED vs BED</button>
-          @endif
-
-          @if (\Session::has('case4_show'))
-            <button class="nav-link border border-dark rounded-3 active" id="nav-BED-BED-combo-tab" data-bs-toggle="tab" data-bs-target="#case4" type="button" role="tab" aria-controls="case4" aria-selected="true">BED vs BED (combinations)</button>          
-          @else
-            <button class="nav-link border border-dark rounded-3" id="nav-BED-BED-combo-tab" data-bs-toggle="tab" data-bs-target="#case4" type="button" role="tab" aria-controls="case4" aria-selected="true">BED vs BED (combinations)</button>
-          @endif
-
+                <div>
+                    <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm">
+                        @csrf 
+                        <!-- @csrf is mandatory for forms with post method -->
+                        <div class="row no-gutters text-center">
+                          <div class="col-sm-12 text center">
+                            <h3 class="fw-bold mb-3">Required input</h3>
+                          </div>
+                        </div>
+    
+                        <div class="row no-gutters text-center" id="case1-required" data-title="Required options" data-intro="On the left side you have your required options.">
+                          
+                          
+                          <div class="col-sm-6 text-center" >
+    
+                            
+                            
+                            <input type="hidden" name="caseId" value="case1">
+    
+                            <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Required email address to send the final results to."></i></p>
+    
+                            <div class="input-group-sm mb-3 ">
+                              <input type="email" class="form-control form-control-sm" id="email1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
+                            </div>
+    
+                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
+                       
+                            <div class="input-group-sm mb-3">
+                              <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" data-title="BED file" data-intro="This is the BED file containing the set of regions for which the enrichment will be calculated."
+                              title="BED file containing the set of regions for which the enrichment will be calculated." required>
+                            </div>
+                           
+    
+                            
+                          </div>
+                            
+                          <div class="col-sm-6 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
+    
+                            <div id="ensgtf1input">
+                              <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose reference GTF directly from Ensembl."></i></p>
+                              <div class="input-group-sm mb-1 ">  
+                                <select class="form-select" aria-label="Default select example" id="ens_gtf1" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose reference GTF directly from Ensembl">
+                                    <option selected></option>
+                                    @foreach ($links as $link)
+                                    <option value="{{ $link }}" >{{ $link }}</option>
+                                    @endforeach
+                                </select>
+                              </div>
+                            </div>
+                            
+    
+                            <div class="d-none" id="gtf1input">
+                              <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
+                              <div class="input-group-sm mb-1">
+                                <input class="form-control "  id="gtf1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                              </div>
+                            </div>
+    
+                            <div class="form-check form-switch text-start mb-3">
+                              <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
+                              <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
+                            </div>
+    
+                            
+    
+                            {{-- <div class="progress mb-3">
+                              <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div> --}}
+    
+                            <div id="enschr1input">
+                              <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose chromosome sizes directly from Ensembl"></i></p>
+                              <div class="input-group-sm mb-1 ">  
+                                <select class="form-select" aria-label="Default select example" id="ens_chr1" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose chromosome sizes directly from Ensembl">
+                                    <option selected></option>
+                                    @foreach ($links as $link)
+                                    <option value="{{ $link }}" >{{ $link }}</option>
+                                    @endforeach
+                                </select>
+                              </div>
+                            </div>
+    
+                            <div class="d-none" id="chr1input">
+                              <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+                              <div class="input-group-sm mb-1">
+                                <input class="form-control "  id="chr1" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                              </div>
+                            </div>
+    
+                            <div class="form-check form-switch text-start mb-3">
+                              <input class="form-check-input" type="checkbox" role="switch" id="chrswitch1" value="false">
+                              <label class="form-check-label" for="chrswitch1">Use personal CHR file</label>
+                            </div>
+                            
+    
+    
+                          </div>
+                          
+                          
+                        </div>
+    
+                        <div class="row no-gutters text-center">
+                          <div class="col-sm-8 text-center">
+                            <div class="accordion" id="case1-accordion-advanced">
+                              <div class="accordion-item justify-content-center text-center">
+                                <h2 class="accordion-header justify-content-center text-center border border-dark rounded-3" id="heading1-advanced">
+                                  <button class="accordion-button" id="case1-acc-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1-advanced" aria-expanded="true" aria-controls="collapse1-advanced">
+                                    Advanced options
+                                  </button>
+                                </h2>
+    
+                                @if (\Session::has('case1_show'))
+                                <div id="collapse1-advanced" class="accordion-collapse collapse show" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                                @else
+                                <div id="collapse1-advanced" class="accordion-collapse collapse" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                                @endif
+    
+                                  <div class="accordion-body">
+                                    <div class="row">
+    
+                                      <div class="col-sm-6 text-start">
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <input class="form-control" type="file" id="mbed1" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
+                                        </div>
+    
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" >{{ old('mbedl') }}</textarea>
+                                        </div>
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <input class="form-control " id="bedin1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
+                                        </div>
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <input class="form-control " id="bedex1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
+                                        </div>
+    
+                                      </div>
+    
+                                      <div class="col-sm-6 text-start">
+    
+                                        <div class="form-check" data-title="Test" data-intro="This is a test.">
+                                          <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg1" name="fcg">
+                                          <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
+                                        </div>
+    
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp1" name="fcp">
+                                          <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
+                                        </div>
+    
+                                        <div class="form-check mb-3">
+                                          <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb1" name="fcmb">
+                                          <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
+                                        </div>
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-arrow-up-square"></i> Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups1" value="{{ old('ups') }}">
+                                        </div>
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-arrow-down-square"></i> Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
+                                        <div class="input-group-sm mb-3">
+                                          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns1" value="{{ old('dns') }}">
+                                        </div>
+                                        
+                                      </div>
+    
+                                      
+    
+    
+    
+    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+    
+                          <div class="col text-center mt-1">
+    
+                            <button type="submit" class="btn btn-dark btn-lg" id="case1-submit" data-title="Submit button" data-intro="Once you finished adding your files and options you can click this button to submit.">Submit request</button></br><br>
+    
+                          </div>
+    
+                        </div>
+    
+    
+                        
+    
+                      </form> 
+                </div>
+            </div>
+    
         </div>
-      </nav>
-
- 
-    <div class="tab-content" id="nav-tabContent1">
-      @if (\Session::has('case2_show')||\Session::has('case3_show')||\Session::has('case4_show'))
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case1" role="tabpanel" aria-labelledby="nav-BED-GTF-tab">
-      @else 
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case1" role="tabpanel" aria-labelledby="nav-BED-GTF-tab">
-      @endif
-            <div>
-                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm">
+    
+        <div class="tab-content" id="nav-tabContent2">
+          @if (\Session::has('case2_show'))
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case2" role="tabpanel" aria-labelledby="nav-BED-GTF-keys-tab">
+          @else
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case2" role="tabpanel" aria-labelledby="nav-BED-GTF-keys-tab">
+          @endif
+                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm2">
                     @csrf 
                     <!-- @csrf is mandatory for forms with post method -->
+    
                     <div class="row no-gutters text-center">
                       <div class="col-sm-12 text center">
                         <h3 class="fw-bold mb-3">Required input</h3>
                       </div>
                     </div>
-
-                    <div class="row no-gutters text-center" id="case1-required" data-title="Required options" data-intro="On the left side you have your required options.">
-                      
-                      
-                      <div class="col-sm-6 text-center" >
-
-                        
-                        
-                        <input type="hidden" name="caseId" value="case1">
-
+    
+                    <div class="row no-gutters text-center">
+                      <div class="col-sm-4 text-center">
+    
+    
+                        <input type="hidden" name="caseId" value="case2">
+    
                         <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Required email address to send the final results to."></i></p>
-
-                        <div class="input-group-sm mb-3 ">
-                          <input type="email" class="form-control form-control-sm" id="email1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
+                        <div class="input-group-sm mb-3">
+                          <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
-
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
-                   
+    
+    
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
                         <div class="input-group-sm mb-3">
-                          <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" data-title="BED file" data-intro="This is the BED file containing the set of regions for which the enrichment will be calculated."
+                          <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                        </div>
+    
+                      </div>
+    
+                      <div class="col-sm-4 text-center">
+    
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
+                        <div class="input-group-sm mb-3">
+                          <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         </div>
-                       
-
-                        
+    
+                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+                        <div class="input-group-sm mb-3">
+                          <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                        </div>
+    
                       </div>
+    
+                      <div class="col-sm-4 text-center">
+    
+                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="Choose reference GTF directly from Ensembl."></i></p>
+                        <div class="input-group-sm mb-3 "> 
+                          <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="Choose reference GTF directly from Ensembl">
+                              <option selected></option>
+                              @foreach ($links as $link)
+                              <option value="{{ $link }}" >{{ $link }}</option>
+                              @endforeach
+                          </select>
+                        </div>
+    
+                        <p class="text-start  mb-1"><i class="bi bi-card-list"></i> GTF keys <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></i></p>
+                        <div class="input-group-sm mb-3">
+                          <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys" id="keys">{{ old('keys') }}</textarea>
+                        </div>
+    
                         
-                      <div class="col-sm-6 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
-
-                        <div id="ensgtf1input">
-                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose reference GTF directly from Ensembl."></i></p>
-                          <div class="input-group-sm mb-1 ">  
-                            <select class="form-select" aria-label="Default select example" id="ens_gtf1" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose reference GTF directly from Ensembl">
-                                <option selected></option>
-                                @foreach ($links as $link)
-                                <option value="{{ $link }}" >{{ $link }}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                        </div>
-                        
-
-                        <div class="d-none" id="gtf1input">
-                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
-                          <div class="input-group-sm mb-1">
-                            <input class="form-control "  id="gtf1" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
-                          </div>
-                        </div>
-
-                        <div class="form-check form-switch text-start mb-3">
-                          <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
-                          <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
-                        </div>
-
-                        
-
-                        {{-- <div class="progress mb-3">
-                          <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div> --}}
-
-                        <div id="enschr1input">
-                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose chromosome sizes directly from Ensembl"></i></p>
-                          <div class="input-group-sm mb-1 ">  
-                            <select class="form-select" aria-label="Default select example" id="ens_chr1" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose chromosome sizes directly from Ensembl">
-                                <option selected></option>
-                                @foreach ($links as $link)
-                                <option value="{{ $link }}" >{{ $link }}</option>
-                                @endforeach
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="d-none" id="chr1input">
-                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-                          <div class="input-group-sm mb-1">
-                            <input class="form-control "  id="chr1" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
-                          </div>
-                        </div>
-
-                        <div class="form-check form-switch text-start mb-3">
-                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch1" value="false">
-                          <label class="form-check-label" for="chrswitch1">Use personal CHR file</label>
-                        </div>
-                        
-
-
+    
                       </div>
-                      
-                      
                     </div>
-
+    
+                    
+    
                     <div class="row no-gutters text-center">
                       <div class="col-sm-8 text-center">
-                        <div class="accordion" id="case1-accordion-advanced">
-                          <div class="accordion-item justify-content-center text-center">
-                            <h2 class="accordion-header justify-content-center text-center border border-dark rounded-3" id="heading1-advanced">
-                              <button class="accordion-button" id="case1-acc-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1-advanced" aria-expanded="true" aria-controls="collapse1-advanced">
+                        
+                        <div class="accordion" id="case2-accordion-advanced">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header border border-dark rounded-3" id="heading2-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2-advanced" aria-expanded="true" aria-controls="collapse2-advanced">
                                 Advanced options
                               </button>
                             </h2>
-
-                            @if (\Session::has('case1_show'))
-                            <div id="collapse1-advanced" class="accordion-collapse collapse show" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+    
+                            @if (\Session::has('case2_show'))
+                            <div id="collapse2-advanced" class="accordion-collapse collapse show" aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
                             @else
-                            <div id="collapse1-advanced" class="accordion-collapse collapse" aria-labelledby="heading1-advanced" data-bs-parent="#case1-accordion-advanced">
+                            <div id="collapse2-advanced" class="accordion-collapse collapse " aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
                             @endif
-
+    
                               <div class="accordion-body">
                                 <div class="row">
-
+                                  
+    
                                   <div class="col-sm-6 text-start">
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
                                     <div class="input-group-sm mb-3">
-                                      <input class="form-control" type="file" id="mbed1" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control" type="file" id="mbed2" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
                                     </div>
-
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
                                     <div class="input-group-sm mb-3">
                                       <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id ="mbedl1" >{{ old('mbedl') }}</textarea>
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2">{{ old('mbedl') }}</textarea>
                                     </div>
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
                                     <div class="input-group-sm mb-3">
-                                      <input class="form-control " id="bedin1"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
+                                      <input class="form-control " id="bedin2"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
                                     </div>
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
                                     <div class="input-group-sm mb-3">
-                                      <input class="form-control " id="bedex1" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="bedex2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                     </div>
-
+    
                                   </div>
-
+    
                                   <div class="col-sm-6 text-start">
-
-                                    <div class="form-check" data-title="Test" data-intro="This is a test.">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg1" name="fcg">
+    
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg2" name="fcg">
                                       <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
                                     </div>
-
+    
                                     <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp1" name="fcp">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp2" name="fcp">
                                       <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
                                     </div>
-
-                                    <div class="form-check mb-3">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb1" name="fcmb">
+    
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb2" name="fcmb">
                                       <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                         title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
                                     </div>
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-arrow-up-square"></i> Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups1" value="{{ old('ups') }}">
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups2" value="{{ old('ups') }}">
                                     </div>
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-arrow-down-square"></i> Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
                                     <div class="input-group-sm mb-3">
                                       <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns1" value="{{ old('dns') }}">
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns2" value="{{ old('dns') }}">
                                     </div>
                                     
                                   </div>
-
-                                  
-
-
-
-
+    
+    
                                 </div>
                               </div>
-                            </div>
+                            </div>  
                           </div>
                         </div>
+    
                       </div>
-
-                      <div class="col text-center mt-1">
-
-                        <button type="submit" class="btn btn-dark btn-lg" id="case1-submit" data-title="Submit button" data-intro="Once you finished adding your files and options you can click this button to submit.">Submit request</button></br><br>
-
+    
+                      <div class="col-sm-4 text-center">
+    
+                        <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
+    
                       </div>
-
+    
+    
                     </div>
-
-
+    
                     
-
+    
                   </form> 
             </div>
         </div>
-
-    </div>
-
-    <div class="tab-content" id="nav-tabContent2">
-      @if (\Session::has('case2_show'))
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case2" role="tabpanel" aria-labelledby="nav-BED-GTF-keys-tab">
-      @else
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case2" role="tabpanel" aria-labelledby="nav-BED-GTF-keys-tab">
-      @endif
-            <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm2">
-                @csrf 
-                <!-- @csrf is mandatory for forms with post method -->
-
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-12 text center">
-                    <h3 class="fw-bold mb-3">Required input</h3>
-                  </div>
-                </div>
-
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-4 text-center">
-
-
-                    <input type="hidden" name="caseId" value="case2">
-
-                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Required email address to send the final results to."></i></p>
-                    <div class="input-group-sm mb-3">
-                      <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
-                      data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
-                    </div>
-
-
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
-                    </div>
-
-                  </div>
-
-                  <div class="col-sm-4 text-center">
-
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="BED file containing the set of regions for which the enrichment will be calculated." required>
-                    </div>
-
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
-                    </div>
-
-                  </div>
-
-                  <div class="col-sm-4 text-center">
-
-                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Choose reference GTF directly from Ensembl."></i></p>
-                    <div class="input-group-sm mb-3 "> 
-                      <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Choose reference GTF directly from Ensembl">
-                          <option selected></option>
-                          @foreach ($links as $link)
-                          <option value="{{ $link }}" >{{ $link }}</option>
-                          @endforeach
-                      </select>
-                    </div>
-
-                    <p class="text-start  mb-1"><i class="bi bi-card-list"></i> GTF keys <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></i></p>
-                    <div class="input-group-sm mb-3">
-                      <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys" id="keys">{{ old('keys') }}</textarea>
-                    </div>
-
-                    
-
-                  </div>
-                </div>
-
-                
-
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-8 text-center">
-                    
-                    <div class="accordion" id="case2-accordion-advanced">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header border border-dark rounded-3" id="heading2-advanced">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2-advanced" aria-expanded="true" aria-controls="collapse2-advanced">
-                            Advanced options
-                          </button>
-                        </h2>
-
-                        @if (\Session::has('case2_show'))
-                        <div id="collapse2-advanced" class="accordion-collapse collapse show" aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
-                        @else
-                        <div id="collapse2-advanced" class="accordion-collapse collapse " aria-labelledby="heading2-advanced" data-bs-parent="#case2-accordion-advanced">
-                        @endif
-
-                          <div class="accordion-body">
-                            <div class="row">
-                              
-
-                              <div class="col-sm-6 text-start">
-
-                                <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)."></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <input class="form-control" type="file" id="mbed2" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED : A list of bed files to be considered as additional reference annotations (i.e in addition to gene centric features)." name="mbed[]">
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl2">{{ old('mbedl') }}</textarea>
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <input class="form-control " id="bedin2"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <input class="form-control " id="bedex2" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
-                                </div>
-
-                              </div>
-
-                              <div class="col-sm-6 text-start">
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg2" name="fcg">
-                                  <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
-                                </div>
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp2" name="fcp">
-                                  <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
-                                </div>
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb2" name="fcmb">
-                                  <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-arrow-up-square"></i> Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups2" value="{{ old('ups') }}">
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-arrow-down-square"></i> Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
-                                <div class="input-group-sm mb-3">
-                                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns2" value="{{ old('dns') }}">
-                                </div>
-                                
-                              </div>
-
-
-                            </div>
-                          </div>
-                        </div>  
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="col-sm-4 text-center">
-
-                    <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
-
-                  </div>
-
-
-                </div>
-
-                
-
-              </form> 
-        </div>
-    </div>
-
-
-    <div class="tab-content" id="nav-tabContent3">
-      @if (\Session::has('case3_show'))
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case3" role="tabpanel" aria-labelledby="nav-BED-BED-tab">
-      @else
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case3" role="tabpanel" aria-labelledby="nav-BED-BED-tab">
-      @endif
-            <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm3">
-                @csrf 
-                <!-- @csrf is mandatory for forms with post method -->
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-12 text center">
-                    <h3 class="fw-bold mb-3">Required input</h3>
-                  </div>
-                </div>
-
-
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-6 text-center">
-
-                    <input type="hidden" name="caseId" value="case3">
-
-                    <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Required email address to send the final results to."></i></p>
-
-                    <div class="input-group-sm mb-3">
-                      <input type="email" class="form-control form-control-sm" id="email3" name="email" value="{{ old('email') }}" placeholder="name@example.com"
-                      data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
-                    </div>
-
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
-
-
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control " id="bed3" type="file" name="bed" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="BED file containing the set of regions for which the enrichment will be calculated." required>
-                    </div>
-
-
-
-                  </div>
-
-                  <div class="col-sm-6 text-center">
-
-                    <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>
-
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control" type="file" id="mbed3" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Ref BED : A list of bed files to be considered as genomic annotations.">
-                    </div>
-
-                    <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-
-                    <div class="input-group-sm mb-3">
-                      <input class="form-control " id="chr3" type="file" name="chr" data-bs-toggle="tooltip" data-bs-placement="top" 
-                      title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
-                    </div>
-
-                  </div>
-                </div>
-                
-                <div class="row no-gutters text-center">
-                  <div class="col-sm-8 text-center">
-
-                    <div class="accordion" id="case3-accordion-advanced">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header border border-dark rounded-3" id="heading3-advanced">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3-advanced" aria-expanded="true" aria-controls="collapse3-advanced">
-                            Advanced options
-                          </button>
-                        </h2>
-
-                        @if (\Session::has('case3_show'))
-                        <div id="collapse3-advanced" class="accordion-collapse collapse show" aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
-                        @else
-                        <div id="collapse3-advanced" class="accordion-collapse collapse " aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
-                        @endif
-
-                          <div class="accordion-body">
-                            <div class="row">
-
-                              <div class="col-sm-6 text-start">
-
-                                <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
-
-
-                                <div class="input-group-sm mb-3">
-                                  <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl3">{{ old('mbedl') }}</textarea>
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
-
-                                <div class="input-group-sm mb-3">
-                                  <input class="form-control " id="bedin3"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
-
-                                <div class="input-group-sm mb-3">
-                                  <input class="form-control " id="bedex3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
-                                </div>
-
-                              </div>
-
-                              <div class="col-sm-6 text-start">
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg3" name="fcg">
-                                  <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
-                                </div>
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp3" name="fcp">
-                                  <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
-                                </div>
-
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb3" name="fcmb">
-                                  <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                    title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-arrow-up-square"></i> Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
-
-                                <div class="input-group-sm mb-3">
-                                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups3" value="{{ old('ups') }}">
-                                </div>
-
-                                <p class="text-start  mb-1"><i class="bi bi-arrow-down-square"></i> Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
-
-                                <div class="input-group-sm mb-3">
-                                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                  title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns3" value="{{ old('dns') }}">
-                                </div>
-                                
-                              </div>
-
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4 text-center">
-
-                    <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
-
-                  </div>
-
-                </div>
-                
-
-              </form> 
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-    <div class="tab-content" id="nav-tabContent4">
-      @if (\Session::has('case4_show'))
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case4" role="tabpanel" aria-labelledby="nav-BED-BED-combo-tab">
-      @else
-        <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case4" role="tabpanel" aria-labelledby="nav-BED-BED-combo-tab">
-      @endif
-            <div>
-                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm4">
+    
+    
+        <div class="tab-content" id="nav-tabContent3">
+          @if (\Session::has('case3_show'))
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case3" role="tabpanel" aria-labelledby="nav-BED-BED-tab">
+          @else
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case3" role="tabpanel" aria-labelledby="nav-BED-BED-tab">
+          @endif
+                <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm3">
                     @csrf 
                     <!-- @csrf is mandatory for forms with post method -->
-
                     <div class="row no-gutters text-center">
                       <div class="col-sm-12 text center">
                         <h3 class="fw-bold mb-3">Required input</h3>
                       </div>
                     </div>
-
+    
+    
                     <div class="row no-gutters text-center">
                       <div class="col-sm-6 text-center">
-
-                        <input type="hidden" name="caseId" value="case4">
-
+    
+                        <input type="hidden" name="caseId" value="case3">
+    
                         <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Required email address to send the final results to."></i></p>
-          
+    
                         <div class="input-group-sm mb-3">
-                          <input type="email" class="form-control form-control-sm" id="email4" name="email" value="{{ old('email') }}" placeholder="name@example.com"
+                          <input type="email" class="form-control form-control-sm" id="email3" name="email" value="{{ old('email') }}" placeholder="name@example.com"
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
-
+    
                         <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
-
+    
+    
                         <div class="input-group-sm mb-3">
-                          <input class="form-control " id="bed4" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="BED file containing the set of regions for which combinations are searched." required>
+                          <input class="form-control " id="bed3" type="file" name="bed" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         </div>
+    
+    
+    
                       </div>
-
+    
                       <div class="col-sm-6 text-center">
-
+    
                         <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>    
-
+                          title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>
+    
                         <div class="input-group-sm mb-3">
-                          <input class="form-control" type="file" id="mbed4" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
+                          <input class="form-control" type="file" id="mbed3" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                          title="Ref BED : A list of bed files to be considered as genomic annotations.">
                         </div>
-
+    
                         <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>    
-
+                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+    
                         <div class="input-group-sm mb-3">
-                          <input class="form-control " id="chr4" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          <input class="form-control " id="chr3" type="file" name="chr" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
                         </div>
-
-
+    
                       </div>
-                      
                     </div>
-
-                    <div class="row no-gutters text-center"> 
+                    
+                    <div class="row no-gutters text-center">
                       <div class="col-sm-8 text-center">
-                        <div class="accordion" id="case4-accordion-advanced">
+    
+                        <div class="accordion" id="case3-accordion-advanced">
                           <div class="accordion-item">
-                            <h2 class="accordion-header border border-dark rounded-3" id="heading4-advanced">
-                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4-advanced" aria-expanded="true" aria-controls="collapse4-advanced">
+                            <h2 class="accordion-header border border-dark rounded-3" id="heading3-advanced">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3-advanced" aria-expanded="true" aria-controls="collapse3-advanced">
                                 Advanced options
                               </button>
                             </h2>
-
-                            @if (\Session::has('case4_show'))
-                            <div id="collapse4-advanced" class="accordion-collapse collapse show" aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+    
+                            @if (\Session::has('case3_show'))
+                            <div id="collapse3-advanced" class="accordion-collapse collapse show" aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
                             @else
-                            <div id="collapse4-advanced" class="accordion-collapse collapse " aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                            <div id="collapse3-advanced" class="accordion-collapse collapse " aria-labelledby="heading3-advanced" data-bs-parent="#case3-accordion-advanced">
                             @endif
-                            
+    
                               <div class="accordion-body">
                                 <div class="row">
-
+    
                                   <div class="col-sm-6 text-start">
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="1" {{ old('exact') ? 'checked' : null }} id="exact" name="exact" >
-                                      <p class="text-start  mb-1">Exact <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                        title="Exact : Whether to perform a transitive counting or not. For example, if true, observations of A+B+C will counts as observations of A+B. (but not as observations of A+B+D)"></i></p>              
-                                    </div>
-
-                                    <p class="text-start  mb-1">Max combinations <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned."></i></p>
-
+    
+                                    <p class="text-start  mb-1"><i class="bi bi-card-list"></i> Reference BED files labels <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting."></i></p>
+    
+    
                                     <div class="input-group-sm mb-3">
-                                      <input type="text" class="form-control" name="max" id="max" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned." value="{{ old('max') }}">
+                                      <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="More BED labels : A comma separated list of labels for “Additional Reference regions”. Used for plotting." name="mbedl" id="mbedl3">{{ old('mbedl') }}</textarea>
                                     </div>
-
-                                  </div>
-
-                                  <div class="col-sm-6 text-start">
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>    
-                                    
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>
+    
                                     <div class="input-group-sm mb-3">
-                                      <input class="form-control " id="bedin4" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
+                                      <input class="form-control " id="bedin3"  type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">  
                                     </div>
-
+    
                                     <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>    
-
+                                      title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>
+    
                                     <div class="input-group-sm mb-3">
-                                      <input class="form-control " id="bedex4" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      <input class="form-control " id="bedex3" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                                       title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
                                     </div>
-
+    
                                   </div>
-
-
+    
+                                  <div class="col-sm-6 text-start">
+    
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcg') ? 'checked' : null }} id="fcg3" name="fcg">
+                                      <p class="text-start  mb-1">Force-chrom-gtf <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                        title="Force-chrom-gtf : Discard silently, from GTF, genes outside chromosomes defined in “Chromosome sizes” file."></i></p>          
+                                    </div>
+    
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcp') ? 'checked' : null }} id="fcp3" name="fcp">
+                                      <p class="text-start  mb-1">Force-chrom-peak <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                        title="Force-chrom-peak : Discard silently, from query regions file, regions outside chromosomes defined in “Chromosome sizes”."></i></p>
+                                    </div>
+    
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1" {{ old('fcmb') ? 'checked' : null }} id="fcmb3" name="fcmb">
+                                      <p class="text-start  mb-1">Force-chrom-more-bed <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                        title="Force-chrom-more-bed : Discard silently, from --more-bed files, regions outside chromosomes defined “Chromosome sizes”."></i></p>
+                                    </div>
+    
+                                    <p class="text-start  mb-1"><i class="bi bi-arrow-up-square"></i> Upstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)"></i></p>
+    
+                                    <div class="input-group-sm mb-3">
+                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Upstream : Extend the TSS and TTS of in 5' by a given value. (default: 1000)" name="ups" id="ups3" value="{{ old('ups') }}">
+                                    </div>
+    
+                                    <p class="text-start  mb-1"><i class="bi bi-arrow-down-square"></i> Downstream <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)"></i></p>
+    
+                                    <div class="input-group-sm mb-3">
+                                      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                      title="Downstream : Extend the TSS and TTS of in 3' by a given value. (default: 1000)" name="dns" id="dns3" value="{{ old('dns') }}">
+                                    </div>
+                                    
+                                  </div>
+    
+    
                                 </div>
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
-
+    
                       <div class="col-sm-4 text-center">
-
+    
                         <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
     
                       </div>
-
+    
                     </div>
                     
-
+    
                   </form> 
             </div>
         </div>
     
+    
+    
+    
+    
+    
+    
+    
+        <div class="tab-content" id="nav-tabContent4">
+          @if (\Session::has('case4_show'))
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3 show active" id="case4" role="tabpanel" aria-labelledby="nav-BED-BED-combo-tab">
+          @else
+            <div class="tab-pane border border-2 border-dark rounded-3 fade p-3" id="case4" role="tabpanel" aria-labelledby="nav-BED-BED-combo-tab">
+          @endif
+                <div>
+                    <form action='/' method='POST' enctype="multipart/form-data" id="uploadForm4">
+                        @csrf 
+                        <!-- @csrf is mandatory for forms with post method -->
+    
+                        <div class="row no-gutters text-center">
+                          <div class="col-sm-12 text center">
+                            <h3 class="fw-bold mb-3">Required input</h3>
+                          </div>
+                        </div>
+    
+                        <div class="row no-gutters text-center">
+                          <div class="col-sm-6 text-center">
+    
+                            <input type="hidden" name="caseId" value="case4">
+    
+                            <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Required email address to send the final results to."></i></p>
+              
+                            <div class="input-group-sm mb-3">
+                              <input type="email" class="form-control form-control-sm" id="email4" name="email" value="{{ old('email') }}" placeholder="name@example.com"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
+                            </div>
+    
+                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
+    
+                            <div class="input-group-sm mb-3">
+                              <input class="form-control " id="bed4" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="BED file containing the set of regions for which combinations are searched." required>
+                            </div>
+                          </div>
+    
+                          <div class="col-sm-6 text-center">
+    
+                            <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>    
+    
+                            <div class="input-group-sm mb-3">
+                              <input class="form-control" type="file" id="mbed4" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
+                            </div>
+    
+                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>    
+    
+                            <div class="input-group-sm mb-3">
+                              <input class="form-control " id="chr4" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                            </div>
+    
+    
+                          </div>
+                          
+                        </div>
+    
+                        <div class="row no-gutters text-center"> 
+                          <div class="col-sm-8 text-center">
+                            <div class="accordion" id="case4-accordion-advanced">
+                              <div class="accordion-item">
+                                <h2 class="accordion-header border border-dark rounded-3" id="heading4-advanced">
+                                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4-advanced" aria-expanded="true" aria-controls="collapse4-advanced">
+                                    Advanced options
+                                  </button>
+                                </h2>
+    
+                                @if (\Session::has('case4_show'))
+                                <div id="collapse4-advanced" class="accordion-collapse collapse show" aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                                @else
+                                <div id="collapse4-advanced" class="accordion-collapse collapse " aria-labelledby="heading4-advanced" data-bs-parent="#case4-accordion-advanced">
+                                @endif
+                                
+                                  <div class="accordion-body">
+                                    <div class="row">
+    
+                                      <div class="col-sm-6 text-start">
+    
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="1" {{ old('exact') ? 'checked' : null }} id="exact" name="exact" >
+                                          <p class="text-start  mb-1">Exact <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Exact : Whether to perform a transitive counting or not. For example, if true, observations of A+B+C will counts as observations of A+B. (but not as observations of A+B+D)"></i></p>              
+                                        </div>
+    
+                                        <p class="text-start  mb-1">Max combinations <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned."></i></p>
+    
+                                        <div class="input-group-sm mb-3">
+                                          <input type="text" class="form-control" name="max" id="max" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="Max combinations : Maximum number of combinations to consider by applying the MODL algorithm to the matrix of full overlaps. Defaults to -1, which means MODL is NOT applied and all combinations are returned." value="{{ old('max') }}">
+                                        </div>
+    
+                                      </div>
+    
+                                      <div class="col-sm-6 text-start">
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED inclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)."></i></p>    
+                                        
+                                        <div class="input-group-sm mb-3">
+                                          <input class="form-control " id="bedin4" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED incl : A BED file. Only these regions will be considered for analysis (opposite of “Exclusion file “)." name="bedin">
+                                        </div>
+    
+                                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> BED exclusion file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)."></i></p>    
+    
+                                        <div class="input-group-sm mb-3">
+                                          <input class="form-control " id="bedex4" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                          title="BED excl : A BED file. These regions will not be considered for analysis (opposite of “Restriction file “)." name="bedex">
+                                        </div>
+    
+                                      </div>
+    
+    
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+    
+                            </div>
+                          </div>
+    
+                          <div class="col-sm-4 text-center">
+    
+                            <button type="submit" class="btn btn-dark btn-lg mt-1">Submit request</button></br><br>
+        
+                          </div>
+    
+                        </div>
+                        
+    
+                      </form> 
+                </div>
+            </div>
+        
+        </div>
+      </div>
     </div>
+
     
   </div>
 
@@ -956,112 +929,10 @@
   <script type="text/javascript" src={{ asset("js/jquery-3.6.0.min.js") }}></script>
   <script type="text/javascript" src={{ asset("js/fontawesome-6.1.1.js") }}></script>
   <script type="text/javascript" src={{ asset("js/intro-5.1.0.min.js") }}></script>
+  <script type="text/javascript" src={{ asset("js/custom.js") }} ></script>
+
+
   <script type="text/javascript" src={{ asset("js/glowCookies-3.1.7.min.js") }}></script>
-
-  <script>
-    $(document).ready(function(){
-
-      $('.nav-link.border').click(function(event){
-        var curId = event.target.getAttribute("data-bs-target");
-        $(".tab-pane").removeClass("show active");
-        $(".accordion-collapse").removeClass("show");
-        $(".nav-link").removeClass("active");
-        $(".tab-pane" + curId).addClass("show active"); 
-        event.target.classList.add("active");
-        $("#homeButton").addClass("active");
-        });
-      
-      
-      $('#gtfswitch1').click(function(event){
-        var isChecked = event.target.getAttribute("value");
-        if (isChecked === "false") {
-          event.target.setAttribute("value","true");
-          $("#gtf1input").removeClass("d-none");
-          $("#ensgtf1input").addClass("d-none");
-          document.getElementById("ens_gtf1").value = "";
-          
-        }
-        else {
-          event.target.setAttribute("value","false")
-          $("#gtf1input").addClass("d-none");
-          $("#ensgtf1input").removeClass("d-none");
-          document.getElementById("gtf1").value = "";
-        }
-        });
-
-      $('#chrswitch1').click(function(event){
-        var isChecked = event.target.getAttribute("value");
-        if (isChecked === "false") {
-          event.target.setAttribute("value","true");
-          $("#chr1input").removeClass("d-none");
-          $("#enschr1input").addClass("d-none");
-          document.getElementById("ens_chr1").value = "";
-          
-        }
-        else {
-          event.target.setAttribute("value","false")
-          $("#chr1input").addClass("d-none");
-          $("#enschr1input").removeClass("d-none");
-          document.getElementById("chr1").value = "";
-        }
-        });
-
-        
-
-      $('#demoButton').click(function(event){
-        $(".tab-pane").removeClass("show active");
-        $(".accordion-collapse").removeClass("show");
-        $(".nav-link").removeClass("active");
-        $(".tab-pane" + "#case1").addClass("show active");
-        $(".nav-link" + "#nav-BED-GTF-tab").addClass("active");
-        introJs().setOptions({
-        steps: [{
-          title: 'Welcome',
-          intro: "Hello there! 👋<br> Welcome to Web-OLOGRAM's website.<br> We will take you on a quick introductory tour.<br> Click next to continue."
-        },
-        {
-          title: 'Analysis cases',
-          element: document.querySelector('#nav-tab'),
-          intro: "First, you can click here to choose your analysis case."
-        },
-        {
-          title: 'Required input fields',
-          element: document.querySelector('#case1-required'),
-          intro: "Then, right below you will find the required input fields you need to fill."
-        },
-        {
-          title: 'Information',
-          element: document.querySelector('#bed1-info'),
-          intro: "If any field is unclear to you you can click on these icons for a popup information guide.",
-          position: 'bottom'
-        },
-        {
-          title: 'Advanced options',
-          element: document.querySelector('#heading1-advanced'),
-          onbeforechange: function(){
-            document.querySelector('#heading1-advanced').click();
-            },
-          intro: "Next you choose the advanced options you want to add to your request."
-        },
-        {
-          title: 'Submit button',
-          element: document.querySelector('#case1-submit'),
-          intro: "Finally, you can click here to submit your request."
-        },
-        {
-          title: 'Issue report',
-          element: document.querySelector('#reportButton'),
-          intro: "If you encounter any bugs or errors please let us know by quickly filling the issue report.<br> Your feedback is very much appreciated to improve the app &#128522; <br>",
-          position: 'bottom'
-        }],
-        "skipLabel": "Skip",
-        showProgress: true,
-        disableInteraction: true,
-        }).start();
-        });
-      });
-  </script>
-
 
   <script>
       glowCookies.start('en', { 
