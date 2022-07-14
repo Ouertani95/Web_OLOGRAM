@@ -1,0 +1,34 @@
+/*Code to change color of active link*/
+.nav-link.border.active {
+    background-color: #212529;
+}
+.nav-link.border {
+    color: black;
+}
+.nav-link.border:hover {
+    color: salmon;
+}
+.btn:hover {
+    color: salmon;
+}
+.accordion-button {
+  background-color: white;
+  color: black;
+}
+
+.accordion-header>button:hover {
+  color: salmon;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.bi.bi-info-circle:hover {
+  color: salmon;
+}
+.bi.bi-info-circle {
+  color:teal;
+}
