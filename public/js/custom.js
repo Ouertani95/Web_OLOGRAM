@@ -24,7 +24,7 @@
         $(pers_group_hash).addClass("d-none");
         document.getElementById(pers_input_id).value = "";
         document.getElementById(pers_input_id).removeAttribute("required");
-        
+
         }
     };
     
@@ -109,6 +109,11 @@
                 intro: "First, you can click here to choose your analysis case."
             },
             {
+                title: 'Case details',
+                element: document.querySelector('#case1DetailsButton'),
+                intro: "Next, you can click here for an explanation about the chosen case."
+            },
+            {
                 title: 'Required input fields',
                 element: document.querySelector('#case1-required'),
                 intro: "Then, right below you will find the required input fields you need to fill."
@@ -116,7 +121,7 @@
             {
                 title: 'Information',
                 element: document.querySelector('#bed1-info'),
-                intro: "If any field is unclear to you you can click on these icons for a popup information guide.",
+                intro: "If any field is unclear to you you can simply hover over these icons for a popup information guide.",
                 position: 'bottom'
             },
             {
@@ -125,7 +130,7 @@
                 onbeforechange: function(){
                 document.querySelector('#heading1-advanced').click();
                 },
-                intro: "Next you choose the advanced options you want to add to your request."
+                intro: "Next, you choose the advanced options you want to add to your request."
             },
             {
                 title: 'Submit button',

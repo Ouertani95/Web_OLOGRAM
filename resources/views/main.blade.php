@@ -166,7 +166,7 @@
                               </div>
                             </div>
                             
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case1explanation">
+                            <button type="button" id="case1DetailsButton" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case1explanation">
                               Case details
                             </button>
                           </div>
