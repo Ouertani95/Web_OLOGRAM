@@ -20,6 +20,7 @@ class JobsController extends Controller
         foreach ($links as $index => $link){
             $links[$index] = str_replace("Ensembl_GTF/","",$link);
         }
+        sort($links);
 
         return view('main')->with(['links' => $links]);
     }

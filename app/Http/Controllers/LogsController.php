@@ -16,7 +16,12 @@ class LogsController extends Controller
         $status_request =  Job::where('location_id', $id)
                         ->get()
                         ->pluck('status');
-        $status = $status_request[0];
+        try {
+            $status = $status_request[0];
+        } catch (\Throwable $e) {
+            abort(404);
+        }
+        
 
         // Get all the validated arguments from the json file
         $recovered_args = file_get_contents("../ologram_results/$id/validated.json");
