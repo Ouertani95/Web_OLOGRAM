@@ -2,17 +2,29 @@
     function switch_function(event,ens_group_hash,pers_group_hash,ens_input_id,pers_input_id) {
         var isChecked = event.target.getAttribute("value");
         if (isChecked === "false") {
+
         event.target.setAttribute("value","true");
+
         $(pers_group_hash).removeClass("d-none");
+        $(pers_group_hash).find('input').attr('required','');
+
         $(ens_group_hash).addClass("d-none");
         document.getElementById(ens_input_id).value = "";
-        
+        document.getElementById(ens_input_id).removeAttribute("required");
+    
         }
+
         else {
-        event.target.setAttribute("value","false")
-        $(pers_group_hash).addClass("d-none");
+
+        event.target.setAttribute("value","false");
+   
         $(ens_group_hash).removeClass("d-none");
+        $(ens_group_hash).find('select').attr('required','');
+
+        $(pers_group_hash).addClass("d-none");
         document.getElementById(pers_input_id).value = "";
+        document.getElementById(pers_input_id).removeAttribute("required");
+        
         }
     };
     

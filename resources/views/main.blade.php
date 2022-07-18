@@ -147,9 +147,34 @@
                         @csrf 
                         <!-- @csrf is mandatory for forms with post method -->
                         <div class="row no-gutters text-center">
-                          <div class="col-sm-12 text center">
-                            <h3 class="fw-bold mb-3">Required input</h3>
+                          <div class="col-sm-4 text-start">
+
+                            <div class="modal fade" id="case1explanation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="case1explanationTitle" style="display: none;" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title w-100 text-center" id="case1explanationTitle">BED vs GTF</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>
+                                      My BED file against a GTF.<br><br>I have a set of regions, I want to see which gene-centric elements they are enriched with.
+                                    </p>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case1explanation">
+                              Case details
+                            </button>
                           </div>
+                          <div class="col-sm-4">
+                            <h3 class="fw-bold mb-5">Required input</h3>
+                          </div>
+                          
+                          
                         </div>
     
                         <div class="row no-gutters text-center" id="case1-required" data-title="Required options" data-intro="On the left side you have your required options.">
@@ -173,7 +198,7 @@
                                 title="Choose reference GTF directly from Ensembl."></i></p>
                               <div class="input-group-sm mb-1 ">  
                                 <select class="form-select" aria-label="Default select example" id="ens_gtf1" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                title="Choose reference GTF directly from Ensembl">
+                                title="Choose reference GTF directly from Ensembl" required>
                                     <option selected></option>
                                     @foreach ($links as $link)
                                     <option value="{{ $link }}" >{{ $link }}</option>
@@ -223,7 +248,7 @@
                                 title="Choose chromosome sizes directly from Ensembl"></i></p>
                               <div class="input-group-sm mb-1 ">  
                                 <select class="form-select" aria-label="Default select example" id="ens_chr1" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                title="Choose chromosome sizes directly from Ensembl">
+                                title="Choose chromosome sizes directly from Ensembl" required>
                                     <option selected></option>
                                     @foreach ($links as $link)
                                     <option value="{{ $link }}" >{{ $link }}</option>
@@ -381,9 +406,34 @@
                     <!-- @csrf is mandatory for forms with post method -->
     
                     <div class="row no-gutters text-center">
-                      <div class="col-sm-12 text center">
-                        <h3 class="fw-bold mb-3">Required input</h3>
+                      <div class="col-sm-4 text-start">
+
+                        <div class="modal fade" id="case2explanation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="case2explanationTitle" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title w-100 text-center" id="case2explanationTitle">BED vs GTF (keys)</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  My BED file against keys/values from a GTF.<br><br>I have a set of regions, I want to see which value from any GTF key they are associated with (e.g. lncRNA, snoRNA, miRNA...  from gene_biotype key).
+                                </p>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case2explanation">
+                          Case details
+                        </button>
                       </div>
+                      <div class="col-sm-4">
+                        <h3 class="fw-bold mb-5">Required input</h3>
+                      </div>
+                      
+                      
                     </div>
     
                     <div class="row no-gutters text-center">
@@ -400,11 +450,11 @@
                         </div>
                         
                         <div id="ensgtf2input">
-                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                             title="Choose reference GTF directly from Ensembl."></i></p>
                           <div class="input-group-sm mb-1"> 
                             <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose reference GTF directly from Ensembl">
+                            title="Choose reference GTF directly from Ensembl" required>
                                 <option selected></option>
                                 @foreach ($links as $link)
                                 <option value="{{ $link }}" >{{ $link }}</option>
@@ -444,7 +494,7 @@
                           title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></i></p>
                         <div class="input-group-sm mb-3">
                           <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys" id="keys">{{ old('keys') }}</textarea>
+                          title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys" id="keys" required>{{ old('keys') }}</textarea>
                         </div>
 
                         
@@ -459,7 +509,7 @@
                             title="Choose chromosome sizes directly from Ensembl"></i></p>
                           <div class="input-group-sm mb-1">  
                             <select class="form-select" aria-label="Default select example" id="ens_chr2" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose chromosome sizes directly from Ensembl">
+                            title="Choose chromosome sizes directly from Ensembl" required>
                                 <option selected></option>
                                 @foreach ($links as $link)
                                 <option value="{{ $link }}" >{{ $link }}</option>
@@ -614,9 +664,34 @@
                     @csrf 
                     <!-- @csrf is mandatory for forms with post method -->
                     <div class="row no-gutters text-center">
-                      <div class="col-sm-12 text center">
-                        <h3 class="fw-bold mb-3">Required input</h3>
+                      <div class="col-sm-4 text-start">
+
+                        <div class="modal fade" id="case3explanation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="case3explanationTitle" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title  w-100 text-center" id="case3explanationTitle">BED vs BED</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  My BED file against a set of BED files.<br><br>I have a set of regions, I want to see which set of regions they are enriched with.
+                                </p>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case3explanation">
+                          Case details
+                        </button>
                       </div>
+                      <div class="col-sm-4">
+                        <h3 class="fw-bold mb-5">Required input</h3>
+                      </div>
+                      
+                      
                     </div>
     
     
@@ -652,7 +727,7 @@
                           title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>
                         <div class="input-group-sm mb-3">
                           <input class="form-control" type="file" id="mbed3" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Ref BED : A list of bed files to be considered as genomic annotations.">
+                          title="Ref BED : A list of bed files to be considered as genomic annotations." required>
                         </div>
     
 
@@ -661,7 +736,7 @@
                             title="Choose chromosome sizes directly from Ensembl"></i></p>
                           <div class="input-group-sm mb-1 ">  
                             <select class="form-select" aria-label="Default select example" id="ens_chr3" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Choose chromosome sizes directly from Ensembl">
+                            title="Choose chromosome sizes directly from Ensembl" required>
                                 <option selected></option>
                                 @foreach ($links as $link)
                                 <option value="{{ $link }}" >{{ $link }}</option>
@@ -814,9 +889,34 @@
                         <!-- @csrf is mandatory for forms with post method -->
     
                         <div class="row no-gutters text-center">
-                          <div class="col-sm-12 text center">
-                            <h3 class="fw-bold mb-3">Required input</h3>
+                          <div class="col-sm-4 text-start">
+
+                            <div class="modal fade" id="case4explanation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="case4explanationTitle" style="display: none;" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title w-100 text-center" id="case4explanationTitle">BED vs BED (combinations)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>
+                                      My BED file against a set of BED files to find combinations.<br><br>I have a set of regions, I want to find n-wise overlaps of genomic features (n > 2).<br><br>Think about using BED inclusion file to enforce statistical power.
+                                    </p>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#case4explanation">
+                              Case details
+                            </button>
                           </div>
+                          <div class="col-sm-4">
+                            <h3 class="fw-bold mb-5">Required input</h3>
+                          </div>
+                          
+                          
                         </div>
     
                         <div class="row no-gutters text-center">
@@ -847,7 +947,7 @@
                               title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>    
                             <div class="input-group-sm mb-3">
                               <input class="form-control" type="file" id="mbed4" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
-                              title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
+                              title="Ref BED : A list of bed files that contains locations of  potential interactors of query." required>
                             </div>
                             
                             <div id="enschr4input">
@@ -855,7 +955,7 @@
                                 title="Choose chromosome sizes directly from Ensembl"></i></p>
                               <div class="input-group-sm mb-1 ">  
                                 <select class="form-select" aria-label="Default select example" id="ens_chr4" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                                title="Choose chromosome sizes directly from Ensembl">
+                                title="Choose chromosome sizes directly from Ensembl" required>
                                     <option selected></option>
                                     @foreach ($links as $link)
                                     <option value="{{ $link }}" >{{ $link }}</option>
