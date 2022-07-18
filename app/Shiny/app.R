@@ -35,21 +35,36 @@ themes_avail <- loading_available_themes()
 #--------------------------------------------------------------
 
 
-ui <- dashboardPage(skin = "black",
-      dashboardHeader(title = "Web_OLOGRAM"),
+ui <- dashboardPage(skin = "red",
+      dashboardHeader(title = "Web_OLOGRAM results", titleWidth = 250),
       dashboardSidebar(
+                      width=250,
                       sidebarMenu(
-                        menuItem("Bar plot", tabName = "Barplot"),
-                        menuItem("Volcano plot", tabName = "Volcanoplot"),
-                        menuItem("table", tabName = "Table")
+                        menuItem("Bar plot", tabName = "Barplot",icon=icon("bar-chart")),
+                        menuItem("Volcano plot", tabName = "Volcanoplot",icon=icon("area-chart")),
+                        menuItem("Results table", tabName = "Table",icon=icon("table"))
                       )
         ),
       dashboardBody(
+          tags$head(tags$style(HTML('
+                                    .main-header .logo {
+                                      font-family: "Noto Sans", Times, "Times New Roman", serif;
+                                      font-size: 24px;
+                                    }
+                                    .skin-red .main-header .navbar {background-color: #222d32}
+                                    .skin-red .main-header .logo {
+                                                                    background-color: #222d32;
+                                                                    color: white;
+                                                                    border-bottom: solid;
+                                                                    border-color: white}
+                                    .skin-red .main-header .navbar .sidebar-toggle {color: white}
+                                    .skin-red .main-sidebar {border: solid; border-color: white}
+                                  '))),
           tabItems(
             tabItem("Barplot",
               fluidRow(
-                box(
-                      width = 3, status = "info",
+                box(  collapsible = TRUE,
+                      width = 3, status = "warning",
                       title = "Barplot Input",
                       # switchInput(inputId = "barplot_coordflip_input",label="Flip Coordinates", value = FALSE,width = NULL),
                       materialSwitch(inputId = "barplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
@@ -100,8 +115,8 @@ ui <- dashboardPage(skin = "black",
             ),
             tabItem("Volcanoplot",
               fluidRow(
-                box(
-                      width = 3, status = "info",
+                box(  collapsible = TRUE,
+                      width = 3, status = "warning",
                       title = "Volcanoplot Input",
                       # br(),
                       # Input: Dopdown for Satistics to use ----
@@ -135,6 +150,9 @@ ui <- dashboardPage(skin = "black",
             tabItem("Table",
               fluidRow(
                 box(width = 12,
+                    solidHeader = TRUE,
+                    status = "info",
+                    title = "Results Table",
                     DT::dataTableOutput("table")
                   )
               )
@@ -218,7 +236,7 @@ server <- function(input, output,session) {
       barly
     }
   })
-  
+
   volcano_plot <- reactive({
     user_volcano_table <- prepare_volcanoplot()
     if (!is.null(user_volcano_table)) {
