@@ -99,9 +99,9 @@
                         
                         
                         <p class="text-start  mb-1 mt-1"><i class="bi bi-bug-fill"></i></i> Description <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                            title="Detailed description of the issue encountered"></i></p>
-                        <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" placeholder="Brief description"
-                        title="Brief description of the issue encountered" name="description" id="description" style="height: 150px" required>{{ old('description') }}</textarea>
+                            title="Brief description of the issue encountered"></i></p>
+                        <textarea class="form-control" aria-label="With textarea"  placeholder="Brief description"
+                        name="description" id="description" style="height: 150px" required>{{ old('description') }}</textarea>
                         
                         <button type="submit" class="btn btn-dark btn-lg mt-3">Submit report</button></br><br>
 

@@ -84,13 +84,13 @@
     
                             <p class="text-start  mb-1 mt-1"><i class="bi bi-flag-fill"></i> Subject <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                 title="Subject of your message"></i></p>
-                            <input type="text" class="form-control" placeholder="Issue title" id="subject" name="subject" value="{{ old('subject') }}" required>
+                            <input type="text" class="form-control" placeholder="Message subject" id="subject" name="subject" value="{{ old('subject') }}" required>
                             
                             
                             <p class="text-start  mb-1 mt-1"><i class="bi bi-chat-left-dots"></i> Message <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                 title="Your personal message"></i></p>
-                            <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" placeholder="Brief description"
-                            title="Your personal message" name="message" id="message" style="height: 150px" required>{{ old('message') }}</textarea>
+                            <textarea class="form-control" aria-label="With textarea" placeholder="Your personal message"
+                            name="message" id="message" style="height: 150px" required>{{ old('message') }}</textarea>
                             
                             <button type="submit" class="btn btn-dark btn-lg mt-3">Send message</button></br><br>
     
