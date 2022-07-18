@@ -46,8 +46,39 @@
                             ens_input_id="ens_chr1",
                             pers_input_id="chr1")
             });
-
         
+        $('#gtfswitch2').click(function(event){
+            switch_function(event,
+                            ens_group_hash="#ensgtf2input",
+                            pers_group_hash="#gtf2input",
+                            ens_input_id="ens_gtf2",
+                            pers_input_id="gtf2")
+            });
+
+        $('#chrswitch2').click(function(event){
+            switch_function(event,
+                            ens_group_hash="#enschr2input",
+                            pers_group_hash="#chr2input",
+                            ens_input_id="ens_chr2",
+                            pers_input_id="chr2")
+            });
+
+        $('#chrswitch3').click(function(event){
+            switch_function(event,
+                            ens_group_hash="#enschr3input",
+                            pers_group_hash="#chr3input",
+                            ens_input_id="ens_chr3",
+                            pers_input_id="chr3")
+            });
+
+        $('#chrswitch4').click(function(event){
+            switch_function(event,
+                            ens_group_hash="#enschr4input",
+                            pers_group_hash="#chr4input",
+                            ens_input_id="ens_chr4",
+                            pers_input_id="chr4")
+            });
+    
         // Demo button tour with intro.js
         $('#demoButton').click(function(event){
             $(".tab-pane").removeClass("show active");

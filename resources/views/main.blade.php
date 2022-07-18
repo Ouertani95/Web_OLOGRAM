@@ -162,27 +162,12 @@
                             <input type="hidden" name="caseId" value="case1">
     
                             <p class="text-start  mb-1"><i class="bi bi-envelope"></i> Email <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                              title="Required email address to send the final results to."></i></p>
-    
+                              title="Required email address to send the final results to."></i></p> 
                             <div class="input-group-sm mb-3 ">
                               <input type="email" class="form-control form-control-sm" id="email1" name='email' value="{{ old('email') }}" placeholder="name@example.com"
                               data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                             </div>
-    
-                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
-                              title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
-                       
-                            <div class="input-group-sm mb-3">
-                              <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" data-title="BED file" data-intro="This is the BED file containing the set of regions for which the enrichment will be calculated."
-                              title="BED file containing the set of regions for which the enrichment will be calculated." required>
-                            </div>
-                           
-    
                             
-                          </div>
-                            
-                          <div class="col-sm-6 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
-    
                             <div id="ensgtf1input">
                               <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                                 title="Choose reference GTF directly from Ensembl."></i></p>
@@ -210,6 +195,21 @@
                             <div class="form-check form-switch text-start mb-3">
                               <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
                               <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
+                            </div>
+
+                           
+                           
+    
+                            
+                          </div>
+                            
+                          <div class="col-sm-6 text-center" data-title="Required options" data-intro="On the left side you have your required options.">
+    
+                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" id="bed1-info" data-bs-toggle="tooltip" data-bs-placement="top" 
+                              title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
+                            <div class="input-group-sm mb-3">
+                              <input class="form-control "  id="bed1" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" data-title="BED file" data-intro="This is the BED file containing the set of regions for which the enrichment will be calculated."
+                              title="BED file containing the set of regions for which the enrichment will be calculated." required>
                             </div>
     
                             
@@ -398,55 +398,90 @@
                           <input type="email" class="form-control form-control-sm" id="email2" name='email' value="{{ old('email') }}" placeholder="name@example.com"
                           data-bs-toggle="tooltip" data-bs-placement="top" title="Required email address to send the final results to." required>
                         </div>
-    
-    
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
-                        <div class="input-group-sm mb-3">
-                          <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                        
+                        <div id="ensgtf2input">
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose reference GTF directly from Ensembl."></i></p>
+                          <div class="input-group-sm mb-1"> 
+                            <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose reference GTF directly from Ensembl">
+                                <option selected></option>
+                                @foreach ($links as $link)
+                                <option value="{{ $link }}" >{{ $link }}</option>
+                                @endforeach
+                            </select>
+                          </div>
                         </div>
+
+                        <div class="d-none" id="gtf2input">
+                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Reference GTF file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…)."></i></p>
+                          <div class="input-group-sm mb-1">
+                            <input class="form-control " id="gtf2" name="gtf" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="The GTF file of interest. Enrichment of the query will be calculated against the features it describes (e.g. exon, transcript, promoter…).">
+                          </div>
+                        </div>
+
+                        <div class="form-check form-switch text-start mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch2" value="false">
+                          <label class="form-check-label" for="gtfswitch2">Use personal GTF file</label>
+                        </div>
+
+                        
     
                       </div>
     
                       <div class="col-sm-4 text-center">
-    
+
                         <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Query BED file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated."></i></p>
                         <div class="input-group-sm mb-3">
                           <input class="form-control " id="bed2" name="bed" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="BED file containing the set of regions for which the enrichment will be calculated." required>
                         </div>
-    
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-                        <div class="input-group-sm mb-3">
-                          <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
-                        </div>
-    
-                      </div>
-    
-                      <div class="col-sm-4 text-center">
-    
-                        <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl GTF + Chromosome sizes <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Choose reference GTF directly from Ensembl."></i></p>
-                        <div class="input-group-sm mb-3 "> 
-                          <select class="form-select" aria-label="Default select example" id="ens_gtf2" name="ens_gtf" value="{{ old("ens_gtf") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Choose reference GTF directly from Ensembl">
-                              <option selected></option>
-                              @foreach ($links as $link)
-                              <option value="{{ $link }}" >{{ $link }}</option>
-                              @endforeach
-                          </select>
-                        </div>
-    
+                        
                         <p class="text-start  mb-1"><i class="bi bi-card-list"></i> GTF keys <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'"></i></p>
                         <div class="input-group-sm mb-3">
                           <textarea class="form-control" aria-label="With textarea" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="GTF keys : A comma separated list of GTF keys used for annoting the genome Default: 'gene_biotype'" name="keys" id="keys">{{ old('keys') }}</textarea>
                         </div>
+
+                        
+    
+                      </div>
+    
+                      <div class="col-sm-4 text-center">
+
+                            
+                        <div id="enschr2input">
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl"></i></p>
+                          <div class="input-group-sm mb-1">  
+                            <select class="form-select" aria-label="Default select example" id="ens_chr2" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl">
+                                <option selected></option>
+                                @foreach ($links as $link)
+                                <option value="{{ $link }}" >{{ $link }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        </div>
+                        
+                        <div class="d-none" id="chr2input">
+                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+                          <div class="input-group-sm mb-1">
+                            <input class="form-control " id="chr2" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                          </div>
+                        </div>  
+
+                        <div class="form-check form-switch text-start mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch2" value="false">
+                          <label class="form-check-label" for="chrswitch2">Use personal CHR file</label>
+                        </div>
+                        
     
                         
     
@@ -615,18 +650,38 @@
     
                         <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>
-    
                         <div class="input-group-sm mb-3">
                           <input class="form-control" type="file" id="mbed3" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                           title="Ref BED : A list of bed files to be considered as genomic annotations.">
                         </div>
     
-                        <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
-    
-                        <div class="input-group-sm mb-3">
-                          <input class="form-control " id="chr3" type="file" name="chr" data-bs-toggle="tooltip" data-bs-placement="top" 
-                          title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+
+                        <div id="enschr3input">
+                          <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl"></i></p>
+                          <div class="input-group-sm mb-1 ">  
+                            <select class="form-select" aria-label="Default select example" id="ens_chr3" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Choose chromosome sizes directly from Ensembl">
+                                <option selected></option>
+                                @foreach ($links as $link)
+                                <option value="{{ $link }}" >{{ $link }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="d-none" id="chr3input">
+                          <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>
+                          <div class="input-group-sm mb-1">
+                            <input class="form-control " id="chr3" type="file" name="chr" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                          </div>
+                        </div>
+
+                        <div class="form-check form-switch text-start mb-3">
+                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch3" value="false">
+                          <label class="form-check-label" for="chrswitch3">Use personal CHR file</label>
                         </div>
     
                       </div>
@@ -790,18 +845,37 @@
     
                             <p class="text-start  mb-1"><i class="bi bi-files"></i> Reference BED files <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
                               title="Ref BED : A list of bed files to be considered as genomic annotations."></i></p>    
-    
                             <div class="input-group-sm mb-3">
                               <input class="form-control" type="file" id="mbed4" name="mbed[]" multiple data-bs-toggle="tooltip" data-bs-placement="top" 
                               title="Ref BED : A list of bed files that contains locations of  potential interactors of query.">
                             </div>
-    
-                            <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
-                              title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>    
-    
-                            <div class="input-group-sm mb-3">
-                              <input class="form-control " id="chr4" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
-                              title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                            
+                            <div id="enschr4input">
+                              <p class="text-start  mb-1"><i class="bi bi-files"></i> Ensembl chrmosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose chromosome sizes directly from Ensembl"></i></p>
+                              <div class="input-group-sm mb-1 ">  
+                                <select class="form-select" aria-label="Default select example" id="ens_chr4" name="ens_chr" value="{{ old("ens_chr") }}" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Choose chromosome sizes directly from Ensembl">
+                                    <option selected></option>
+                                    @foreach ($links as $link)
+                                    <option value="{{ $link }}" >{{ $link }}</option>
+                                    @endforeach
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="d-none" id="chr4input">
+                              <p class="text-start  mb-1"><i class="bi bi-file-earmark-arrow-up"></i> Chromosome sizes file <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2."></i></p>    
+                              <div class="input-group-sm mb-1">
+                                <input class="form-control " id="chr4" name="chr" type="file" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                title="Chromosome sizes ; Tabulated two-columns file. Chromosomes as column 1, sizes as column 2.">
+                              </div>
+                            </div>
+
+                            <div class="form-check form-switch text-start mb-3">
+                              <input class="form-check-input" type="checkbox" role="switch" id="chrswitch4" value="false">
+                              <label class="form-check-label" for="chrswitch4">Use personal CHR file</label>
                             </div>
     
     
