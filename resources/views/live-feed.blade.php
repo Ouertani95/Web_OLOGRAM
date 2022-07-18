@@ -7,43 +7,7 @@
 
   <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-5.1.3.min.css") }}>
   <link rel="stylesheet" type="text/css" href={{ asset("css/bootstrap-icons-1.8.3/bootstrap-icons.css") }}>
-  <style>
-    /*Code to change color of active link*/
-    .nav-link.border.active {
-        background-color: #212529;
-    }
-    .nav-link.border {
-        color: black;
-    }
-    .nav-link.border:hover {
-        color: salmon;
-    }
-    .btn:hover {
-        color: salmon;
-    }
-    .accordion-button {
-      background-color: white;
-      color: black;
-    }
-
-    .accordion-header>button:hover {
-      color: salmon;
-    }
-
-    .accordion-button:not(.collapsed) {
-      background-color: white;
-      color: black;
-      text-align: center;
-    }
-
-    .bi.bi-info-circle:hover {
-      color: salmon;
-    }
-    .bi.bi-info-circle {
-      color:teal;
-    }
-    
-</style>
+  <link rel="stylesheet" type="text/css" href={{ asset("css/custom.css") }}>
 
     <title>live-feed</title>
 </head>
@@ -65,7 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item border-end">
-            <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
+            <a class="nav-link" aria-current="page" id="homeButton" href="/"><i class="bi bi-house"></i> Home</a>
           </li>
           <li class="nav-item border-end">
             <a class="nav-link" aria-current="page" href="/about" target="_blank" rel=noopener><i class="fa-solid fa-person-chalkboard"></i> About</a>
@@ -75,6 +39,8 @@
               <i class="fa-solid fa-book"></i> Documentation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/index.html" target="_blank" rel=noopener><i class="bi bi-github"></i> PYGTFTK</a></li>
+              <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="https://dputhier.github.io/pygtftk/ologram.html" target="_blank" rel=noopener><i class="bi bi-github"></i> OLOGRAM</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="https://github.com/Ouertani95/Web_OLOGRAM" target="_blank" rel=noopener><i class="bi bi-github"></i> Web-OLOGRAM</a></li>
