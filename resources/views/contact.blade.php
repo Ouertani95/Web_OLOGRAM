@@ -62,6 +62,12 @@
             <div class="row">
                 <div class="col text-center">
                     <h1 class="mt-3"> Contact us </h1><br>
+                    <!-- this part is needed to show the success message from the routing file with post -->
+                    @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                            <div id="success_field">{!! \Session::get('success') !!}</div>
+                    </div>
+                    @endif
                 </div>
             </div>
     
