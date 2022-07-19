@@ -217,7 +217,7 @@
                               </div>
                             </div>
     
-                            <div class="form-check form-switch text-start mb-3">
+                            <div class="form-check form-switch text-start mb-3" id="switchgroup">
                               <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
                               <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
                             </div>

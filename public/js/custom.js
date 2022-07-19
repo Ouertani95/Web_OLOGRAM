@@ -125,6 +125,12 @@
                 position: 'bottom'
             },
             {
+                title: 'Personal files',
+                element: document.querySelector('#switchgroup'),
+                intro: "Some fields like GTF and Chromosome sizes files offer the possibility to upload your own files instead of the suggested options through this simple switch.",
+                position: 'bottom'
+            },
+            {
                 title: 'Advanced options',
                 element: document.querySelector('#heading1-advanced'),
                 onbeforechange: function(){
