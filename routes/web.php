@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\DisplayIssuesController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\IssuesController;
 use Illuminate\Support\Facades\Route;
@@ -57,3 +58,5 @@ Route::view("/contact","contact");
 Route::post('/contact', [ContactsController::class,'sendContact']);
 
 Route::view("/mail","mail");
+
+Route::get("/display-issues",[DisplayIssuesController::class,'DisplayIssues']);
