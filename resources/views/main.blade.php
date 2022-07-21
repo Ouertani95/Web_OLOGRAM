@@ -62,11 +62,11 @@
   </nav>
   
   {{-- This is where the main components will be placed --}}
-  <div class="container mb-5 mt-5 pt-3">
+  <div class="container mb-5 mt-7 pt-3 ">
 
     <div class="row">
       <div class="col text-center">
-        <h1 class="mt-3"> WELCOME TO OLOGRAM </h1><br>
+        <h1 class="mt-2 mb-4"> WELCOME TO OLOGRAM </h1><br>
 
         <!-- this part is needed to show the success message from the routing file with post -->
         @if (\Session::has('success'))
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-6">
       <div class="col text-center">
         <nav>
           <div class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tab-list" data-title="Different cases" data-intro="These are the different cases of analysis for your BED files.">
@@ -218,7 +218,7 @@
                             </div>
     
                             <div class="form-check form-switch text-start mb-3" id="switchgroup">
-                              <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch1" value="false">
+                              <input class="form-check-input border border-primary" type="checkbox" role="switch" id="gtfswitch1" value="false">
                               <label class="form-check-label" for="gtfswitch1">Use personal GTF file</label>
                             </div>
 
@@ -267,8 +267,8 @@
                             </div>
     
                             <div class="form-check form-switch text-start mb-3">
-                              <input class="form-check-input" type="checkbox" role="switch" id="chrswitch1" value="false">
-                              <label class="form-check-label" for="chrswitch1">Use personal CHR file</label>
+                              <input class="form-check-input border border-primary" type="checkbox" role="switch" id="chrswitch1" value="false">
+                              <label class="form-check-label" for="chrswitch1">Use personal chromosome sizes file</label>
                             </div>
                             
     
@@ -473,7 +473,7 @@
                         </div>
 
                         <div class="form-check form-switch text-start mb-3">
-                          <input class="form-check-input" type="checkbox" role="switch" id="gtfswitch2" value="false">
+                          <input class="form-check-input border border-primary" type="checkbox" role="switch" id="gtfswitch2" value="false">
                           <label class="form-check-label" for="gtfswitch2">Use personal GTF file</label>
                         </div>
 
@@ -528,8 +528,8 @@
                         </div>  
 
                         <div class="form-check form-switch text-start mb-3">
-                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch2" value="false">
-                          <label class="form-check-label" for="chrswitch2">Use personal CHR file</label>
+                          <input class="form-check-input border border-primary" type="checkbox" role="switch" id="chrswitch2" value="false">
+                          <label class="form-check-label" for="chrswitch2">Use personal chromosome sizes file</label>
                         </div>
                         
     
@@ -755,8 +755,8 @@
                         </div>
 
                         <div class="form-check form-switch text-start mb-3">
-                          <input class="form-check-input" type="checkbox" role="switch" id="chrswitch3" value="false">
-                          <label class="form-check-label" for="chrswitch3">Use personal CHR file</label>
+                          <input class="form-check-input border border-primary" type="checkbox" role="switch" id="chrswitch3" value="false">
+                          <label class="form-check-label" for="chrswitch3">Use personal chromosome sizes file</label>
                         </div>
     
                       </div>
@@ -974,8 +974,8 @@
                             </div>
 
                             <div class="form-check form-switch text-start mb-3">
-                              <input class="form-check-input" type="checkbox" role="switch" id="chrswitch4" value="false">
-                              <label class="form-check-label" for="chrswitch4">Use personal CHR file</label>
+                              <input class="form-check-input border border-primary" type="checkbox" role="switch" id="chrswitch4" value="false">
+                              <label class="form-check-label" for="chrswitch4">Use personal chromosome sizes file</label>
                             </div>
     
     
