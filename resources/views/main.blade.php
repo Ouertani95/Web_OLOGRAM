@@ -62,7 +62,7 @@
   </nav>
   
   {{-- This is where the main components will be placed --}}
-  <div class="container mb-5 mt-7 pt-3 ">
+  <div class="container mb-5 mt-6 pt-3 ">
 
     <div class="row">
       <div class="col text-center">
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div class="row justify-content-center mt-6">
+    <div class="row justify-content-center mt-4">
       <div class="col text-center">
         <nav>
           <div class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tab-list" data-title="Different cases" data-intro="These are the different cases of analysis for your BED files.">
