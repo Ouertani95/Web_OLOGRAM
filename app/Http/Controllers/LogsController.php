@@ -16,6 +16,7 @@ class LogsController extends Controller
         $status_request =  Job::where('location_id', $id)
                         ->get()
                         ->pluck('status');
+        // Catch error if id does not exist in database and return 404 error
         try {
             $status = $status_request[0];
         } catch (\Throwable $e) {
@@ -31,24 +32,23 @@ class LogsController extends Controller
         $case = $recovered_args_array["caseId"];
 
         // Prepare and filter log file if it exists 
-        $file_name = "../ologram_results/$id/ologram.log";
-
-        if(file_exists($file_name)){
-            $file_content_string = file_get_contents($file_name);
-            $file_content_array = explode("\n",$file_content_string );
+        $log_file = "../ologram_results/$id/ologram.log";
+        if(file_exists($log_file)){
+            $log_content_string = file_get_contents($log_file);
+            $log_content_array = explode("\n",$log_content_string );
             $words_list = array("python","conda","docker","threads");
-            foreach($file_content_array as $index => $line) {
+            foreach($log_content_array as $index => $line) {
                 if (str_contains($line,$id)){
                     $line = str_replace("$id/","",$line);
-                    $file_content_array[$index] = $line;
+                    $log_content_array[$index] = $line;
                 }
                 if (str_contains($line,"-WARNING")){
                     $line = str_replace("-WARNING","",$line);
-                    $file_content_array[$index] = $line;
+                    $log_content_array[$index] = $line;
                 }
                 foreach ($words_list as $word){
                     if(str_contains($line,$word)) {
-                        unset($file_content_array[$index]);
+                        unset($log_content_array[$index]);
                         break;
                     }
                 }
@@ -56,8 +56,8 @@ class LogsController extends Controller
             }
         }
         else{
-            $file_content_string = "";
-            $file_content_array = array("Loading ...") ;
+            $log_content_string = "";
+            $log_content_array = array("Loading ...") ;
         }
 
 
@@ -69,41 +69,52 @@ class LogsController extends Controller
             session()->now('running','Your request is running ... ');
         }
         elseif($status === "success"){
+
+            // Get current app URL (localhost or IP ,...)
+            $current_address = env("APP_URL");
+
+            // Create filtered log file
+            $filtered_log_content_string = implode("\n",$log_content_array);
+            file_put_contents("../ologram_results/$id/ologram_request.log",$filtered_log_content_string);
+            $log_link = "$current_address/download/log/$id" ;
+            
+            // Prepare results link
             $results_directory = "../ologram_results/$id/";
             $available_files = scandir($results_directory);
             foreach ($available_files as $file) {
                 if (str_ends_with($file,".tsv")){
-                    $current_address = env("APP_URL");
                     $dash_link = "$current_address/results/$id/$file";
                     $dash_link = str_replace("../ologram_results/","",$dash_link);
                     
                 }
             }
+
+            // Prepare file download buttons if Ensembl GTF or CHR options are chosen
+            if (array_key_exists("ens_gtf",$recovered_args_array)&&array_key_exists("ens_chr",$recovered_args_array)) {
+                $download_link = $current_address."/download/ens/".$recovered_args_array["ens_gtf"] ;
+                session()->now('download_gtf_chr',$download_link);
+            }
+            elseif (array_key_exists("ens_gtf",$recovered_args_array)){
+                $download_link = $current_address."/download/ens/".$recovered_args_array["ens_gtf"] ;
+                session()->now('download_gtf',$download_link);
+            }
+            elseif (array_key_exists("ens_chr",$recovered_args_array)) {
+                $download_link = $current_address."/download/ens/".$recovered_args_array["ens_chr"]."/chr" ;
+                session()->now('download_chr',$download_link);
+            }
+
+            // Prepare request ologram command
             $command = file_get_contents("../ologram_results/$id/command.txt");
 
-            // Prepare for download button if Ensembl GTF + CHR is used
-            $Ensembl_directories = Storage::directories("Ensembl_GTF");
-            // Remove parent directory name
-            foreach ($Ensembl_directories as $index=>$directory){
-                $Ensembl_directories[$index] = str_replace("Ensembl_GTF/","",$directory);
-            }
-            // Search for Ensembl GTF name in command
-            foreach ($Ensembl_directories as $directory){
-                if (str_contains($command,$directory)){
-                    $current_address = env("APP_URL");
-                    $download_link = $current_address."/download/$directory";
-                    session()->now('download',$download_link);
-                    session()->now('success', $dash_link);
-                    return view("live-feed")->with(['file' => $file_content_array,'command'=>$command]);
-                }
-        }
-
+            // Return view with command, results link and log
             session()->now('success', $dash_link);
-            return view("live-feed")->with(['file' => $file_content_array,'command'=>$command]);
+            return view("live-feed")->with(['file' => $log_content_array
+                                            ,'command' => $command
+                                            ,'log' => $log_link]);
         }
         elseif($status === "error"){
             $msg = "Your request failed with the following error(s): <br>";
-            foreach ($file_content_array as $line){
+            foreach ($log_content_array as $line){
                 if ((str_contains($line ,"ERROR"))){
                     $msg .= "$line<br>";
                 }
@@ -117,6 +128,6 @@ class LogsController extends Controller
         }
 
         // Show the page with the corresponding message
-        return view("live-feed")->with(['file' => $file_content_array]);
+        return view("live-feed")->with(['file' => $log_content_array]);
     }
 }

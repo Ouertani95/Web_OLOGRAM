@@ -8,10 +8,17 @@ use ZipArchive;
 
 class DownloadController extends Controller
 {
-    public function download_files($species)
-    {
-
-        return Storage::download("Ensembl_GTF/$species.zip");
+    public function download_files($file_type,$id,$optional_input="")
+    {   if($file_type==="ens"){
+            if ($optional_input === "chr") {
+                return Storage::download("Ensembl_GTF/$id/$id.chrominfo");
+            }
+        return Storage::download("Ensembl_GTF/$id.zip");
+        }
+        if($file_type==="log"){
+            return Storage::download("$id/ologram_request.log");
+        }
+        
 
     }
 }

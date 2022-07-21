@@ -40,7 +40,7 @@ Route::get('/live-feed/{id?}', [LogsController::class,'display_log']);
 
 Route::view("/test","test");
 
-Route::get('/download/{species?}', [DownloadController::class,'download_files']);
+Route::get('/download/{file_type?}/{id?}/{optional_input?}', [DownloadController::class,'download_files']);
 
 Route::get('/results/{id?}/{file?}', function($id,$file) {
     
