@@ -103,6 +103,7 @@ loading_and_preparing_ologram_table_barplot <- function(table_path){
   #---------------------
   
   dmm = bind_rows(dmm_n, dmm_s)
+  dmm$Significant = ifelse(dmm$Pval <= 0.05,"true","false")
   
   return(dmm)
 }

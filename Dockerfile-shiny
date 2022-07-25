@@ -39,4 +39,7 @@ RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
 RUN R -e 'install.packages("shinydashboard",dependencies=TRUE)'
 RUN R -e 'install.packages("shinyWidgets",dependencies=TRUE)'
 
+RUN R -e 'install.packages("shinydashboardPlus",dependencies=TRUE)'
+RUN R -e 'install.packages("colourpicker",dependencies=TRUE)'
+
 ENTRYPOINT ["Rscript", "app.R"]

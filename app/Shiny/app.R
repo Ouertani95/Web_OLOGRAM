@@ -15,8 +15,9 @@ library(plotly)
 library(DT)
 library(shinydashboard)
 library(shinyWidgets)
-# library(shinydashboardPlus)
+library(shinydashboardPlus)
 source("data_prep_functions.R")
+library(colourpicker)
 
 #--------------------------------------------------------------
 # Load shell files
@@ -40,8 +41,8 @@ ui <- dashboardPage(skin = "red",
       dashboardSidebar(
                       width=250,
                       sidebarMenu(
-                        menuItem("Bar plot", tabName = "Barplot",icon=icon("bar-chart")),
-                        menuItem("Volcano plot", tabName = "Volcanoplot",icon=icon("area-chart")),
+                        menuItem("Bar plot", tabName = "Barplot",icon=icon("chart-bar")),
+                        menuItem("Volcano plot", tabName = "Volcanoplot",icon=icon("chart-area")),
                         menuItem("Results table", tabName = "Table",icon=icon("table"))
                       )
         ),
@@ -59,92 +60,84 @@ ui <- dashboardPage(skin = "red",
                                                                     border-color: white}
                                     .skin-red .main-header .navbar .sidebar-toggle {color: white}
                                     .skin-red .main-sidebar {border: solid; border-color: white}
+                                    .direct-chat-contacts {padding: 20px 25px 20px 20px}
+                                    .plotly{height:70vh;}
+                                    .box{height: auto;}
                                   '))),
           tabItems(
             tabItem("Barplot",
               fluidRow(
-                box(  collapsible = TRUE,
-                      width = 3, status = "warning",
-                      title = "Barplot Input",
-                      # switchInput(inputId = "barplot_coordflip_input",label="Flip Coordinates", value = FALSE,width = NULL),
-                      materialSwitch(inputId = "barplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
-                      # checkboxInput("barplot_coordflip_input", "Flip Coordinates", value = FALSE, width = NULL),
-                      # Input: Dopdown for Satistics to use ----
-                      materialSwitch(inputId = "barplot_show_pvalue_input", label = "Show P-value", status = "primary", value = FALSE, width = NULL,right=TRUE),
-                      # checkboxInput("barplot_show_pvalue_input", "Show P-value", value = FALSE, width = NULL),
-                      selectInput(
-                        inputId="theme_input", 
-                        label="Theme",
-                        choices=themes_avail,
-                        selected = NULL,
-                        multiple = FALSE,
-                        selectize = TRUE,
-                        width = NULL,
-                        size = NULL
-                      ),
-                      # br(),
-                      # Input: Dopdown for Satistics to use ----
-                      selectInput(
-                        inputId="barplot_statistic_input", 
-                        label="Statistics",
-                        choices=sort(unique(user_barplot_table$Statistic)),
-                        selected = NULL,
-                        multiple = FALSE,
-                        selectize = TRUE,
-                        width = NULL,
-                        size = NULL
-                      ),
-                      pickerInput(
-                        inputId = "barplot_features_input", 
-                        label = "Features", 
-                        choices = sort(unique(user_barplot_table$Feature)), 
-                        options = list(
-                          `actions-box` = TRUE, 
-                          size = 10,
-                          `selected-text-format` = "count > 3"
-                        ), 
-                        multiple = TRUE
-                      )
-                  ),
-                box(
-                    width = 9, status = "info", solidHeader = TRUE,
-                    title = "Barplot Graph",
-                    plotlyOutput("barplot")
+                box(  solidHeader = TRUE,
+                      width = 12, status = "warning",
+                      title = "Barplot Graph",
+                      actionButton("update_bar", "Modify barplot",class = ""),
+                      sidebar = boxSidebar(
+                        id = "barplot_sidebar",
+                        width = 30,
+                        h4("Show / Hide",icon("info-circle")),
+                        br(),
+                        materialSwitch(inputId = "barplot_hide_pvalue_input", label = "Hide P-value", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                        materialSwitch(inputId = "barplot_show_fit_input", label = "Show Negative Binomial fit", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                        selectInput(inputId="barplot_reactivity_input",label="Reactivity",choices=c("Reactive","Static"),selected = "Reactive"), 
+                        selectInput(inputId="barplot_statistic_input",label="Statistics",choices=sort(unique(user_barplot_table$Statistic)),selected = NULL,multiple = FALSE,selectize = TRUE,width = NULL,size = NULL),
+                        pickerInput(inputId = "barplot_features_input", label = "Features",choices = sort(unique(user_barplot_table$Feature)), options = list(`actions-box` = TRUE, size = 10,`selected-text-format` = "count > 3"), multiple = TRUE),
+                        br(),
+                        h4("Title and labels"),
+                        br(),
+                        materialSwitch(inputId = "barplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
+                        textInput("Barx", "X axis label", "Feature"),
+                        numericInput("Barxangle", "X axis values angle", 45, min = 0, max = 90),
+                        textInput("Bary", "Y axis label", "Value"),
+                        textInput("Bartitle", "Barplot title",NULL),
+                        br(),
+                        h4("Theming"),
+                        br(),    
+                        selectInput(inputId="bar_theme_input", label="Theme",choices=themes_avail,selected = NULL,multiple = FALSE,selectize = TRUE,width = NULL,size = NULL),
+                        colourInput("colShuff", "Shuffled colour", "#FF7B00"),
+                        colourInput("colTrue", "True colour", "#00CCFF")
+                      ), 
+                      conditionalPanel("input.barplot_reactivity_input == 'Reactive'", plotlyOutput("bar_plotly",height = "70vh")),
+                      conditionalPanel("input.barplot_reactivity_input == 'Static'", plotOutput("bar_plot",height = "70vh")),
+                      conditionalPanel("input.barplot_reactivity_input == 'Static'", downloadButton("downloadBar", "Download barplot"))
                   )
               )
             ),
             tabItem("Volcanoplot",
               fluidRow(
-                box(  collapsible = TRUE,
-                      width = 3, status = "warning",
-                      title = "Volcanoplot Input",
-                      # br(),
-                      # Input: Dopdown for Satistics to use ----
-                      materialSwitch(inputId = "volcanoplot_coordflip_input", label = "Flip Coordinates", status = "primary", value = FALSE, width = NULL,right=TRUE),
-                      # checkboxInput("volcanoplot_coordflip_input", "Flip Coordinates", value = FALSE, width = NULL),
-                      selectInput(
-                        inputId="volcano_statistic_input", 
-                        label="Statistics",
-                        choices=c("Both", sort(unique(user_volcano_table$Statistic))),
-                        selected = NULL,
-                        multiple = FALSE,
-                        selectize = TRUE,
-                        width = NULL,
-                        size = NULL
+                box(  solidHeader = TRUE,
+                      width = 12, status = "warning",
+                      title = "Volcanoplot Graph",
+                      actionButton("update_volcano", "Modify volcanoplot"),
+                      sidebar = boxSidebar(title = "Volcanoplot input",
+                        id = "volcanoplot_sidebar",
+                        width = 30,
+                        h4("Show / Hide"),
+                        
+                        br(),
+                        selectInput(inputId="volcano_statistic_input",label="Statistics",choices=c("Both", sort(unique(user_volcano_table$Statistic))),selected = NULL,multiple = FALSE,selectize = TRUE,width = NULL,size = NULL),
+                        selectInput(inputId="volcanoplot_reactivity_input",label="Reactivity",choices=c("Reactive","Static"),selected = "Reactive"), 
+                        br(),
+                        h4("Title and labels"),
+                        br(),
+                        materialSwitch(inputId = "volcanoplot_coordflip_input",label = "Flip Coordinates",status = "primary",value = FALSE,width = NULL,right=TRUE),
+                        textInput("Volcanox", "X axis label", value="log2(FC)"),
+                        textInput("Volcanoy", "Y axis label", value="-log10(pvalue)"),
+                        textInput("Volcanotitle", "Volcanoplot title",value=""),
+                        br(),
+                        br(),
+                        h4("Theming"),
+                        br(),
+                        selectInput(inputId="volcano_theme_input", label="Theme",choices=themes_avail,selected = NULL,multiple = FALSE,selectize = TRUE,width = NULL,size = NULL),
+                        colourInput("col_N", "Number of intersections colour", "#FF7B00"),
+                        colourInput("col_S", "Overlap length colour", "#00CCFF")
+                             
                       ),
-                      selectInput(
-                        inputId="volcanoplot_reactivity_input", 
-                        label="Reactivity",
-                        choices=c("Reactive","Static"),
-                        selected = "Reactive"
-                      )
+                      conditionalPanel("input.volcanoplot_reactivity_input == 'Reactive'", plotlyOutput("volcano_plotly",height = "70vh")),
+                      conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot",height = "70vh")),
+                      conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", downloadButton("downloadVolcano", "Download volcanoplot"))
+                      
+                      
                   ),
-                box(
-                    width = 9, status = "info", solidHeader = TRUE,
-                    title = "Volcanoplot Graph",
-                    conditionalPanel("input.volcanoplot_reactivity_input == 'Reactive'", plotlyOutput("volcano_plotly")),
-                    conditionalPanel("input.volcanoplot_reactivity_input == 'Static'", plotOutput("volcano_plot"))
-                  )
               )
             ),
             tabItem("Table",
@@ -155,6 +148,7 @@ ui <- dashboardPage(skin = "red",
                     title = "Results Table",
                     DT::dataTableOutput("table")
                   )
+
               )
             )
           )
@@ -173,7 +167,7 @@ server <- function(input, output,session) {
   # Reactive expression to generate the requested distribution ----
   # This is called whenever the inputs change. The output functions
   # defined below then use the value computed from this expression
-  prepare_barplot <- reactive({
+  prepare_barplot_table <- reactive({
     query <- parseQueryString(session$clientData$url_search)
     if (!is.null(query[['file']])) {
       query[['file']]
@@ -187,7 +181,7 @@ server <- function(input, output,session) {
     }
   })
   
-  prepare_volcanoplot <- reactive({
+  prepare_volcanoplot_table <- reactive({
     query <- parseQueryString(session$clientData$url_search)
     if (!is.null(query[['file']])) {
       query[['file']]
@@ -202,9 +196,9 @@ server <- function(input, output,session) {
   # dependencies on the inputs and the data reactive expression are
   # both tracked, and all expressions are called in the sequence
   # implied by the dependency graph.
-  
-  output$barplot <- renderPlotly({
-    user_barplot_table <- prepare_barplot()
+
+  prepare_barplot <- reactive({
+    user_barplot_table <- prepare_barplot_table()
     if (!is.null(user_barplot_table)) {
       user_barplot_table <- user_barplot_table[user_barplot_table$Statistic == input$barplot_statistic_input,]
       user_barplot_table <- user_barplot_table[user_barplot_table$Feature %in% input$barplot_features_input,]
@@ -214,31 +208,63 @@ server <- function(input, output,session) {
       else
         coord_fliped <- NULL
       
-      if(!is.null(input$theme_input))
-        my_theme <- do.call(input$theme_input,list(base_size = 11))
+      if(!is.null(input$bar_theme_input))
+        my_theme <- do.call(input$bar_theme_input,list(base_size = 11))
       else
         my_theme <- do.call('theme_bw',list(base_size = 11))
+
+      if (input$barplot_statistic_input == 'Total overlap length per region type'){
+          abr <- " (S)"
+        }
+        else{
+          abr <- " (N)"
+        }
       
       bar <- ggplot(user_barplot_table, mapping=aes(x=Feature, y=Value, fill=Type)) + 
         geom_bar(stat="identity", position = "dodge") +
-        # geom_text(data = user_barplot_table[user_barplot_table$Type =="True",],aes(y=Pval+Value,label = paste("Pval = ",Pval)),vjust = 1,size=2) +
-        # annotate("text",size=3, x = user_barplot_table[user_barplot_table$Type =="True",]$Feature, y = user_barplot_table[user_barplot_table$Type =="True",]$Value, label = paste(user_barplot_table[user_barplot_table$Type =="True",]$Pval))+
+        scale_fill_manual(values=c(input$colShuff,input$colTrue))+
         coord_fliped +
         my_theme + 
-        theme (axis.text.x = element_text(angle = 45))
+        theme (axis.text.x = element_text(angle = input$Barxangle),plot.title=element_text(hjust=0.5))+
+        ggtitle(paste(input$barplot_statistic_input,abr))
 
-      if(input$barplot_show_pvalue_input)
-        bar <- bar + annotate("text",size=3, x = user_barplot_table[user_barplot_table$Type =="True",]$Feature, y = user_barplot_table[user_barplot_table$Type =="True",]$Value, label = paste(user_barplot_table[user_barplot_table$Type =="True",]$Pval))
+      if (!is.null(input$Barx)) {
+        bar <- bar + xlab(input$Barx)
+      }
+      
+      if (!is.null(input$Bary)) {
+        bar <- bar + ylab(input$Bary)
+      }
+
+      if (input$Bartitle != "") {
+        bar <- bar + ggtitle(input$Bartitle)
+      }
+
+      if(!input$barplot_hide_pvalue_input){
+        bar <- bar + geom_text(data = user_barplot_table[user_barplot_table$Type =="True",], aes(x = Feature, y = Value+0.1 * max(Value), label = paste(Pval)),size=3)
+      }
+
+      if(input$barplot_show_fit_input){
+         
+        bar <- bar + geom_text(data = user_barplot_table[user_barplot_table$Type =="True",], aes(x = Feature, y = Value+0.25 * max(Value), label = paste(Neg_binom_fit)),size=3,color="blue")
+      }
       else
         bar <- bar
-      
-      barly <- ggplotly(bar)
-      barly
+      bar
     }
   })
+  
+  output$bar_plot <- renderPlot({prepare_barplot()})
 
-  volcano_plot <- reactive({
-    user_volcano_table <- prepare_volcanoplot()
+  output$bar_plotly <- renderPlotly({
+    bar <- prepare_barplot()
+    bar <- ggplotly(bar)
+    bar <- bar %>% config(bar, displayModeBar = TRUE) 
+    bar
+    })
+
+  prepare_volcanoplot <- reactive ({
+    user_volcano_table <- prepare_volcanoplot_table()
     if (!is.null(user_volcano_table)) {
       
       if(input$volcano_statistic_input != 'Both')
@@ -249,8 +275,8 @@ server <- function(input, output,session) {
       else
         coord_fliped <- NULL
       
-      if(!is.null(input$theme_input))
-        my_theme <- do.call(input$theme_input,list(base_size = 11))
+      if(!is.null(input$volcano_theme_input))
+        my_theme <- do.call(input$volcano_theme_input,list(base_size = 11))
       else
         my_theme <- do.call('theme_bw',list(base_size = 11))
       
@@ -259,6 +285,7 @@ server <- function(input, output,session) {
                                     y=.data[['-log10(pvalue)']], 
                                     color=.data[['Statistic']],
                                     label=.data[['Feature']])) + 
+        scale_color_manual(values=c(input$col_N,input$col_S))+
         geom_vline(xintercept = 0, 
                    size=0.5) +
         geom_hline(yintercept = 0, 
@@ -267,8 +294,20 @@ server <- function(input, output,session) {
         
         coord_fliped +
         my_theme +
-        theme (axis.text.x = element_text(angle = 45))
+        theme (plot.title=element_text(hjust=0.5))
       
+      if (!is.null(input$Volcanox)) {
+        volcano <- volcano + xlab(input$Volcanox)
+      }
+      
+      if (!is.null(input$Volcanoy)) {
+        volcano <- volcano + ylab(input$Volcanoy)
+      }
+
+      if (input$Volcanotitle !=  "") {
+        volcano <- volcano + ggtitle(input$Volcanotitle)
+      }
+
       if (input$volcanoplot_reactivity_input == "Reactive"){
         volcano <- ggplotly(volcano)
         volcano
@@ -276,27 +315,26 @@ server <- function(input, output,session) {
       else{
         volcano <- volcano + geom_label_repel(box.padding = 0.5)
         volcano
-        volcano
       }
     }
+
   })
   
-  output$volcano_plot <- renderPlot({volcano_plot()})
   
-  output$volcano_plotly <- renderPlotly({volcano_plot()})
+  output$volcano_plot <- renderPlot({prepare_volcanoplot()})
   
-  
-  # Generate a summary of the data ----
-  output$summary <- renderPrint({
-    user_barplot_table <- prepare_barplot()
-    if (!is.null(user_barplot_table)) {
-      summary(user_barplot_table)
-    }
-  })
+  output$volcano_plotly <- renderPlotly({
+    
+    volcano <- prepare_volcanoplot()
+    volcano <- ggplotly(volcano)
+    volcano <- volcano %>% config(volcano, displayModeBar = TRUE)
+    
+    })
+
   
   # Generate an HTML table view of the data ----
   output$table <- DT::renderDataTable({
-    DT::datatable(prepare_barplot(),rownames = FALSE, class = 'cell-border stripe',extensions = 'Buttons', options = list(
+    DT::datatable(prepare_barplot_table(),rownames = FALSE, class = 'cell-border stripe',extensions = 'Buttons', options = list(
       dom = 'Bfrtip',
       buttons = 
         list('colvis','copy', 'print', list(
@@ -312,6 +350,38 @@ server <- function(input, output,session) {
     )
   })
   
+   output$downloadBar <- downloadHandler(
+    filename = function() {
+      timestamp <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+      paste("Barplot-", timestamp, ".png", sep="")
+    },
+    content = function(file) {
+      png(file)
+      plot(prepare_barplot())
+      dev.off()
+    }
+  )
+
+  output$downloadVolcano <- downloadHandler(
+    filename = function() {
+      timestamp <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+      paste("Volcanoplot-", timestamp , ".png", sep="")
+    },
+    content = function(file) {
+      png(file)
+      plot(prepare_volcanoplot())
+      dev.off()
+    }
+  )
+
+  observeEvent(input$update_bar, {
+      updateBoxSidebar("barplot_sidebar")
+    })
+
+  observeEvent(input$update_volcano, {
+      updateBoxSidebar("volcanoplot_sidebar")
+    })
+
 }
 
 shinyApp(ui, server,options = list("port"=7775,"host"='0.0.0.0'))
