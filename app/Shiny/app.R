@@ -356,9 +356,7 @@ server <- function(input, output,session) {
       paste("Barplot-", timestamp, ".png", sep="")
     },
     content = function(file) {
-      png(file)
-      plot(prepare_barplot())
-      dev.off()
+      ggsave(file,prepare_barplot(), width = 16, height = 10.4)
     }
   )
 
@@ -368,9 +366,7 @@ server <- function(input, output,session) {
       paste("Volcanoplot-", timestamp , ".png", sep="")
     },
     content = function(file) {
-      png(file)
-      plot(prepare_volcanoplot())
-      dev.off()
+      ggsave(file,prepare_volcanoplot(), width = 16, height = 10.4)
     }
   )
 
