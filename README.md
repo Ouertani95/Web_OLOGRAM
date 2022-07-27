@@ -1,11 +1,21 @@
-# PYGTFTK WEBAPP
+# Web-OLOGRAM
 
 ## About :
 
-This is the implementation of the pygtftk program as a web application using the LARAVEL framework.
+This is the implementation of the OLOGRAM (OverLap Of Genomic Regions Analysis using Monte Carlo) tool as a web application using the LARAVEL framework.
+
+For more information about OLOGRAM click [here](https://dputhier.github.io/pygtftk/ologram.html).
+For more information about LARAVEL click [here](https://laravel.com/).
+
+The OLOGRAM tool is part of the PYGTFTK (Python GTF Toolkit) project.
+
+For more information about PYGTFTK click [here](https://dputhier.github.io/pygtftk/index.html).
+
 
 
 ## Prerequisites :
+
+*Note* : This tool has been tested thoroughly on ubuntu 20.04.
 
 You must have Docker and Docker Compose installed on your computer to launch the application correctly.
 
@@ -20,12 +30,11 @@ You also need Git in order to clone the repository locally :
 
 ## Getting Started :
 
-Once you have Docker Compose set up you can run the following commands :
+Once you have the prerequisites set up you can run the following commands :
 
 ```bash
 git clone https://github.com/Ouertani95/Web_OLOGRAM
 cd Web_OLOGRAM/
-docker build -f Dockerfile-pygtftk-conda -t gtftk:staging .
 sudo groupadd docker
 sudo adduser sail
 usermod -aG docker sail
@@ -35,7 +44,7 @@ newgrp docker
 
 ## Usage :
 
-Type the following comands to launch the webapplication :
+Type the following commands to launch the webapplication :
 
 ```bash
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
@@ -58,6 +67,20 @@ newgrp docker
 ```
 
 Now you can run any docker or sail command from your account.
+
+## App file structure :
+
+If you're unfamiliar with the LARAVEL file structure here's a quick guide to find the most important files :
+
+- The main entry point of the app is the **web.php** file for routing found in : <ins>routes/web.php/</ins>
+- Since the app is using the **MVC** (Model View Controller) structure the following files can be found at :
+    * Controllers (app logic): <ins>app/Http/Controllers/</ins>
+    * Models (database handlers): <ins>app/Models/</ins>
+    * Views (displayed web pages) : <ins>resources/views/</ins>
+- The most important **parameters** of the app can be found in the **.env** file at the root of the app directory
+- The **shiny** results page files can be found at : <ins>app/Shiny/</ins>
+- The **Dockerfiles** used to build the **shiny** and **gtftk** docker images can be found in : <ins>storage/</ins>
+   
 
 ## Authors :
 
