@@ -24,7 +24,7 @@ class ContactsController extends Controller
         ]);
 
         // Send contact email to Admin
-        Mail::to("ouertani2006@gmail.com")
+        Mail::to(env("ADMIN_MAIL"))
             ->send(new SendContact($sender_email,$contact_subject,$contact_message));
 
         // Return success message to contact page

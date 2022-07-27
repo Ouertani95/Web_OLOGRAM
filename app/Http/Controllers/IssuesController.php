@@ -24,7 +24,7 @@ class IssuesController extends Controller
         ]);
 
         // Send issue email to Admin
-        Mail::to("ouertani2006@gmail.com")
+        Mail::to(env("ADMIN_MAIL"))
             ->send(new SendIssue($sender_email,$issue_title,$issue_description));
 
         // Return success message to issue page

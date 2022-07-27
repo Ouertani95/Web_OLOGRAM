@@ -31,7 +31,7 @@ Route::post('/', [JobsController::class,'run_queued_job']);
 Route::get('/test-mail', function() {
     Mail::raw('bonjour',function($message){
         $message->subject('Email de test 2')
-                ->to('ouertani2006@gmail.com');
+                ->to(env("ADMIN_MAIL"));
     });
     return 'OK! Le mail a été envoyé !';
 });
