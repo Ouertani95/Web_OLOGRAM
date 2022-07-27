@@ -2,44 +2,45 @@ FROM r-base:latest
 
 WORKDIR /shiny
 
+
+RUN apt-get update
+
+RUN apt-get install -y apt-transport-https
+RUN apt-get install -y wget           
+RUN apt-get install -y dirmngr
+RUN apt-get install -y gnupg
+RUN apt-get install -y ca-certificates
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y libcurl4-openssl-dev
+RUN apt-get install -y libssl-dev
+RUN apt-get install -y build-essential
+RUN apt-get install -y libcurl4-gnutls-dev
+RUN apt-get install -y libxml2-dev
+RUN apt-get install -y libssl-dev 
+RUN apt-get install -y pandoc
+
+RUN add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' 
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+
 # Installing R and all the dependencies :
-RUN apt-get update \
-    && apt-get install -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common \
-    && add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu impish-cran40/' \ 
-    && wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc \
-    # && apt-get update \
-    && apt-get install -y r-base \
-    && apt-get install -y r-base-dev \
-    && R -e 'install.packages("shiny",dependencies=TRUE)' \
-    && R -e 'install.packages("reshape2",dependencies=TRUE)' \
-    && R -e 'install.packages("ggplot2",dependencies=TRUE)' \
-    && R -e 'install.packages("dplyr",dependencies=TRUE)' \
-    && R -e 'install.packages("ggrepel",dependencies=TRUE)' \
-    && R -e 'install.packages("ggthemes",dependencies=TRUE)' \
-    && R -e 'install.packages("shinythemes",dependencies=TRUE)' \
-    && R -e 'install.packages("optparse",dependencies=TRUE)'
-
-RUN apt install -y libcurl4-openssl-dev \
-    && apt install -y  libssl-dev \
-    && R -e 'install.packages("plotly",dependencies=TRUE)' \
-    && R -e 'install.packages("flexdashboard",dependencies=TRUE)' \
-    && R -e 'install.packages("htmltools",dependencies=TRUE)' \
-    && R -e 'install.packages("DT",dependencies=TRUE)' 
-
-RUN apt install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev \
-    && R -e 'install.packages("xml2",dependencies=TRUE)' \
-    && R -e 'install.packages("devtools",dependencies=TRUE)' \
-    && R -e 'devtools::install_github("rstudio/crosstalk")' 
-    
-RUN apt install -y pandoc \
-    && R -e 'install.packages("rmarkdown",dependencies=TRUE)' 
-
-RUN R -e 'install.packages("downloadthis",dependencies=TRUE)'
-
-RUN R -e 'install.packages("shinydashboard",dependencies=TRUE)'
-RUN R -e 'install.packages("shinyWidgets",dependencies=TRUE)'
-
-RUN R -e 'install.packages("shinydashboardPlus",dependencies=TRUE)'
+RUN apt-get install -y r-base
+RUN apt-get install -y r-base-dev
+RUN R -e 'install.packages("shiny",dependencies=TRUE)'
+RUN R -e 'install.packages("reshape2",dependencies=TRUE)'
+RUN R -e 'install.packages("ggplot2",dependencies=TRUE)' 
+RUN R -e 'install.packages("dplyr",dependencies=TRUE)' 
+RUN R -e 'install.packages("ggrepel",dependencies=TRUE)' 
+RUN R -e 'install.packages("ggthemes",dependencies=TRUE)' 
+RUN R -e 'install.packages("shinythemes",dependencies=TRUE)' 
+RUN R -e 'install.packages("optparse",dependencies=TRUE)' 
+RUN R -e 'install.packages("plotly",dependencies=TRUE)' 
+RUN R -e 'install.packages("htmltools",dependencies=TRUE)' 
+RUN R -e 'install.packages("DT",dependencies=TRUE)' 
+RUN R -e 'install.packages("xml2",dependencies=TRUE)' 
+RUN R -e 'install.packages("devtools",dependencies=TRUE)'  
+RUN R -e 'install.packages("shinydashboard",dependencies=TRUE)' 
+RUN R -e 'install.packages("shinyWidgets",dependencies=TRUE)' 
+RUN R -e 'install.packages("shinydashboardPlus",dependencies=TRUE)' 
 RUN R -e 'install.packages("colourpicker",dependencies=TRUE)'
 
 ENTRYPOINT ["Rscript", "app.R"]

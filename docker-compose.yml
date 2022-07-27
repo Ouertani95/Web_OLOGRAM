@@ -2,12 +2,7 @@
 version: '3'
 services:
     laravel.test:
-        build:
-            context: ./vendor/laravel/sail/runtimes/8.1
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
+        image: ouertani95/web-ologram-sail
         restart: always
         extra_hosts:
             - 'host.docker.internal:host-gateway'
@@ -63,11 +58,8 @@ services:
         networks:
           - sail
     gtftk:
-        build:
-            context: .
-            dockerfile: Dockerfile-pygtftk-conda
         container_name: gtftk
-        image: 'gtftk:staging'
+        image: 'ouertani95/web-ologram-gtftk'
         restart: always
         ports:
             - '6869:6869'
@@ -76,10 +68,7 @@ services:
         networks:
             - sail
     shiny:
-        build:
-            context: .
-            dockerfile: Dockerfile-shiny
-        image: 'shiny-app:latest'
+        image: 'ouertani95/web-ologram-shiny'
         restart: always
         ports:
             - '7775:7775'
