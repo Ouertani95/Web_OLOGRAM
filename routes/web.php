@@ -36,27 +36,35 @@ Route::get('/test-mail', function() {
     return 'OK! Le mail a été envoyé !';
 });
 
+// Live feed route
 Route::get('/live-feed/{id?}', [LogsController::class,'display_log']);
 
-Route::view("/test","test");
-
+// file download route
 Route::get('/download/{file_type?}/{id?}/{optional_input?}', [DownloadController::class,'download_files']);
 
+// Results page route
 Route::get('/results/{id?}/{file?}', function($id,$file) {
     
     return view("results")->with(["id"=>$id,"file"=>$file]);
 });
 
+// About page route
 Route::view("/about","about");
 
+// Issue page route
 Route::view("/issue","issue");
 
+// Issue form submission route
 Route::post('/issue', [IssuesController::class,'sendIssue']);
 
+// Contact page route
 Route::view("/contact","contact");
 
+// Contact form submission route
 Route::post('/contact', [ContactsController::class,'sendContact']);
 
+// Showing mails sent (used with mailhog)
 Route::view("/mail","mail");
 
+// Page route to display all issues reported in database
 Route::get("/display-issues",[DisplayIssuesController::class,'DisplayIssues']);

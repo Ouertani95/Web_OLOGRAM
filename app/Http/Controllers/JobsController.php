@@ -15,13 +15,15 @@ class JobsController extends Controller
 {
     public function index()
     {
-
+        // Get all the directories available in Ensembl_GTF directory
         $links = Storage::allDirectories("Ensembl_GTF");
+        // Remove parent directory name from paths
         foreach ($links as $index => $link){
             $links[$index] = str_replace("Ensembl_GTF/","",$link);
         }
+        // Sort the species alphabetically
         sort($links);
-
+        // Return the home page with the links of all available species
         return view('main')->with(['links' => $links]);
     }
 
@@ -41,7 +43,7 @@ class JobsController extends Controller
         file_put_contents("../ologram_results/$directory_name/validated.json",$validated_args);
 
         // Verify if Ensembl GTF is selected and ignore gtf and chr if selected
-        $file_fields= ["gtf","bed","chr","mbed","bedin","bedex"];
+        $file_fields = ["gtf","bed","chr","mbed","bedin","bedex"];
         if (array_key_exists("ens_gtf",$request->validated())){
             $index = array_search('gtf',$file_fields);
             if($index !== FALSE){

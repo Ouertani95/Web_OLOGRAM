@@ -113,6 +113,7 @@ class LogsController extends Controller
                                             ,'log' => $log_link]);
         }
         elseif($status === "error"){
+            // If there is an error prepare error message and return it to the main page
             $msg = "Your request failed with the following error(s): <br>";
             foreach ($log_content_array as $line){
                 if ((str_contains($line ,"ERROR"))){
